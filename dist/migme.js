@@ -4,13 +4,10 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 var API_BASE = "https://api.mig.me";
 var OAUTH_BASE = "https://oauth.mig.me/oauth";
 
-var Migme = exports.Migme = (function () {
+var Migme = (function () {
   function Migme() {
     var options = arguments[0] === undefined ? {} : arguments[0];
 
@@ -31,6 +28,11 @@ var Migme = exports.Migme = (function () {
 
       value: function getLoginStatus() {
         return fetch(OAUTH_BASE + "");
+      }
+    },
+    setAccessToken: {
+      value: function setAccessToken(access_token) {
+        this.access_token = access_token;
       }
     },
     login: {
@@ -55,7 +57,9 @@ var Migme = exports.Migme = (function () {
       }
     },
     api: {
-      value: function api(endpoint, options) {
+      value: function api(endpoint) {
+        var options = arguments[1] === undefined ? {} : arguments[1];
+
         if (endpoint.indexOf("/") !== 0) {
           endpoint = "/" + endpoint;
         }
@@ -63,9 +67,10 @@ var Migme = exports.Migme = (function () {
         if (typeof this.access_token !== "undefined") {
           options["Content-Type"] = "application/json";
           options.Authorization = "Bearer " + this.access_token;
+          console.log(API_BASE + endpoint, options);
           return fetch(API_BASE + endpoint, options);
         } else {
-          console.error("You need to get an auth_token before calling api()");
+          console.error("You need to get an access_token before calling api()");
         }
       }
     }
@@ -73,4 +78,6 @@ var Migme = exports.Migme = (function () {
 
   return Migme;
 })();
+
+module.exports = Migme;
 //# sourceMappingURL=migme.js.map

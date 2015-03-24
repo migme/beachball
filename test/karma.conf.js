@@ -10,15 +10,16 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'mocha', 'chai'],
+    frameworks: ['browserify', 'mocha', 'chai', 'sinon-chai'],
 
 
     // list of files / patterns to load in the browser
     files: [
+      // es6 promise
+      'node_modules/es5-shim/es5-shim.js',
+      'node_modules/es6-shim/es6-shim.js',
       // fetch
       'bower_components/fetch/fetch.js',
-      // es6 promise
-      'bower_components/es6-promise/promise.js',
 
       // migme
       'src/**/*.js',
@@ -72,16 +73,6 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['PhantomJS'/*, 'SlimerJS'*/],
-
-    // Which plugins to enable
-    // plugins: [
-    //   'karma-babel-preprocessor',
-    //   'karma-phantomjs-launcher',
-    //   'karma-slimerjs-launcher',
-    //   'karma-mocha',
-    //   'karma-chai'
-    // ],
-
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

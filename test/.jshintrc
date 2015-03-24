@@ -28,7 +28,7 @@
     "describe": false,
     "expect": false,
     "it": false,
-    "spyOn": false
+    "sinon": true
   }
 }
 

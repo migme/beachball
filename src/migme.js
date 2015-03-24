@@ -1,7 +1,7 @@
 const API_BASE = 'https://api.mig.me';
 const OAUTH_BASE = 'https://oauth.mig.me/oauth';
 
-export class Migme {
+export default class Migme {
 
   constructor (options = {}) {
     this.client_id = options.client_id || '309f818242abae8fdd1b';
@@ -15,6 +15,10 @@ export class Migme {
    */
   getLoginStatus () {
     return fetch(OAUTH_BASE + '');
+  }
+
+  setAccessToken (access_token) {
+    this.access_token = access_token;
   }
 
   /**
@@ -38,7 +42,7 @@ export class Migme {
     return fetch(OAUTH_BASE + '');
   }
 
-  api (endpoint, options) {
+  api (endpoint, options = {}) {
     if (endpoint.indexOf('/') !== 0) {
       endpoint = '/' + endpoint;
     }
@@ -46,9 +50,10 @@ export class Migme {
     if (typeof this.access_token !== 'undefined') {
       options['Content-Type'] = 'application/json';
       options.Authorization = 'Bearer ' + this.access_token;
+      console.log(API_BASE + endpoint, options);
       return fetch(API_BASE + endpoint, options);
     } else {
-      console.error('You need to get an auth_token before calling api()');
+      console.error('You need to get an access_token before calling api()');
     }
   }
 }
