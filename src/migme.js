@@ -50,7 +50,7 @@ export default class Migme {
     if (typeof this.access_token !== 'undefined') {
       options['Content-Type'] = 'application/json';
       options.Authorization = 'Bearer ' + this.access_token;
-      console.log(API_BASE + endpoint, options);
+
       return fetch(API_BASE + endpoint, options);
     } else {
       console.error('You need to get an access_token before calling api()');
