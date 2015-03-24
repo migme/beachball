@@ -10,3 +10,4 @@ node_modules/
 /docs/
 /test/coverage/
 npm-debug.log
+dist/
