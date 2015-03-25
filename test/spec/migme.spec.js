@@ -8,7 +8,7 @@ describe('migme', function () {
   beforeEach(function () {
     migme = new Migme({
       client_id: '309f818242abae8fdd1b',
-      redirect_uri: 'http://localhost:8080/oauth/callback',
+      // redirect_uri: 'http://localhost:8080/oauth/callback',
       access_token: 'TESTING'
     });
   });
@@ -59,7 +59,14 @@ describe('migme', function () {
   describe('migme.login()', function () {
 
     it('should call the api and inject an iframe', function () {
+      sinon.spy(window, 'open');
+
       migme.login(['test-scope']);
+
+      expect(window.open).to.be.calledWith('https://login.mig.me/' +
+            '?client_id=' + '309f818242abae8fdd1b' +
+            '&scope=' + 'test-scope' +
+            '&response_type=code');
     });
 
   });

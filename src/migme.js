@@ -1,12 +1,15 @@
 // const API_BASE = new Symbol();
 // const OAUTH_BASE = new Symbol();
+//
+class Login {
+
+}
 
 export default class Migme {
 
   constructor (options = {}) {
     this.client_id = options.client_id || '309f818242abae8fdd1b';
     this.redirect_uri = options.redirect_uri || null;
-    this.callback = options.redirect_uri || null;
     this.version = options.version || '1.0';
     this.access_token = options.access_token || null;
 
@@ -30,8 +33,34 @@ export default class Migme {
    */
   login (scopes = [], type = 'popup') {
 
+    switch (type) {
+      case 'popup':
+        this.loginWithPopup(scopes);
+        break;
+      case 'redirect':
+        this.loginWithRedirect(scopes);
+        break;
+    }
+
+  }
+
+  signin (scopes = [], type = 'popup') {
+    this.login(scopes, type);
+  }
+
+  buildLoginUrl (scopes) {
+    return 'https://login.mig.me/' +
+            '?client_id=' + this.client_id +
+            (this.redirect_uri ? '&redirect_uri=' + this.redirect_uri : '') +
+            '&scope=' + scopes +
+            '&response_type=code';
+  }
+
+  loginWithPopup (scopes) {
+    let opener;
+    let loc = this.buildLoginUrl(scopes);
+
     return new Promise((resolve, reject) => {
-      let opener;
 
       let recieveMessage = (e) => {
         if (typeof opener !== 'undefined') {
@@ -39,33 +68,23 @@ export default class Migme {
           opener = null;
         }
 
-        console.log(e);
-
-        if (e.origin !== this.OAUTH_BASE) {
-          reject();
-        } else {
+        if (e.origin === this.OAUTH_BASE) {
           resolve(e.data);
+        } else {
+          reject(e.data);
         }
       };
 
-      let loc = 'https://login.mig.me/' +
-                '?client_id=' + this.client_id +
-                (this.redirect_uri ? '&redirect_uri=' + this.redirect_uri : '') +
-                (this.callback ? '&callback=' + this.callback : '') +
-                '&scope=' + scopes.toString() +
-                '&response_type=code';
-      switch (type) {
-        case 'popup':
-          opener = window.open(loc);
-          break;
-        case 'redirect':
-        default:
-          window.location = loc;
-          break;
-      }
+      window.open(loc);
 
       window.addEventListener('message', recieveMessage, false);
     });
+  }
+
+  loginWithRedirect (scopes) {
+    let loc = this.buildLoginUrl(scopes);
+
+    window.location = loc;
   }
 
   // TODO: do a proper logout
@@ -74,9 +93,7 @@ export default class Migme {
   }
 
   api (endpoint, options = {}) {
-    if (endpoint.indexOf('/') !== 0) {
-      endpoint = '/' + endpoint;
-    }
+    endpoint = endpoint.indexOf('/') === 0 ? endpoint : '/' + endpoint;
 
     if (typeof this.access_token !== 'undefined') {
       options['Content-Type'] = 'application/json';
