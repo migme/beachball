@@ -4,12 +4,14 @@ import Migme from '../../src/migme';
 describe('migme', function () {
 
   var migme;
+  var client_id = '309f818242abae8fdd1b';
+  var access_token = 'TESTING';
 
   beforeEach(function () {
     migme = new Migme({
-      client_id: '309f818242abae8fdd1b',
+      client_id: client_id,
       // redirect_uri: 'http://localhost:8080/oauth/callback',
-      access_token: 'TESTING'
+      access_token: access_token
     });
   });
 
@@ -65,7 +67,7 @@ describe('migme', function () {
       migme.api('/me');
 
       expect(window.fetch).to.be.calledWith(API_BASE + '/me', {
-        Authorization: 'Bearer TESTING',
+        Authorization: 'Bearer ' + access_token,
         'Content-Type': 'application/json'
       });
     });
@@ -77,11 +79,13 @@ describe('migme', function () {
     it('should call the api and inject an iframe', function () {
       sinon.spy(window, 'open');
 
-      migme.login(['test-scope']);
+      var scopes = ['test-scope'];
+
+      migme.login(scopes);
 
       expect(window.open).to.be.calledWith('https://login.mig.me/' +
-            '?client_id=' + '309f818242abae8fdd1b' +
-            '&scope=' + 'test-scope' +
+            '?client_id=' + client_id +
+            '&scope=' + scopes +
             '&response_type=code');
     });
 
