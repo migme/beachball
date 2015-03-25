@@ -1,7 +1,7 @@
 export default class Migme {
 
   constructor (options = {}) {
-    this.client_id = options.client_id || '309f818242abae8fdd1b';
+    this.client_id = options.client_id || null;
     this.redirect_uri = options.redirect_uri || null;
     this.version = options.version || '1.0';
     this.access_token = options.access_token || null;
