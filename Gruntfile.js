@@ -19,7 +19,8 @@ module.exports = function (grunt) {
 
     babel: {
       options: {
-        sourceMap: true
+        sourceMap: true,
+        modules: "ignore"
       },
       dist: {
         files: {
@@ -39,7 +40,9 @@ module.exports = function (grunt) {
     },
 
     eslint: {
-      target: ['<%= app.src %>/<%= pkg.name %>.js']
+      target: [
+        '<%= app.src %>/<%= pkg.name %>.js'
+      ]
     },
 
     // Empties folders to start fresh
@@ -66,6 +69,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'eslint',
     'karma'
   ]);
 

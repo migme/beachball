@@ -5,7 +5,8 @@ export default class Migme {
 
   constructor (options = {}) {
     this.client_id = options.client_id || '309f818242abae8fdd1b';
-    this.redirect_uri = options.redirect_uri || 'http://localhost:8080/oauth/callback';
+    this.redirect_uri = options.redirect_uri || null;
+    this.callback = options.redirect_uri || null;
     this.version = options.version || '1.0';
     this.access_token = options.access_token || null;
 
@@ -22,64 +23,49 @@ export default class Migme {
 
   }
 
-  setAccessToken (access_token) {
-    this.access_token = access_token;
-  }
-
   /**
    * @brief Prompts a user to login to your app.
    * @details Prompts a user to login to your app using the Login dialog in a popup. This method can also be used with an already logged-in user to request additional permissions from them.
    * @return authResponse object
    */
-  login (scopes = [], options = {}) {
+  login (scopes = [], type = 'popup') {
 
-    if (window.domain !== 'mig.me') {
+    return new Promise((resolve, reject) => {
+      let opener;
 
-      return new Promise((resolve, reject) => {
-        var opener;
+      let recieveMessage = (e) => {
+        if (typeof opener !== 'undefined') {
+          opener.close();
+          opener = null;
+        }
 
-        let recieveMessage = (e) => {
-          if (typeof opener !== 'undefined') {
-            opener.close();
-            opener = null;
-          }
+        console.log(e);
 
-          console.log(e);
+        if (e.origin !== this.OAUTH_BASE) {
+          reject();
+        } else {
+          resolve(e.data);
+        }
+      };
 
-          if (e.origin !== this.OAUTH_BASE) {
-            reject();
-          } else {
-            resolve(e.data);
-          }
-        };
+      let loc = 'https://login.mig.me/' +
+                '?client_id=' + this.client_id +
+                (this.redirect_uri ? '&redirect_uri=' + this.redirect_uri : '') +
+                (this.callback ? '&callback=' + this.callback : '') +
+                '&scope=' + scopes.toString() +
+                '&response_type=code';
+      switch (type) {
+        case 'popup':
+          opener = window.open(loc);
+          break;
+        case 'redirect':
+        default:
+          window.location = loc;
+          break;
+      }
 
-        opener = window.open('https://login.mig.me' +
-                            '/?client_id=' + this.client_id +
-                            '&redirect_uri=' + this.redirect_uri +
-                            '&scope=' + scopes.toString() +
-                            '&response_type=code');
-
-        window.addEventListener('message', recieveMessage, false);
-      });
-
-    } else {
-
-      // Get the auth_token
-      return fetch(this.OAUTH_BASE + '/token', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: JSON.stringify({
-          grant_type: 'password',
-          client_id: this.client_id,
-          username: options.username,
-          password: options.password,
-          scope: 'test-scope'
-        })
-      });
-
-    }
+      window.addEventListener('message', recieveMessage, false);
+    });
   }
 
   // TODO: do a proper logout

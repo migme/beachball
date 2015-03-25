@@ -42,5 +42,12 @@
     "no-eval": [2, true],
     "yoda": [2, "never", { "exceptRange": true }],
     "no-unused-vars": [2, {"vars": "all", "args": "after-used"}]
+  },
+  "globals": {
+    "describe": true,
+    "beforeEach": true,
+    "it": true,
+    "expect": true,
+    "sinon": true
   }
 }

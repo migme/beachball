@@ -7,8 +7,9 @@ describe('migme', function () {
 
   beforeEach(function () {
     migme = new Migme({
-      client_id:    '309f818242abae8fdd1b',
-      redirect_uri: 'http://localhost:8080/oauth/callback'
+      client_id: '309f818242abae8fdd1b',
+      redirect_uri: 'http://localhost:8080/oauth/callback',
+      access_token: 'TESTING'
     });
   });
 
@@ -39,17 +40,8 @@ describe('migme', function () {
     expect(migme.getLoginStatus).to.be.a('function');
   });
 
-  it('should have a method setAccessToken()', function () {
-    expect(migme.setAccessToken).to.exist;
-    expect(migme.setAccessToken).to.be.a('function');
-  });
-
   describe('migme.api()', function () {
     let API_BASE = 'https://api.mig.me';
-
-    beforeEach(function () {
-      migme.setAccessToken('TESTING');
-    });
 
     it('should call the correct uri', function () {
       sinon.spy(window, 'fetch');
@@ -57,7 +49,7 @@ describe('migme', function () {
       migme.api('/me');
 
       expect(window.fetch).to.be.calledWith(API_BASE + '/me', {
-        Authorization:  'Bearer TESTING',
+        Authorization: 'Bearer TESTING',
         'Content-Type': 'application/json'
       });
     });
