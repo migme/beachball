@@ -40,6 +40,22 @@ describe('migme', function () {
     expect(migme.getLoginStatus).to.be.a('function');
   });
 
+  describe('API_BASE', function () {
+    it('should not be able to write to API_BASE', function () {
+      let b = migme.API_BASE;
+      let fn = function () { migme.API_BASE = 'something' };
+      expect(fn).to.throw(TypeError);
+    });
+  });
+
+  describe('OAUTH_BASE', function () {
+    it('should not be able to write to OAUTH_BASE', function () {
+      let b = migme.OAUTH_BASE;
+      let fn = function () { migme.OAUTH_BASE = 'something' };
+      expect(fn).to.throw(TypeError);
+    });
+  });
+
   describe('migme.api()', function () {
     let API_BASE = 'https://api.mig.me';
 

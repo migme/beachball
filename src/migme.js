@@ -5,9 +5,14 @@ export default class Migme {
     this.redirect_uri = options.redirect_uri || null;
     this.version = options.version || '1.0';
     this.access_token = options.access_token || null;
+  }
 
-    this.API_BASE = 'https://api.mig.me';
-    this.OAUTH_BASE = 'https://oauth.mig.me/oauth';
+  get API_BASE () {
+    return 'https://api.mig.me';
+  }
+
+  get OAUTH_BASE () {
+    return 'https://oauth.mig.me/oauth';
   }
 
   /**
