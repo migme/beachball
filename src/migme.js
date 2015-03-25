@@ -1,5 +1,5 @@
-const API_BASE = 'https://api.mig.me';
-const OAUTH_BASE = 'https://oauth.mig.me/oauth';
+// const API_BASE = new Symbol();
+// const OAUTH_BASE = new Symbol();
 
 export default class Migme {
 
@@ -8,6 +8,9 @@ export default class Migme {
     this.redirect_uri = options.redirect_uri || 'http://localhost:8080/oauth/callback';
     this.version = options.version || '1.0';
     this.access_token = options.access_token || null;
+
+    this.API_BASE = 'https://api.mig.me';
+    this.OAUTH_BASE = 'https://oauth.mig.me/oauth';
   }
 
   /**
@@ -32,10 +35,10 @@ export default class Migme {
 
     if (window.domain !== 'mig.me') {
 
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         var opener;
 
-        let recieveMessage = function (e) {
+        let recieveMessage = (e) => {
           if (typeof opener !== 'undefined') {
             opener.close();
             opener = null;
@@ -43,7 +46,7 @@ export default class Migme {
 
           console.log(e);
 
-          if (e.origin !== OAUTH_BASE) {
+          if (e.origin !== this.OAUTH_BASE) {
             reject();
           } else {
             resolve(e.data);
@@ -62,7 +65,7 @@ export default class Migme {
     } else {
 
       // Get the auth_token
-      return fetch(OAUTH_BASE + '/token', {
+      return fetch(this.OAUTH_BASE + '/token', {
         method: 'post',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -81,7 +84,7 @@ export default class Migme {
 
   // TODO: do a proper logout
   logout () {
-    return fetch(OAUTH_BASE + '/logout');
+    return fetch(this.OAUTH_BASE + '/logout');
   }
 
   api (endpoint, options = {}) {
@@ -93,7 +96,7 @@ export default class Migme {
       options['Content-Type'] = 'application/json';
       options.Authorization = 'Bearer ' + this.access_token;
 
-      return fetch(API_BASE + endpoint, options);
+      return fetch(this.API_BASE + endpoint, options);
     } else {
       console.error('You need to get an access_token before calling api()');
     }

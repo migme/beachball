@@ -1,0 +1,46 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "binaryLiterals": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": true,
+    "generators": true,
+    "modules": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralDuplicateProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "octalLiterals": false,
+    "regexUFlag": false,
+    "regexYFlag": false,
+    "spread": false,
+    "superInFunctions": true,
+    "templateStrings": true,
+    "unicodeCodePointEscapes": true,
+    "globalReturn": false,
+    "jsx": false
+  },
+  "rules": {
+    "indent": [2, 2],
+    "quotes": "single",
+    "camelcase": false,
+    "no-trailing-spaces": true,
+    "comma-dangle": "never",
+    "no-space-before-semi": true,
+    "semi": [2, "always"],
+    "eqeqeq": [2, "smart"],
+    "no-alert": [2, true],
+    "no-debugger": [2, true],
+    "no-eval": [2, true],
+    "yoda": [2, "never", { "exceptRange": true }],
+    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}]
+  }
+}
