@@ -1,10 +1,3 @@
-// const API_BASE = new Symbol();
-// const OAUTH_BASE = new Symbol();
-//
-class Login {
-
-}
-
 export default class Migme {
 
   constructor (options = {}) {
