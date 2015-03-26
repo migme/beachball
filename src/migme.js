@@ -69,7 +69,7 @@ export default class Migme {
    * @return authResponse object
    */
   getLoginStatus () {
-
+    return fetch(this[OAUTH_BASE] + '/loginstatus');
   }
 
   /**
@@ -78,6 +78,7 @@ export default class Migme {
    * @return authResponse object
    */
   login (scopes = [], type = 'popup') {
+
     switch (type) {
       case 'popup':
         this[LOGIN].popup(scopes);
@@ -101,13 +102,9 @@ export default class Migme {
   api (endpoint, options = {}) {
     endpoint = endpoint.indexOf('/') === 0 ? endpoint : '/' + endpoint;
 
-    if (typeof this.access_token !== 'undefined') {
-      options['Content-Type'] = 'application/json';
-      options.Authorization = 'Bearer ' + this.access_token;
+    options['Content-Type'] = 'application/json';
+    options.Authorization = 'Bearer ' + this.access_token;
 
-      return fetch(this[API_BASE] + endpoint, options);
-    } else {
-      console.error('You need to get an access_token before calling api()');
-    }
+    return fetch(this[API_BASE] + endpoint, options);
   }
 }
