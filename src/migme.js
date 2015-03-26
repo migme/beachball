@@ -1,5 +1,54 @@
-var API_BASE = Symbol();
-var OAUTH_BASE = Symbol();
+let API_BASE = Symbol(),
+    OAUTH_BASE = Symbol(),
+    LOGIN = Symbol();
+
+class Login {
+  constructor (o, api, oauth) {
+    this.client_id = o.client_id;
+    this.redirect_uri = o.redirect_uri;
+    this.API_BASE = api;
+    this.OAUTH_BASE = oauth;
+  }
+
+  buildLoginUrl (scopes) {
+    return 'https://login.mig.me/' +
+            '?client_id=' + this.client_id +
+            (this.redirect_uri ? '&redirect_uri=' + this.redirect_uri : '') +
+            '&scope=' + scopes +
+            '&response_type=code';
+  }
+
+  popup (scopes) {
+    let opener,
+        loc = this.buildLoginUrl(scopes);
+    // This is a test
+    return new Promise((resolve, reject) => {
+
+      let recieveMessage = (e) => {
+        if (typeof opener !== 'undefined') {
+          opener.close();
+          opener = null;
+        }
+
+        if (e.origin === this.OAUTH_BASE) {
+          resolve(e.data);
+        } else {
+          reject(e.data);
+        }
+      };
+
+      window.open(loc);
+
+      window.addEventListener('message', recieveMessage, false);
+    });
+  }
+
+  redirect (scopes) {
+    let loc = this.buildLoginUrl(scopes);
+
+    window.location = loc;
+  }
+}
 
 export default class Migme {
 
@@ -11,6 +60,7 @@ export default class Migme {
 
     this[API_BASE] = 'https://api.mig.me';
     this[OAUTH_BASE] = 'https://oauth.mig.me/oauth';
+    this[LOGIN] = new Login(this, this[API_BASE], this[OAUTH_BASE]);
   }
 
   /**
@@ -28,13 +78,12 @@ export default class Migme {
    * @return authResponse object
    */
   login (scopes = [], type = 'popup') {
-
     switch (type) {
       case 'popup':
-        this.loginWithPopup(scopes);
+        this[LOGIN].popup(scopes);
         break;
       case 'redirect':
-        this.loginWithRedirect(scopes);
+        this[LOGIN].redirect(scopes);
         break;
     }
 
@@ -42,45 +91,6 @@ export default class Migme {
 
   signin (scopes = [], type = 'popup') {
     this.login(scopes, type);
-  }
-
-  buildLoginUrl (scopes) {
-    return 'https://login.mig.me/' +
-            '?client_id=' + this.client_id +
-            (this.redirect_uri ? '&redirect_uri=' + this.redirect_uri : '') +
-            '&scope=' + scopes +
-            '&response_type=code';
-  }
-
-  loginWithPopup (scopes) {
-    let opener;
-    let loc = this.buildLoginUrl(scopes);
-
-    return new Promise((resolve, reject) => {
-
-      let recieveMessage = (e) => {
-        if (typeof opener !== 'undefined') {
-          opener.close();
-          opener = null;
-        }
-
-        if (e.origin === this[OAUTH_BASE]) {
-          resolve(e.data);
-        } else {
-          reject(e.data);
-        }
-      };
-
-      window.open(loc);
-
-      window.addEventListener('message', recieveMessage, false);
-    });
-  }
-
-  loginWithRedirect (scopes) {
-    let loc = this.buildLoginUrl(scopes);
-
-    window.location = loc;
   }
 
   // TODO: do a proper logout
