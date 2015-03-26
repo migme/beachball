@@ -25,15 +25,15 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'dist/migme.js': 'src/migme.js'
+          '<%= app.dist %>/migme.js': 'src/migme.js'
         }
       }
     },
 
     concat: {
       dist: {
-        src: ['node_modules/babel/browser-polyfill.js', 'dist/migme.js'],
-        dest: 'dist/migme.js'
+        src: ['node_modules/babel/browser-polyfill.js', '<%= app.dist %>/migme.js'],
+        dest: '<%= app.dist %>/migme.js'
       }
     },
 
