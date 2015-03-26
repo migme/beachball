@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/migme/migme.js.git"
+  },
   "keywords": [
     "migme",
     "sdk"
@@ -13,33 +17,35 @@
   "author": "migme",
   "license": "ISC",
   "private": true,
+  "bugs": {
+    "url": "https://github.com/migme/migme.js/issues"
+  },
+  "homepage": "https://github.com/migme/migme.js",
   "devDependencies": {
-    "babel": "^4.7.16",
+    "babel-core": "^4.7.16",
     "babelify": "^5.0.4",
-    "browserify": "^9.0.3",
     "chai": "^2.1.2",
-    "es5-shim": "^4.1.0",
-    "es6-shim": "^0.27.1",
     "eslint": "^0.17.1",
     "grunt": "^0.4.5",
     "grunt-babel": "^4.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-jshint": "^0.11.1",
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-eslint": "^9.0.0",
     "grunt-karma": "^0.10.1",
+    "isparta": "^2.2.0",
     "karma": "^0.12.31",
     "karma-babel-preprocessor": "^4.0.1",
     "karma-browserify": "^4.0.0",
     "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-coverage": "git://github.com/douglasduteil/karma-coverage#next",
     "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-sinon-chai": "^0.3.0",
-    "karma-slimerjs-launcher": "^0.1.2",
+    "karma-spec-reporter": "0.0.16",
     "load-grunt-tasks": "^3.1.0",
     "mocha": "^2.2.1",
-    "stringify": "^3.1.0",
     "time-grunt": "^1.1.0"
   }
 }

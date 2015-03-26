@@ -14,7 +14,7 @@
     "sdk",
     "javascript"
   ],
-  "license": "MIT",
+  "license": "ISC",
   "homepage": "http://developers.mig.me",
   "private": true,
   "ignore": [

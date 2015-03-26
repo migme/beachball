@@ -57,6 +57,14 @@ module.exports = function (grunt) {
 
     // Empties folders to start fresh
     clean: {
+      test: {
+        files: [{
+          dot: true,
+          src: [
+            'test/coverage/*'
+          ]
+        }]
+      },
       dist: {
         files: [{
           dot: true,
@@ -79,7 +87,9 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'clean:test',
     'eslint',
+    'babel',
     'karma'
   ]);
 

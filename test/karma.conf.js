@@ -15,43 +15,48 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/babel/browser-polyfill.js',
-      // es6 promise
-      'node_modules/es5-shim/es5-shim.js',
-      'node_modules/es6-shim/es6-shim.js',
+      'node_modules/babel-core/browser-polyfill.js',
       // fetch
       'bower_components/fetch/fetch.js',
 
       // migme
-      'src/**/*.js',
+      // 'src/**/*.js',
 
       // tests
       'test/**/*.spec.js'
     ],
 
 
-    // list of files to exclude
-    exclude: [
-    ],
-
-
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['browserify'],
+      'src/**/*.js': ['coverage'],
       'test/**/*.js': ['browserify']
     },
 
     browserify: {
       debug: true,
-      transform: ['babelify', 'stringify']
+      transform: ['babelify']
     },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['coverage', 'spec'],
 
+    // optionally, configure the reporter
+    coverageReporter: {
+      type: 'lcov',
+      dir: 'test/coverage',
+      subdir: '.',
+      instrumenters: { isparta: require('isparta') },
+      instrumenter: {
+        '**/*.js': 'isparta'
+      },
+      instrumenterOptions: {
+        isparta: { babel: { experimental: true } }
+      }
+    },
 
     // web server port
     port: 9876,
