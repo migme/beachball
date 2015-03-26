@@ -6,6 +6,8 @@ describe('migme', () => {
   let migme,
       client_id = '309f818242abae8fdd1b',
       access_token = 'TESTING';
+  let API_BASE = 'https://api.mig.me',
+      OAUTH_BASE = 'https://oauth.mig.me/oauth';
 
   beforeEach(() => {
     migme = new Migme({
@@ -54,7 +56,10 @@ describe('migme', () => {
   });
 
   describe('migme.api()', () => {
-    let API_BASE = 'https://api.mig.me';
+
+    afterEach(() => {
+      window.fetch.restore();
+    });
 
     it('should call the correct uri', () => {
       sinon.spy(window, 'fetch');
@@ -83,6 +88,20 @@ describe('migme', () => {
             '&response_type=code');
     });
 
+  });
+
+  describe('migme getLoginStatus()', () => {
+    afterEach(() => {
+      window.fetch.restore();
+    });
+
+    it('should call the correct api', () => {
+      sinon.spy(window, 'fetch');
+
+      migme.getLoginStatus();
+
+      expect(window.fetch).to.be.calledWith(OAUTH_BASE + '/loginstatus');
+    });
   });
 
 });
