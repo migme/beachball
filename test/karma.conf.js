@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Tue Mar 24 2015 09:47:41 GMT+0800 (SGT)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,6 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/babel/browser-polyfill.js',
       // es6 promise
       'node_modules/es5-shim/es5-shim.js',
       'node_modules/es6-shim/es6-shim.js',
@@ -40,6 +41,19 @@ module.exports = function(config) {
       'src/**/*.js': ['browserify'],
       'test/**/*.js': ['browserify']
     },
+
+    // 'babelPreprocessor': {
+    //   options: {
+    //     sourceMap: "inline",
+    //     modules: "umd"
+    //   },
+    //   filename: function(file) {
+    //     return file.originalPath.replace(/\.js$/, ".es5.js");
+    //   },
+    //   sourceFileName: function(file) {
+    //     return file.originalPath;
+    //   }
+    // },
 
     browserify: {
       debug: true,

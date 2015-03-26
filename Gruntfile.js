@@ -20,12 +20,21 @@ module.exports = function (grunt) {
     babel: {
       options: {
         sourceMap: true,
-        modules: "ignore"
+        modules: "umd",
+        //externalHelpers: true,
+        experimental: true
       },
       dist: {
         files: {
           'dist/migme.js': 'src/migme.js'
         }
+      }
+    },
+
+    concat: {
+      dist: {
+        src: ['node_modules/babel/browser-polyfill.js', 'dist/migme.js'],
+        dest: 'dist/migme.js'
       }
     },
 
@@ -41,6 +50,7 @@ module.exports = function (grunt) {
 
     eslint: {
       target: [
+        'test/**.*.js',
         '<%= app.src %>/<%= pkg.name %>.js'
       ]
     },
@@ -78,6 +88,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'eslint',
     'babel',
+    'concat',
     'uglify'
   ]);
 

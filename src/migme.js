@@ -1,3 +1,6 @@
+var API_BASE = Symbol();
+var OAUTH_BASE = Symbol();
+
 export default class Migme {
 
   constructor (options = {}) {
@@ -5,14 +8,9 @@ export default class Migme {
     this.redirect_uri = options.redirect_uri || null;
     this.version = options.version || '1.0';
     this.access_token = options.access_token || null;
-  }
 
-  get API_BASE () {
-    return 'https://api.mig.me';
-  }
-
-  get OAUTH_BASE () {
-    return 'https://oauth.mig.me/oauth';
+    this[API_BASE] = 'https://api.mig.me';
+    this[OAUTH_BASE] = 'https://oauth.mig.me/oauth';
   }
 
   /**
@@ -66,7 +64,7 @@ export default class Migme {
           opener = null;
         }
 
-        if (e.origin === this.OAUTH_BASE) {
+        if (e.origin === this[OAUTH_BASE]) {
           resolve(e.data);
         } else {
           reject(e.data);
@@ -87,7 +85,7 @@ export default class Migme {
 
   // TODO: do a proper logout
   logout () {
-    return fetch(this.OAUTH_BASE + '/logout');
+    return fetch(this[OAUTH_BASE] + '/logout');
   }
 
   api (endpoint, options = {}) {
@@ -97,7 +95,7 @@ export default class Migme {
       options['Content-Type'] = 'application/json';
       options.Authorization = 'Bearer ' + this.access_token;
 
-      return fetch(this.API_BASE + endpoint, options);
+      return fetch(this[API_BASE] + endpoint, options);
     } else {
       console.error('You need to get an access_token before calling api()');
     }
