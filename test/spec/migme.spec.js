@@ -3,14 +3,13 @@ import Migme from '../../src/migme';
 
 describe('migme', () => {
 
-  var migme;
-  var client_id = '309f818242abae8fdd1b';
-  var access_token = 'TESTING';
+  let migme,
+      client_id = '309f818242abae8fdd1b',
+      access_token = 'TESTING';
 
   beforeEach(() => {
     migme = new Migme({
       client_id: client_id,
-      // redirect_uri: 'http://localhost:8080/oauth/callback',
       access_token: access_token
     });
   });
@@ -68,7 +67,6 @@ describe('migme', () => {
       });
     });
   });
-
 
   describe('migme.login()', () => {
 
