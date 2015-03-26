@@ -42,24 +42,10 @@ module.exports = function (config) {
       'test/**/*.js': ['browserify']
     },
 
-    // 'babelPreprocessor': {
-    //   options: {
-    //     sourceMap: "inline",
-    //     modules: "umd"
-    //   },
-    //   filename: function(file) {
-    //     return file.originalPath.replace(/\.js$/, ".es5.js");
-    //   },
-    //   sourceFileName: function(file) {
-    //     return file.originalPath;
-    //   }
-    // },
-
     browserify: {
       debug: true,
       transform: ['babelify', 'stringify']
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
