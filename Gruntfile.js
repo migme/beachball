@@ -21,7 +21,6 @@ module.exports = function (grunt) {
       options: {
         sourceMap: true,
         modules: "umd",
-        //externalHelpers: true,
         experimental: true
       },
       dist: {
@@ -48,10 +47,11 @@ module.exports = function (grunt) {
       }
     },
 
+    // Lint all the things
     eslint: {
       target: [
         'test/**.*.js',
-        '<%= app.src %>/<%= pkg.name %>.js'
+        '<%= app.src %>/**/*.js'
       ]
     },
 
