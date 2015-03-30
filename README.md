@@ -1,5 +1,5 @@
-# migme.js
-migme's javascript sdk
+# Beachball
+migme's javascript sdk - throws data to the [sandcastle](https://github.com/migme/sandcastle) api.
 
 This JavaScript SDK is to be used by both migme and 3rd party developers.
 
