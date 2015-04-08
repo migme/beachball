@@ -2,6 +2,7 @@
 migme's javascript sdk - throws data to the [sandcastle](https://github.com/migme/sandcastle) api.
 
 This JavaScript SDK is to be used by both migme and 3rd party developers.
+[![Build Status](https://img.shields.io/codeship/5e7f47c0-bfe9-0132-39f9-7eb09717a41c.svg)](https://codeship.com/projects/73070)
 
 ## Contribute
 - Fork this repo
