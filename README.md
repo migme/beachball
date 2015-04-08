@@ -7,12 +7,12 @@ This JavaScript SDK is to be used by both migme and 3rd party developers.
 - Fork this repo
 - clone the forked repo
 ```bash
-git clone https://github.com/<YOUR_USERNAME>/migme.js.git && cd migme.js
+git clone https://github.com/<YOUR_USERNAME>/beachball.git && cd beachball
 ```
 
-- Add ```migme/migme.js``` as an upstream remote
+- Add ```migme/beachball``` as an upstream remote
 ```bash
-git remote add upstream git@github.com:migme/migme.js.git
+git remote add upstream git@github.com:migme/beachball.git
 ```
 
 ### Install dependancies
