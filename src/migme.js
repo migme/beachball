@@ -1,4 +1,4 @@
-let API_BASE = Symbol(),
+const API_BASE = Symbol(),
     OAUTH_BASE = Symbol(),
     LOGIN = Symbol();
 
@@ -100,7 +100,9 @@ export default class Migme {
   }
 
   api (endpoint, options = {}) {
-    endpoint = endpoint.indexOf('/') === 0 ? endpoint : '/' + endpoint;
+    if (endpoint.charAt(0) !== '/') {
+      endpoint = '/' + endpoint;
+    }
 
     options['Content-Type'] = 'application/json';
     options.Authorization = 'Bearer ' + this.access_token;
