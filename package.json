@@ -4,7 +4,7 @@
   "description": "migme js sdk",
   "main": "src/migme.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "standard && grunt test"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "karma-spec-reporter": "0.0.16",
     "load-grunt-tasks": "^3.1.0",
     "mocha": "^2.2.1",
+    "standard": "^3.3.2",
     "time-grunt": "^1.1.0"
   }
 }

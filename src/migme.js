@@ -1,13 +1,13 @@
-const API_BASE = Symbol(),
-    OAUTH_BASE = Symbol(),
-    LOGIN = Symbol();
+const API_BASE = Symbol()
+const OAUTH_BASE = Symbol()
+const LOGIN = Symbol()
 
 class Login {
   constructor (o, api, oauth) {
-    this.client_id = o.client_id;
-    this.redirect_uri = o.redirect_uri;
-    this.API_BASE = api;
-    this.OAUTH_BASE = oauth;
+    this.client_id = o.client_id
+    this.redirect_uri = o.redirect_uri
+    this.API_BASE = api
+    this.OAUTH_BASE = oauth
   }
 
   buildLoginUrl (scopes) {
@@ -15,52 +15,50 @@ class Login {
             '?client_id=' + this.client_id +
             (this.redirect_uri ? '&redirect_uri=' + this.redirect_uri : '') +
             '&scope=' + scopes +
-            '&response_type=code';
+            '&response_type=code'
   }
 
   popup (scopes) {
-    let opener,
-        loc = this.buildLoginUrl(scopes);
+    let opener
+    let loc = this.buildLoginUrl(scopes)
     // This is a test
     return new Promise((resolve, reject) => {
-
       let recieveMessage = (e) => {
         if (typeof opener !== 'undefined') {
-          opener.close();
-          opener = null;
+          opener.close()
+          opener = null
         }
 
         if (e.origin === this.OAUTH_BASE) {
-          resolve(e.data);
+          resolve(e.data)
         } else {
-          reject(e.data);
+          reject(e.data)
         }
-      };
+      }
 
-      window.open(loc);
+      window.open(loc)
 
-      window.addEventListener('message', recieveMessage, false);
-    });
+      window.addEventListener('message', recieveMessage, false)
+    })
   }
 
   redirect (scopes) {
-    let loc = this.buildLoginUrl(scopes);
+    let loc = this.buildLoginUrl(scopes)
 
-    window.location = loc;
+    window.location = loc
   }
 }
 
 export default class Migme {
-
   constructor (options = {}) {
-    this.client_id = options.client_id || null;
-    this.redirect_uri = options.redirect_uri || null;
-    this.version = options.version || '1.0';
-    this.access_token = options.access_token || null;
+    this.client_id = options.client_id || null
+    this.redirect_uri = options.redirect_uri || null
+    this.version = options.version || '1.0'
+    this.access_token = options.access_token || null
 
-    this[API_BASE] = 'https://migme-sandcastle.herokuapp.com';
-    this[OAUTH_BASE] = 'https://oauth.mig.me/oauth';
-    this[LOGIN] = new Login(this, this[API_BASE], this[OAUTH_BASE]);
+    this[API_BASE] = 'https://migme-sandcastle.herokuapp.com'
+    this[OAUTH_BASE] = 'https://oauth.mig.me/oauth'
+    this[LOGIN] = new Login(this, this[API_BASE], this[OAUTH_BASE])
   }
 
   /**
@@ -69,7 +67,7 @@ export default class Migme {
    * @return authResponse object
    */
   getLoginStatus () {
-    return fetch(this[OAUTH_BASE] + '/loginstatus');
+    return window.fetch(this[OAUTH_BASE] + '/loginstatus')
   }
 
   /**
@@ -78,35 +76,33 @@ export default class Migme {
    * @return authResponse object
    */
   login (scopes = [], type = 'popup') {
-
     switch (type) {
       case 'popup':
-        this[LOGIN].popup(scopes);
-        break;
+        this[LOGIN].popup(scopes)
+        break
       case 'redirect':
-        this[LOGIN].redirect(scopes);
-        break;
+        this[LOGIN].redirect(scopes)
+        break
     }
-
   }
 
   signin (scopes = [], type = 'popup') {
-    this.login(scopes, type);
+    this.login(scopes, type)
   }
 
   // TODO: do a proper logout
   logout () {
-    return fetch(this[OAUTH_BASE] + '/logout');
+    return window.fetch(this[OAUTH_BASE] + '/logout')
   }
 
   api (endpoint, options = {}) {
     if (endpoint.charAt(0) !== '/') {
-      endpoint = '/' + endpoint;
+      endpoint = '/' + endpoint
     }
 
-    options['Content-Type'] = 'application/json';
-    options.Authorization = 'Bearer ' + this.access_token;
+    options['Content-Type'] = 'application/json'
+    options.Authorization = 'Bearer ' + this.access_token
 
-    return fetch(this[API_BASE] + endpoint, options);
+    return window.fetch(this[API_BASE] + endpoint, options)
   }
 }
