@@ -58,7 +58,7 @@ export default class Migme {
     this.version = options.version || '1.0';
     this.access_token = options.access_token || null;
 
-    this[API_BASE] = 'https://api.mig.me';
+    this[API_BASE] = 'https://migme-sandcastle.herokuapp.com';
     this[OAUTH_BASE] = 'https://oauth.mig.me/oauth';
     this[LOGIN] = new Login(this, this[API_BASE], this[OAUTH_BASE]);
   }
