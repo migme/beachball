@@ -46,14 +46,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Lint all the things
-    eslint: {
-      target: [
-        'test/**.*.js',
-        '<%= app.src %>/**/*.js'
-      ]
-    },
-
     // Empties folders to start fresh
     clean: {
       test: {
@@ -87,7 +79,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:test',
-    'eslint',
     'babel',
     'karma'
   ])
@@ -95,7 +86,6 @@ module.exports = function (grunt) {
   // Default task(s).
   grunt.registerTask('build', [
     'clean:dist',
-    'eslint',
     'babel',
     'concat',
     'uglify'
