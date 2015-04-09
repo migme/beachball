@@ -3,36 +3,20 @@ Migme JavaScript SDK. Throws data to the [Sandcastle](https://github.com/migme/s
 
 [![Build Status](https://img.shields.io/codeship/5e7f47c0-bfe9-0132-39f9-7eb09717a41c.svg)](https://codeship.com/projects/73070)
 
-## Contribute
-- Fork this repo
-- Clone the forked repo
-```bash
-git clone https://github.com/<YOUR_USERNAME>/beachball.git && cd beachball
-```
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-- Add ```migme/beachball``` as an upstream remote
-```bash
-git remote add upstream git@github.com:migme/beachball.git
-```
-
-### Install dependencies
+## Installation
 ```bash
 npm install && bower install
 ```
 
+## Usage
 
-## Build and test
 ```bash
-grunt
+grunt test  # Tests only
+grunt build # Build only
+grunt       # Test and build
 ```
 
-## Run the tests
-```bash
-grunt test
-```
-
-## Just Build
-```bash
-grunt build
-```
-
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
