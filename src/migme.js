@@ -20,7 +20,7 @@ class Login {
 
   popup (scopes) {
     let opener
-    let loc = this.buildLoginUrl(scopes)
+    const loc = this.buildLoginUrl(scopes)
     // This is a test
     return new Promise((resolve, reject) => {
       let recieveMessage = (e) => {
@@ -43,7 +43,7 @@ class Login {
   }
 
   redirect (scopes) {
-    let loc = this.buildLoginUrl(scopes)
+    const loc = this.buildLoginUrl(scopes)
 
     window.location = loc
   }
