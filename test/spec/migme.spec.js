@@ -3,11 +3,11 @@ import Migme from '../../src/migme';
 
 describe('migme', () => {
 
-  let migme,
-      client_id = '309f818242abae8fdd1b',
-      access_token = 'TESTING';
-  let API_BASE = 'https://api.mig.me',
-      OAUTH_BASE = 'https://oauth.mig.me/oauth';
+  let migme;
+  const client_id = '309f818242abae8fdd1b';
+  const access_token = 'TESTING';
+  const API_BASE = 'https://migme-sandcastle.herokuapp.com';
+  const OAUTH_BASE = 'https://oauth.mig.me/oauth';
 
   beforeEach(() => {
     migme = new Migme({
