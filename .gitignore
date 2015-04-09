@@ -8,6 +8,6 @@ bower_components/
 node_modules/
 /pages/
 /docs/
-/test/coverage/
+coverage/
 npm-debug.log
 dist/
