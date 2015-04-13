@@ -1,5 +1,13 @@
 const OAUTH_BASE = 'https://oauth.mig.me/oauth'
 
+var API_URL = 'https://migme-sandcastle.herokuapp.com';
+
+var API_URL_LOGIN = API_URL + '/login-page/';
+var API_URL_LOGIN_IFRAME = API_URL_LOGIN + '?callback_type=iframe';
+var API_URL_LOGIN_POPUP = API_URL_LOGIN + '?callback_type=popup';
+var API_URL_LOGIN_REDIRECT = API_URL_LOGIN + '?callback_type=redirect' +
+    '&redirect_uri=' + encodeURIComponent(location.href).replace('%20', '+');
+
 function buildLoginUrl ({scopes, redirect_uri, client_id}) {
   return 'https://login.mig.me/' +
           '?client_id=' + client_id +
@@ -11,7 +19,6 @@ function buildLoginUrl ({scopes, redirect_uri, client_id}) {
 function popup (scopes) {
   let opener
   const loc = buildLoginUrl(scopes)
-  // This is a test
   return new Promise((resolve, reject) => {
     let recieveMessage = (e) => {
       if (typeof opener !== 'undefined') {
@@ -32,26 +39,58 @@ function popup (scopes) {
   })
 }
 
-function redirect (scopes) {
+function redirect(scopes) {
   const loc = buildLoginUrl(scopes)
 
   window.location = loc
 }
 
 function loginIframe() {
-  return Promise.resolve()
+  var iframe = document.createElement('iframe')
+  iframe.src = API_URL_LOGIN_IFRAME
+  document.body.appendChild(iframe)
+  return awaitMessage()
 }
 
 function loginRedirect() {
+  location.href = API_URL_LOGIN_REDIRECT
   return Promise.resolve()
 }
 
 function loginPopup() {
-  return Promise.resolve()
+  window.open(API_URL_LOGIN_POPUP)
+  return awaitMessage()
+}
+
+function awaitMessage() {
+  return new Promise((resolve, reject) => {
+    window.addEventListener('message', function(event) {
+      if (event.origin === API_URL) {
+        if (event.data.err) reject(event.data.err)
+        else if (event.data.res) resolve(event.data.res)
+      }
+    }, false)
+  })
+}
+
+function parseHash() {
+  if (location.hash) {
+    try {
+      var data = JSON.parse(location.hash.substring(1))
+    } catch (error) {
+    }
+    if (data && (data.err || data.res)) {
+      log(JSON.stringify(data.err || data.res))
+      var length = location.href.length - location.hash.length
+      var trimmed = location.href.substring(0, length)
+      location.replaceState(null, null, trimmed)
+    }
+  }
 }
 
 class Session {
   constructor (migme) {
+    this.migme = migme;
   }
 
   /**
@@ -71,12 +110,12 @@ class Session {
   login (scopes = [], type = 'popup') {
     switch (type) {
       case 'iframe':
-        return loginIframe(scopes)
+        return loginIframe.call(this, scopes)
       case 'redirect':
-        return loginRedirect(scopes)
+        return loginRedirect.call(this, scopes)
       case 'popup':
       default:
-        return loginPopup(scopes)
+        return loginPopup.call(this, scopes)
     }
   }
 
