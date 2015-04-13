@@ -38,6 +38,18 @@ function redirect (scopes) {
   window.location = loc
 }
 
+function loginIframe() {
+  return Promise.resolve()
+}
+
+function loginRedirect() {
+  return Promise.resolve()
+}
+
+function loginPopup() {
+  return Promise.resolve()
+}
+
 class Session {
   constructor (migme) {
   }
@@ -58,12 +70,13 @@ class Session {
    */
   login (scopes = [], type = 'popup') {
     switch (type) {
-      case 'popup':
-        popup(scopes)
-        break
+      case 'iframe':
+        return loginIframe(scopes)
       case 'redirect':
-        redirect(scopes)
-        break
+        return loginRedirect(scopes)
+      case 'popup':
+      default:
+        return loginPopup(scopes)
     }
   }
 

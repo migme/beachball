@@ -8,7 +8,8 @@ export default class Migme {
       client_id = '',
       redirect_uri = '',
       version = version,
-      access_token = ''
+      access_token = '',
+      baseUrl = 'https://migme-sandcastle.herokuapp.com'
     }, opts)
 
     this.Session = new Session(this)
