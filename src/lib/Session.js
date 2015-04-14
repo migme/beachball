@@ -1,70 +1,49 @@
-const OAUTH_BASE = 'https://oauth.mig.me/oauth'
+import {URI} from 'uri-template-lite'
+import localforage from 'localforage'
 
-var API_URL = 'https://migme-sandcastle.herokuapp.com';
+const API_URL = 'https://migme-sandcastle.herokuapp.com'
+const API_URL_LOGIN = `${API_URL}/login-page/{?${[
+  'callback',
+  'callback_type',
+  'redirect_uri',
+  'scopes',
+  'redirect_uri',
+  'client_id'
+]}}`
 
-var API_URL_LOGIN = API_URL + '/login-page/';
-var API_URL_LOGIN_IFRAME = API_URL_LOGIN + '?callback_type=iframe';
-var API_URL_LOGIN_POPUP = API_URL_LOGIN + '?callback_type=popup';
-var API_URL_LOGIN_REDIRECT = API_URL_LOGIN + '?callback_type=redirect' +
-    '&redirect_uri=' + encodeURIComponent(location.href).replace('%20', '+');
-
-function buildLoginUrl ({scopes, redirect_uri, client_id}) {
-  return 'https://login.mig.me/' +
-          '?client_id=' + client_id +
-          (redirect_uri ? '&redirect_uri=' + redirect_uri : '') +
-          '&scope=' + scopes +
-          '&response_type=code'
-}
-
-function popup (scopes) {
-  let opener
-  const loc = buildLoginUrl(scopes)
-  return new Promise((resolve, reject) => {
-    let recieveMessage = (e) => {
-      if (typeof opener !== 'undefined') {
-        opener.close()
-        opener = null
-      }
-
-      if (e.origin === OAUTH_BASE) {
-        resolve(e.data)
-      } else {
-        reject(e.data)
-      }
-    }
-
-    window.open(loc)
-
-    window.addEventListener('message', recieveMessage, false)
-  })
-}
-
-function redirect(scopes) {
-  const loc = buildLoginUrl(scopes)
-
-  window.location = loc
-}
-
-function loginIframe() {
-  var iframe = document.createElement('iframe')
-  iframe.src = API_URL_LOGIN_IFRAME
+function loginIframe () {
+  const data = Object.assign({
+    callback_type: 'iframe'
+  }, this.migme)
+  const url = URI.expand(API_URL_LOGIN, data)
+  const iframe = document.createElement('iframe')
+  iframe.src = url
   document.body.appendChild(iframe)
   return awaitMessage()
 }
 
-function loginRedirect() {
-  location.href = API_URL_LOGIN_REDIRECT
-  return Promise.resolve()
+function loginRedirect () {
+  const data = Object.assign({
+    callback_type: 'redirect',
+    redirect_uri: window.location.href
+  }, this.migme)
+  const url = URI.expand(API_URL_LOGIN, data)
+  window.location.href = url
+  return new Promise()
 }
 
-function loginPopup() {
-  window.open(API_URL_LOGIN_POPUP)
+function loginPopup () {
+  const data = Object.assign({
+    callback_type: 'popup'
+  }, this.migme)
+  const url = URI.expand(API_URL_LOGIN, data)
+  window.open(url)
   return awaitMessage()
 }
 
-function awaitMessage() {
+function awaitMessage () {
   return new Promise((resolve, reject) => {
-    window.addEventListener('message', function(event) {
+    window.addEventListener('message', (event) => {
       if (event.origin === API_URL) {
         if (event.data.err) reject(event.data.err)
         else if (event.data.res) resolve(event.data.res)
@@ -73,50 +52,52 @@ function awaitMessage() {
   })
 }
 
-function parseHash() {
-  if (location.hash) {
-    try {
-      var data = JSON.parse(location.hash.substring(1))
-    } catch (error) {
-    }
-    if (data && (data.err || data.res)) {
-      log(JSON.stringify(data.err || data.res))
-      var length = location.href.length - location.hash.length
-      var trimmed = location.href.substring(0, length)
-      location.replaceState(null, null, trimmed)
-    }
-  }
+function getLoginFromHash () {
+  return new Promise(resolve => {
+    const data = JSON.parse(window.location.hash.substring(1))
+    resolve(data.res)
+  })
 }
 
-class Session {
+function saveProfile (data) {
+  return localforage.setItem('session', data)
+}
+
+function trimHash () {
+  const location = window.location
+  const length = location.href.length - location.hash.length
+  const trimmed = location.href.substring(0, length)
+  location.replaceState(null, null, trimmed)
+}
+
+export default class Session {
   constructor (migme) {
-    this.migme = migme;
+    this.migme = migme
+
+    getLoginFromHash()
+      .then(saveProfile)
+      .then(trimHash)
   }
 
-  /**
-   * @brief Returns the migme login status of a user.
-   * @details Returns the migme login status of a user, with an authResponse object if they are logged in.
-   * @return authResponse object
-   */
-  getLoginStatus () {
-    return window.fetch(OAUTH_BASE + '/loginstatus')
+  getStatus () {
+    return localforage.getItem('session')
   }
 
-  /**
-   * @brief Prompts a user to login to your app.
-   * @details Prompts a user to login to your app using the Login dialog in a popup. This method can also be used with an already logged-in user to request additional permissions from them.
-   * @return authResponse object
-   */
-  login (scopes = [], type = 'popup') {
+  login (type = 'popup') {
+    let session
     switch (type) {
       case 'iframe':
-        return loginIframe.call(this, scopes)
+        session = loginIframe.apply(this)
+        break
       case 'redirect':
-        return loginRedirect.call(this, scopes)
+        session = loginRedirect.call(this)
+        break
       case 'popup':
       default:
-        return loginPopup.call(this, scopes)
+        session = loginPopup.apply(this)
     }
+    return session
+      .then(saveProfile)
   }
 
   signin () {
@@ -124,12 +105,10 @@ class Session {
   }
 
   logout () {
-    return window.fetch(OAUTH_BASE + '/logout')
+    return localforage.removeItem('session')
   }
 
   signout () {
     return this.logout.apply(this, arguments)
   }
 }
-
-export default Session

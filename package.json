@@ -53,5 +53,9 @@
       "bower_components/**",
       "dist/**"
     ]
+  },
+  "dependencies": {
+    "localforage": "^1.2.2",
+    "uri-template-lite": "^0.1.11"
   }
 }
