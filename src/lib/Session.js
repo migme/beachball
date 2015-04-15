@@ -1,8 +1,7 @@
 import {URI} from 'uri-template-lite'
 import localforage from 'localforage'
 
-const API_URL = 'https://migme-sandcastle.herokuapp.com'
-const API_URL_LOGIN = `${API_URL}/login-page/{?${[
+const API_URL_LOGIN = `{baseUrl}/login-page/{?${[
   'callback',
   'callback_type',
   'redirect_uri',
@@ -28,8 +27,8 @@ function loginRedirect () {
     redirect_uri: window.location.href
   }, this.migme)
   const url = URI.expand(API_URL_LOGIN, data)
-  window.location.href = url
-  return new Promise()
+  this._redirect(url)
+  return new Promise(() => {})
 }
 
 function loginPopup () {
@@ -38,13 +37,13 @@ function loginPopup () {
   }, this.migme)
   const url = URI.expand(API_URL_LOGIN, data)
   window.open(url)
-  return awaitMessage()
+  return awaitMessage.call(this)
 }
 
 function awaitMessage () {
   return new Promise((resolve, reject) => {
-    window.addEventListener('message', (event) => {
-      if (event.origin === API_URL) {
+    window.addEventListener('message', event => {
+      if (event.origin === this.migme.baseUrl) {
         if (event.data.err) reject(event.data.err)
         else if (event.data.res) resolve(event.data.res)
       }
@@ -81,6 +80,10 @@ export default class Session {
 
   getStatus () {
     return localforage.getItem('session')
+  }
+
+  _redirect (href) {
+    window.location.href = href
   }
 
   login (type = 'popup') {

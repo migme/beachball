@@ -8,8 +8,8 @@ export default class API {
       endpoint = '/' + endpoint
     }
 
-    options['Content-Type'] = 'application/json'
-    options.Authorization = 'Bearer ' + this.access_token
+    options['content-type'] = 'application/json'
+    options.Authorization = 'Bearer ' + this.migme.access_token
 
     return window.fetch(this.migme.baseUrl + endpoint, options)
   }

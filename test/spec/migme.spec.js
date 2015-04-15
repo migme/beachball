@@ -1,13 +1,13 @@
-/* global afterEach beforeEach describe expect it sinon */
+/* global beforeEach describe expect it */
 'use strict'
 import Migme from '../../src/migme'
+import API from '../../src/lib/API'
+import Session from '../../src/lib/Session'
 
-describe('migme', () => {
+describe('Migme', () => {
   let migme
   const client_id = '309f818242abae8fdd1b'
   const access_token = 'TESTING'
-  const API_BASE = 'https://migme-sandcastle.herokuapp.com'
-  const OAUTH_BASE = 'https://oauth.mig.me/oauth'
 
   beforeEach(() => {
     migme = new Migme({
@@ -16,88 +16,43 @@ describe('migme', () => {
     })
   })
 
-  it('should be defined', () => {
+  it('should be instantiated', () => {
     expect(migme).to.exist
+    expect(migme).to.be.an.instanceof(Migme)
   })
 
-  /*
-    Check if the functions exist
-   */
-  it('should have a method login()', () => {
-    expect(migme.login).to.exist
-    expect(migme.login).to.be.a('function')
+  it('should expose Session', () => {
+    expect(migme.Session).to.exist
+    expect(migme.Session).to.be.an.instanceof(Session)
   })
 
-  it('should have a method logout()', () => {
-    expect(migme.logout).to.exist
-    expect(migme.logout).to.be.a('function')
+  it('should expose API', () => {
+    expect(migme.API).to.exist
+    expect(migme.API).to.be.an.instanceof(API)
   })
 
-  it('should have a method api()', () => {
-    expect(migme.api).to.exist
-    expect(migme.api).to.be.a('function')
+  it('should expose configuration', () => {
+    expect(migme).to.contain.all.keys([
+      'client_id',
+      'access_token',
+      'baseUrl'
+    ])
   })
 
-  it('should have a method getLoginStatus()', () => {
-    expect(migme.getLoginStatus).to.exist
-    expect(migme.getLoginStatus).to.be.a('function')
-  })
+  // describe('migme.api()', () => {
+  //   afterEach(() => {
+  //     window.fetch.restore()
+  //   })
 
-  describe('API_BASE', () => {
-    it('should not be able to see API_BASE', () => {
-      expect(migme.API_BASE).to.not.exist
-    })
-  })
+  //   it('should call the correct uri', () => {
+  //     sinon.spy(window, 'fetch')
 
-  describe('OAUTH_BASE', () => {
-    it('should not be able to see OAUTH_BASE', () => {
-      expect(migme.OAUTH_BASE).to.not.exist
-    })
-  })
+  //     migme.api('/me')
 
-  describe('migme.api()', () => {
-    afterEach(() => {
-      window.fetch.restore()
-    })
-
-    it('should call the correct uri', () => {
-      sinon.spy(window, 'fetch')
-
-      migme.api('/me')
-
-      expect(window.fetch).to.be.calledWith(API_BASE + '/me', {
-        Authorization: 'Bearer ' + access_token,
-        'Content-Type': 'application/json'
-      })
-    })
-  })
-
-  describe('migme.login()', () => {
-    it('should call the api and inject an iframe', () => {
-      sinon.spy(window, 'open')
-
-      var scopes = ['test-scope']
-
-      migme.login(scopes)
-
-      expect(window.open).to.be.calledWith('https://login.mig.me/' +
-        '?client_id=' + client_id +
-        '&scope=' + scopes +
-        '&response_type=code')
-    })
-  })
-
-  describe('migme getLoginStatus()', () => {
-    afterEach(() => {
-      window.fetch.restore()
-    })
-
-    it('should call the correct api', () => {
-      sinon.spy(window, 'fetch')
-
-      migme.getLoginStatus()
-
-      expect(window.fetch).to.be.calledWith(OAUTH_BASE + '/loginstatus')
-    })
-  })
+  //     expect(window.fetch).to.be.calledWith(API_BASE + '/me', {
+  //       Authorization: 'Bearer ' + access_token,
+  //       'Content-Type': 'application/json'
+  //     })
+  //   })
+  // })
 })
