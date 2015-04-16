@@ -43,7 +43,7 @@ function loginPopup () {
 function awaitMessage () {
   return new Promise((resolve, reject) => {
     window.addEventListener('message', event => {
-      if (event.origin === this.migme.baseUrl) {
+      if (this && this.migme && event.origin === this.migme.baseUrl) {
         if (event.data.err) reject(event.data.err)
         else if (event.data.res) resolve(event.data.res)
       }
