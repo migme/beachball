@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/migme/migme.js.git"
+    "url": "https://github.com/migme/beachball.git"
   },
   "keywords": [
     "migme",
@@ -21,9 +21,9 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/migme/migme.js/issues"
+    "url": "https://github.com/migme/beachball/issues"
   },
-  "homepage": "https://github.com/migme/migme.js",
+  "homepage": "https://github.com/migme/beachball",
   "devDependencies": {
     "babel-core": "^4.7.16",
     "babelify": "^5.0.4",
