@@ -1,7 +1,7 @@
 {
   "name": "migme",
-  "version": "0.1.0",
-  "description": "migme js sdk",
+  "version": "0.1.1",
+  "description": "Migme JavaScript SDK.",
   "main": "src/migme.js",
   "scripts": {
     "test": "standard && grunt test"
@@ -14,7 +14,11 @@
     "migme",
     "sdk"
   ],
-  "author": "migme",
+  "author": "Migme (https://mig.me)",
+  "contributors": [
+    "Ed Moore <eddie.moore@gmail.com>",
+    "Sebastiaan Deckers <seb@ninja.sg>"
+  ],
   "license": "ISC",
   "private": true,
   "bugs": {
@@ -56,5 +60,8 @@
   "dependencies": {
     "localforage": "^1.2.2",
     "uri-template-lite": "^0.1.11"
+  },
+  "directories": {
+    "test": "test"
   }
 }
