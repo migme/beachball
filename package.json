@@ -20,7 +20,6 @@
     "Sebastiaan Deckers <seb@ninja.sg>"
   ],
   "license": "ISC",
-  "private": true,
   "bugs": {
     "url": "https://github.com/migme/migme.js/issues"
   },
