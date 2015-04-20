@@ -7,7 +7,7 @@ Migme JavaScript SDK. Throws data to the [Sandcastle](https://github.com/migme/s
 
 ## Installation
 ```bash
-npm install && bower install
+npm install
 ```
 
 ## Usage

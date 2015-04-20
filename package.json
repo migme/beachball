@@ -24,7 +24,6 @@
   "devDependencies": {
     "babel-core": "^4.7.16",
     "babelify": "^5.0.4",
-    "bower": "^1.4.1",
     "chai": "^2.1.2",
     "grunt": "^0.4.5",
     "grunt-babel": "^4.0.0",
@@ -46,11 +45,11 @@
     "load-grunt-tasks": "^3.1.0",
     "mocha": "^2.2.1",
     "standard": "^3.3.2",
-    "time-grunt": "^1.1.0"
+    "time-grunt": "^1.1.0",
+    "whatwg-fetch": "^0.7.0"
   },
   "standard": {
     "ignore": [
-      "bower_components/**",
       "dist/**"
     ]
   },
