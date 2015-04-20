@@ -1,7 +1,7 @@
 {
   "name": "migme",
-  "version": "0.1.0",
-  "description": "migme js sdk",
+  "version": "0.1.1",
+  "description": "Migme JavaScript SDK.",
   "main": "src/migme.js",
   "scripts": {
     "test": "standard && grunt test"
@@ -14,9 +14,12 @@
     "migme",
     "sdk"
   ],
-  "author": "migme",
+  "author": "Migme (https://mig.me)",
+  "contributors": [
+    "Ed Moore <eddie.moore@gmail.com>",
+    "Sebastiaan Deckers <seb@ninja.sg>"
+  ],
   "license": "ISC",
-  "private": true,
   "bugs": {
     "url": "https://github.com/migme/migme.js/issues"
   },
@@ -24,7 +27,6 @@
   "devDependencies": {
     "babel-core": "^4.7.16",
     "babelify": "^5.0.4",
-    "bower": "^1.4.1",
     "chai": "^2.1.2",
     "grunt": "^0.4.5",
     "grunt-babel": "^4.0.0",
@@ -46,16 +48,19 @@
     "load-grunt-tasks": "^3.1.0",
     "mocha": "^2.2.1",
     "standard": "^3.3.2",
-    "time-grunt": "^1.1.0"
+    "time-grunt": "^1.1.0",
+    "whatwg-fetch": "^0.7.0"
   },
   "standard": {
     "ignore": [
-      "bower_components/**",
       "dist/**"
     ]
   },
   "dependencies": {
     "localforage": "^1.2.2",
     "uri-template-lite": "^0.1.11"
+  },
+  "directories": {
+    "test": "test"
   }
 }

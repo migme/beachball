@@ -13,8 +13,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/babel-core/browser-polyfill.js',
-      // fetch
-      'bower_components/fetch/fetch.js',
+      'node_modules/whatwg-fetch/fetch.js',
 
       // migme
       // 'src/**/*.js',
