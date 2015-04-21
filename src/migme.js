@@ -1,12 +1,11 @@
 import Session from './lib/Session'
 import API from './lib/API'
-import {version} from '../package.json'
 
 export default class Migme {
   constructor ({
     client_id = '',
     redirect_uri = '',
-    version = version,
+    version = '',
     access_token = '',
     baseUrl = 'https://migme-sandcastle.herokuapp.com'
   }) {
