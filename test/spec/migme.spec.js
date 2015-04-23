@@ -39,20 +39,7 @@ describe('Migme', () => {
     ])
   })
 
-  // describe('migme.api()', () => {
-  //   afterEach(() => {
-  //     window.fetch.restore()
-  //   })
-
-  //   it('should call the correct uri', () => {
-  //     sinon.spy(window, 'fetch')
-
-  //     migme.api('/me')
-
-  //     expect(window.fetch).to.be.calledWith(API_BASE + '/me', {
-  //       Authorization: 'Bearer ' + access_token,
-  //       'Content-Type': 'application/json'
-  //     })
-  //   })
-  // })
+  it('should work without options', () => {
+    expect(() => new Migme()).not.to.throw(TypeError)
+  })
 })

@@ -8,7 +8,7 @@ export default class Migme {
     version = '',
     access_token = '',
     baseUrl = 'https://migme-sandcastle.herokuapp.com'
-  }) {
+  } = {}) {
     Object.assign(this, {
       client_id,
       redirect_uri,
@@ -17,7 +17,7 @@ export default class Migme {
       baseUrl
     })
 
-    this.Session = new Session(this)
     this.API = new API(this)
+    this.Session = new Session(this)
   }
 }
