@@ -64,5 +64,10 @@
     "lib": "src",
     "test": "test"
   },
-  "format": "es6"
+  "format": "es6",
+  "ignore": [
+    "node_modules",
+    "coverage",
+    "test"
+  ]
 }
