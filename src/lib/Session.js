@@ -52,7 +52,7 @@ function awaitMessage () {
 }
 
 function getLoginFromHash () {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const data = JSON.parse(window.location.hash.substring(1))
     resolve(data.res)
   })
