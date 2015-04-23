@@ -61,9 +61,8 @@
     "uri-template-lite": "^0.1.11"
   },
   "directories": {
+    "lib": "src",
     "test": "test"
   },
-  "jspm": {
-    "format": "es6"
-  }
+  "format": "es6"
 }
