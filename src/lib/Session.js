@@ -52,7 +52,7 @@ function awaitMessage () {
 }
 
 function getLoginFromHash () {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const data = JSON.parse(window.location.hash.substring(1))
     resolve(data.res)
   })
@@ -76,6 +76,8 @@ export default class Session {
     getLoginFromHash()
       .then(saveProfile)
       .then(trimHash)
+      .catch(function () {
+      })
   }
 
   getStatus () {
