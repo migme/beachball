@@ -1,4 +1,6 @@
 # Beachball
+
+[![Join the chat at https://gitter.im/migme/beachball](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/migme/beachball?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Migme JavaScript SDK. Throws data to the [Migme API](http://docs.migme.apiary.io/).
 
 [![Build Status](https://img.shields.io/codeship/5e7f47c0-bfe9-0132-39f9-7eb09717a41c.svg)](https://codeship.com/projects/73070)
