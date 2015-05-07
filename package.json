@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "localforage": "^1.2.2",
-    "uri-template-lite": "^0.1.11"
+    "url-template": "^2.0.6"
   },
   "directories": {
     "lib": "src",
