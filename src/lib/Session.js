@@ -1,4 +1,4 @@
-import {URI} from 'uri-template-lite'
+import urltemplate from 'url-template'
 import localforage from 'localforage'
 
 const API_URL_LOGIN = `{baseUrl}/login-page/{?${[
@@ -14,7 +14,7 @@ function loginIframe () {
   const data = Object.assign({
     callback_type: 'iframe'
   }, this.migme)
-  const url = URI.expand(API_URL_LOGIN, data)
+  const url = urltemplate.parse(API_URL_LOGIN).expand(data)
   const iframe = document.createElement('iframe')
   iframe.src = url
   document.body.appendChild(iframe)
@@ -26,7 +26,7 @@ function loginRedirect () {
     callback_type: 'redirect',
     redirect_uri: window.location.href
   }, this.migme)
-  const url = URI.expand(API_URL_LOGIN, data)
+  const url = urltemplate.parse(API_URL_LOGIN).expand(data)
   this._redirect(url)
   return new Promise(() => {})
 }
@@ -35,7 +35,7 @@ function loginPopup () {
   const data = Object.assign({
     callback_type: 'popup'
   }, this.migme)
-  const url = URI.expand(API_URL_LOGIN, data)
+  const url = urltemplate.parse(API_URL_LOGIN).expand(data)
   window.open(url)
   return awaitMessage.call(this)
 }

@@ -1,6 +1,6 @@
 {
   "name": "migme",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Migme JavaScript SDK.",
   "main": "src/migme.js",
   "scripts": {
@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "localforage": "^1.2.2",
-    "uri-template-lite": "^0.1.11"
+    "url-template": "^2.0.6"
   },
   "directories": {
     "lib": "src",
