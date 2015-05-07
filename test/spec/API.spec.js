@@ -1,17 +1,13 @@
 /* global afterEach beforeEach describe expect it sinon */
 'use strict'
+import * as config from '../fixtures/config'
 import API from '../../src/lib/API'
 
 describe('API', () => {
   let api
-  const accessToken = '1234567890'
-  const baseUrl = 'https://localhost'
 
   beforeEach(() => {
-    api = new API({
-      baseUrl: baseUrl,
-      access_token: accessToken
-    })
+    api = new API(config.session)
   })
 
   it('should be instantiated', () => {
@@ -36,8 +32,8 @@ describe('API', () => {
     it('should call the correct uri', () => {
       const endpoint = '/me'
       api.url(endpoint)
-      expect(window.fetch).to.be.calledWith(baseUrl + endpoint, {
-        Authorization: 'Bearer ' + accessToken,
+      expect(window.fetch).to.be.calledWith(config.baseUrl + endpoint, {
+        Authorization: 'Bearer ' + config.accessToken,
         'content-type': 'application/json'
       })
     })
