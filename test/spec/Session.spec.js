@@ -1,12 +1,13 @@
 /* global before after beforeEach describe expect it sinon */
 'use strict'
+import * as config from '../fixtures/config'
 import Session from '../../src/lib/Session'
 
 describe('Session', () => {
   let session
 
   beforeEach(() => {
-    session = new Session()
+    session = new Session(config.session)
   })
 
   it('should be instantiated', () => {
@@ -39,7 +40,7 @@ describe('Session', () => {
       it('should open a window', () => {
         session.login('popup')
         expect(window.open).to.be.calledWith(
-          '/login-page/?callback_type=popup'
+          config.baseUrl + '/login-page/?callback_type=popup'
         )
       })
     })

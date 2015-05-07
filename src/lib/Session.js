@@ -1,7 +1,7 @@
 import urltemplate from 'url-template'
 import localforage from 'localforage'
 
-const API_URL_LOGIN = `{baseUrl}/login-page/{?${[
+const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'callback',
   'callback_type',
   'redirect_uri',
