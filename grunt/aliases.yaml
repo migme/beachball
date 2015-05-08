@@ -1,0 +1,14 @@
+test:
+  - 'clean:test'
+  - 'babel'
+  - 'karma'
+
+build:
+  - 'clean:dist'
+  - 'babel'
+  - 'concat'
+  - 'uglify'
+
+default:
+  - 'test'
+  - 'build'

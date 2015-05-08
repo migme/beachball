@@ -47,6 +47,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-sinon-chai": "^0.3.0",
     "karma-spec-reporter": "0.0.16",
+    "load-grunt-config": "^0.17.1",
     "load-grunt-tasks": "^3.1.0",
     "mocha": "^2.2.1",
     "standard": "^3.3.2",
