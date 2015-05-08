@@ -1,15 +1,14 @@
 test:
-  description: 'Test that code'
-  tasks:
-    - 'clean:test'
-    - 'babel'
-    - 'karma'
+  - 'clean:test'
+  - 'babel'
+  - 'karma'
 
 build:
-  tasks:
-    - 'clean:dist'
-    - 'babel'
-    - 'concat'
-    - 'uglify'
+  - 'clean:dist'
+  - 'babel'
+  - 'concat'
+  - 'uglify'
 
-default: ['test', 'build']
+default:
+  - 'test'
+  - 'build'
