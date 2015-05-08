@@ -1,8 +1,7 @@
 module.exports = {
   options: {
     sourceMap: true,
-    modules: 'umd',
-    experimental: true
+    modules: 'umd'
   },
   dist: {
     files: {
