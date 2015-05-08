@@ -8,7 +8,7 @@ Migme JavaScript SDK. Throws data to the [Migme API](http://docs.migme.apiary.io
 [![npm](https://img.shields.io/npm/v/migme.svg)](https://www.npmjs.com/package/migme)
 [![npm](https://img.shields.io/npm/dm/migme.svg)](https://www.npmjs.com/package/migme)
 
-![Beachball](https://gist.githubusercontent.com/mixstix/5eb0fe3bea4e87ea5034/raw/fbf873d7d1b3c845e9e0f9613690489203479fcc/beachball.svg "Beachball")
+![Beachball](https://cdn.rawgit.com/mixstix/5eb0fe3bea4e87ea5034/raw/fbf873d7d1b3c845e9e0f9613690489203479fcc/beachball.svg "Beachball")
 
 ## Installation
 ```bash
