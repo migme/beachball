@@ -11,9 +11,7 @@ module.exports = {
     files: [{
       dot: true,
       src: [
-        '.tmp',
-        '<%= app.dist %>/{,*/}*',
-        '!<%= app.dist %>/.git*'
+        '<%= app.dist %>'
       ]
     }]
   }

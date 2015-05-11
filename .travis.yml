@@ -10,12 +10,22 @@ notifications:
     on_success: change
     on_failure: always
     on_start: never
+before_deploy: grunt build
 deploy:
-  provider: npm
-  email: seb.d@mig.me
-  api_key:
-    secure: QscM8y3mEJCHhuNqoHNA2KC3Ls8nP3S761Jc8PHRkBQ5zR1nQ88WS34EgelOuzZJulXS7/Qu2GSk+9RhUyOrpT+iaGl/2tGmsRIUMdFxLr1q/oINLahYrvprdTFNfGqGcI/MEfF5k49pOaKi/S1MtolctlNStHwpuwBbnoTfsPw=
-  skip_cleanup: true
-  on:
-    tags: true
-    branch: master
+  - provider: releases
+    api_key:
+      secure: Gw5K6RwRHq0ubD6L37GimTTWHbxPb8EEg1XrAHUvBHn3py92uUfqH5JCvaMsl02TVif1SzPMjWwFmfEgK3Ci2OPZ6hISGtHucyrwzTSDAPzAU7IFoVTnKmBbi2hzcEcTSN1J3fvaFH7MZsOcPJjKHoRhxlBsYALbhcqAwfmkHOY=
+    skip_cleanup: true
+    file_glob: true
+    file: dist/*
+    on:
+      repo: migme/beachball
+      tags: true
+  - provider: npm
+    email: seb.d@mig.me
+    api_key:
+      secure: QscM8y3mEJCHhuNqoHNA2KC3Ls8nP3S761Jc8PHRkBQ5zR1nQ88WS34EgelOuzZJulXS7/Qu2GSk+9RhUyOrpT+iaGl/2tGmsRIUMdFxLr1q/oINLahYrvprdTFNfGqGcI/MEfF5k49pOaKi/S1MtolctlNStHwpuwBbnoTfsPw=
+    skip_cleanup: true
+    on:
+      repo: migme/beachball
+      tags: true
