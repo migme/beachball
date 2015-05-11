@@ -1,6 +1,6 @@
 {
   "name": "migme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Migme JavaScript SDK.",
   "main": "src/migme.js",
   "scripts": {
