@@ -1,14 +1,14 @@
 test:
-  - 'clean:test'
-  - 'babel'
-  - 'karma'
+  - clean:test
+  - babel
+  - karma
 
 build:
-  - 'clean:dist'
-  - 'babel'
-  - 'concat'
-  - 'uglify'
+  - clean:dist
+  - browserify
+  - exorcise
+  - uglify
 
 default:
-  - 'test'
-  - 'build'
+  - test
+  - build
