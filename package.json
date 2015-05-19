@@ -67,6 +67,11 @@
     "lib": "src",
     "test": "test"
   },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
   "jspm": {
     "directories": {
       "lib": "src",
