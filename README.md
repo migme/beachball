@@ -13,14 +13,13 @@ Migme JavaScript SDK. Throws data to the [Migme API](http://docs.migme.apiary.io
 ![Beachball Migbot](https://cdn.rawgit.com/mixstix/5eb0fe3bea4e87ea5034/raw/fbf873d7d1b3c845e9e0f9613690489203479fcc/beachball.svg "Beachball Migbot")
 
 ## Installation
+
+### NPM
 ```bash
-npm install
-npm test    # Test only
-grunt build # Build only
-grunt       # Test, then build
+npm install migme
 ```
 
-## CDN
+### CDN
 Replace `${VERSION}` with a released version number.
 ```html
 <script src="https://cdn.rawgit.com/migme/beachball/releases/download/${VERSION}/migme.min.js"></script>
@@ -47,4 +46,12 @@ define(['migme'], function (Migme) {
 const client = new Migme({
   // options
 })
+```
+
+### Development
+```bash
+npm install # Install dependencies
+npm test    # Test only
+grunt build # Build only
+grunt       # Test, then build
 ```
