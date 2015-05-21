@@ -2,7 +2,7 @@ module.exports = {
    options: {
     browserifyOptions: {
        debug: true,
-       standalone: 'Migme'
+       standalone: 'Beachball'
     },
     transform: [
       ['babelify', {
@@ -12,7 +12,7 @@ module.exports = {
   },
   bundle: {
     files: {
-      '<%= app.dist %>/migme.min.js': '<%= app.src %>/migme.js'
+      '<%= app.dist %>/<%= pkg.name %>.min.js': '<%= pkg.main %>'
     }
   }
 }
