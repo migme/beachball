@@ -1,7 +1,7 @@
 import Session from './lib/Session'
 import API from './lib/API'
 
-export default class Migme {
+export default class Beachball {
   constructor ({
     client_id = '',
     redirect_uri = '',

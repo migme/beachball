@@ -5,7 +5,7 @@ module.exports = {
   },
   dist: {
     files: {
-      '<%= app.dist %>/migme.js': '<%= app.src %>/migme.js'
+      '<%= app.dist %>/<%= pkg.name %>.js': '<%= pkg.main %>'
     }
   }
 }
