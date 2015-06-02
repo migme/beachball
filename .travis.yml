@@ -12,20 +12,24 @@ notifications:
     on_start: never
 before_deploy: grunt build
 deploy:
-  - provider: releases
-    api_key:
-      secure: Gw5K6RwRHq0ubD6L37GimTTWHbxPb8EEg1XrAHUvBHn3py92uUfqH5JCvaMsl02TVif1SzPMjWwFmfEgK3Ci2OPZ6hISGtHucyrwzTSDAPzAU7IFoVTnKmBbi2hzcEcTSN1J3fvaFH7MZsOcPJjKHoRhxlBsYALbhcqAwfmkHOY=
-    skip_cleanup: true
-    file_glob: true
-    file: dist/*
-    on:
-      repo: migme/beachball
-      tags: true
-  - provider: npm
-    email: seb.d@mig.me
-    api_key:
-      secure: QscM8y3mEJCHhuNqoHNA2KC3Ls8nP3S761Jc8PHRkBQ5zR1nQ88WS34EgelOuzZJulXS7/Qu2GSk+9RhUyOrpT+iaGl/2tGmsRIUMdFxLr1q/oINLahYrvprdTFNfGqGcI/MEfF5k49pOaKi/S1MtolctlNStHwpuwBbnoTfsPw=
-    skip_cleanup: true
-    on:
-      repo: migme/beachball
-      tags: true
+- provider: releases
+  api_key:
+    secure: Gw5K6RwRHq0ubD6L37GimTTWHbxPb8EEg1XrAHUvBHn3py92uUfqH5JCvaMsl02TVif1SzPMjWwFmfEgK3Ci2OPZ6hISGtHucyrwzTSDAPzAU7IFoVTnKmBbi2hzcEcTSN1J3fvaFH7MZsOcPJjKHoRhxlBsYALbhcqAwfmkHOY=
+  skip_cleanup: true
+  file_glob: true
+  file: dist/*
+  on:
+    repo: migme/beachball
+    tags: true
+- provider: npm
+  email: seb.d@mig.me
+  api_key:
+    secure: QscM8y3mEJCHhuNqoHNA2KC3Ls8nP3S761Jc8PHRkBQ5zR1nQ88WS34EgelOuzZJulXS7/Qu2GSk+9RhUyOrpT+iaGl/2tGmsRIUMdFxLr1q/oINLahYrvprdTFNfGqGcI/MEfF5k49pOaKi/S1MtolctlNStHwpuwBbnoTfsPw=
+  skip_cleanup: true
+  on:
+    repo: migme/beachball
+    tags: true
+env:
+  global:
+  - secure: A1VYaJLskUD9lqtdxJ0Ten339I/G3UaqlF5vpHmoOP67po3o7JFXZ+4RTWgylZBdplTt1ZotnOiuOvS76XLrKrhrWUCqTchDiKYuWv+2KwPGVXqFcWNyN+GgreqVdROfw4n2A0RmVj72Iagb4821LgIg5yj3AvDiS3Sb2SX7IZo=
+  - secure: bu/OchIYO/CixC2DN/5Pc1oYnUu1u9cb2B8cX64TjZWZ0sKz0e/0kDDitJIfg6Cp9j5iKDc2qQ6Ogz9v6HoLvo/MiUyz2y35DE+qyLRy0EPCtu0oFbtWmhMiAwsfdv8/R0bXeULISNUlit28wH3RUzsrfPZPGhuHJFNBT+PTRMs=

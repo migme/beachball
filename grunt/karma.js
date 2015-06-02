@@ -1,5 +1,9 @@
-module.exports = {
-  unit: {
+var isparta = require('isparta')
+var istanbul = require('browserify-istanbul')
+var assign = require('lodash.assign')
+
+var karma = {
+  runner: {
     // configFile: 'test/karma.conf.js',
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -7,22 +11,20 @@ module.exports = {
 
     // list of files / patterns to load in the browser
     files: [
-      { src: ['node_modules/babel-core/browser-polyfill.js'] },
-      { src: ['node_modules/whatwg-fetch/fetch.js'] },
-      // { src: ['src/**/*.js'] },
       { src: ['test/**/*.spec.js'] }
     ],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['coverage'],
       'test/**/*.js': ['browserify']
     },
 
     browserify: {
       debug: true,
-      transform: ['babelify']
+      transform: [istanbul({
+        instrumenter: isparta
+      })]
     },
 
     // test results reporter to use
@@ -32,16 +34,11 @@ module.exports = {
 
     // optionally, configure the reporter
     coverageReporter: {
-      type: 'lcovonly',
       dir: 'coverage',
-      subdir: '.',
-      instrumenters: { isparta: require('isparta') },
-      instrumenter: {
-        '**/*.js': 'isparta'
-      },
-      instrumenterOptions: {
-        isparta: { babel: { experimental: true } }
-      }
+      reporters: [
+        { type: 'lcovonly', subdir: '.', file: 'lcov.info' },
+        { type: 'text-summary' }
+      ]
     },
 
     // web server port
@@ -59,10 +56,47 @@ module.exports = {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS' /*, 'SlimerJS'*/],
+    // browsers: [],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true
   }
 }
+
+var customLaunchers = {
+  // sl_android: {
+  //   base: 'SauceLabs',
+  //   browserName: 'android'
+  // },
+  sl_ie: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer'
+  }
+  // sl_ipad: {
+  //   base: 'SauceLabs',
+  //   browserName: 'ipad'
+  // }
+}
+
+if (process.env.TRAVIS) {
+  assign(karma.runner, {
+    sauceLabs: {
+      testName: 'Web App Unit Tests'
+    },
+    customLaunchers: customLaunchers,
+    browsers: Object.keys(customLaunchers),
+    reporters: ['dots', 'coverage', 'saucelabs']
+  })
+} else if (process.env.CI_NAME === 'codeship') {
+  assign(karma.runner, {
+    browsers: ['Chrome', 'Firefox'],
+    reporters: ['dots']
+  })
+} else if (!process.env.CI) {
+  assign(karma.runner, {
+    browsers: ['Chrome', 'Firefox']
+  })
+}
+
+module.exports = karma

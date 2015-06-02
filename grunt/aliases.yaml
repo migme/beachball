@@ -1,6 +1,5 @@
 test:
   - clean:test
-  - babel
   - karma
 
 build:
