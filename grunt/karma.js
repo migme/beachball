@@ -81,7 +81,7 @@ assign(karma.runner, process.env.CI ? {
   },
   customLaunchers: customLaunchers,
   browsers: Object.keys(customLaunchers),
-  reporters: ['dots', 'saucelabs']
+  reporters: ['dots', 'coverage', 'saucelabs']
 } : {
   browsers: ['Chrome', 'Firefox']
 })
