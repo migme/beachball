@@ -3,12 +3,6 @@ node_js:
 - iojs
 before_script: npm i -g grunt-cli
 after_script: npm run codecov
-addons:
-  sauce_connect:
-    username:
-      secure: BD3pEOwyzA+RdSxXSm4bE0EzdAG9DEW1M8EWoXToOC3Ewu2lIsFQLHHHj9O10eDBCm8ExlSSAr6n4cfEJ4okm85v54aPNcHIZLdFPw4IZod8gv4tiXMpz+Z0U/YI1yxCIWqB9ViaCJfTJS9mEbtZZltURr4jBJF5NLaRoElhzEU=
-    access_key:
-      secure: iVlmOI1MF4TT5g4+u+rJM+Z8ooD4PKybZCiQOfH1r2afWFtQhrM0UWCKpeBnDSCzXkC8rtcQs8Xyq/DI0+uLbf4jMt+XttoAVJcA1HoMc2IHGax9lqrZt2fBp4lj/dojocNi8Oqj3EC4H6k7OhTBOk9WIO86FJKvUod5vGMoPjk=
 notifications:
   webhooks:
     urls:
