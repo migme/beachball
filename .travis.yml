@@ -3,6 +3,12 @@ node_js:
 - iojs
 before_script: npm i -g grunt-cli
 after_script: npm run codecov
+addons:
+  sauce_connect:
+    username:
+      secure: BD3pEOwyzA+RdSxXSm4bE0EzdAG9DEW1M8EWoXToOC3Ewu2lIsFQLHHHj9O10eDBCm8ExlSSAr6n4cfEJ4okm85v54aPNcHIZLdFPw4IZod8gv4tiXMpz+Z0U/YI1yxCIWqB9ViaCJfTJS9mEbtZZltURr4jBJF5NLaRoElhzEU=
+    access_key:
+      secure: iVlmOI1MF4TT5g4+u+rJM+Z8ooD4PKybZCiQOfH1r2afWFtQhrM0UWCKpeBnDSCzXkC8rtcQs8Xyq/DI0+uLbf4jMt+XttoAVJcA1HoMc2IHGax9lqrZt2fBp4lj/dojocNi8Oqj3EC4H6k7OhTBOk9WIO86FJKvUod5vGMoPjk=
 notifications:
   webhooks:
     urls:
@@ -12,20 +18,20 @@ notifications:
     on_start: never
 before_deploy: grunt build
 deploy:
-  - provider: releases
-    api_key:
-      secure: Gw5K6RwRHq0ubD6L37GimTTWHbxPb8EEg1XrAHUvBHn3py92uUfqH5JCvaMsl02TVif1SzPMjWwFmfEgK3Ci2OPZ6hISGtHucyrwzTSDAPzAU7IFoVTnKmBbi2hzcEcTSN1J3fvaFH7MZsOcPJjKHoRhxlBsYALbhcqAwfmkHOY=
-    skip_cleanup: true
-    file_glob: true
-    file: dist/*
-    on:
-      repo: migme/beachball
-      tags: true
-  - provider: npm
-    email: seb.d@mig.me
-    api_key:
-      secure: QscM8y3mEJCHhuNqoHNA2KC3Ls8nP3S761Jc8PHRkBQ5zR1nQ88WS34EgelOuzZJulXS7/Qu2GSk+9RhUyOrpT+iaGl/2tGmsRIUMdFxLr1q/oINLahYrvprdTFNfGqGcI/MEfF5k49pOaKi/S1MtolctlNStHwpuwBbnoTfsPw=
-    skip_cleanup: true
-    on:
-      repo: migme/beachball
-      tags: true
+- provider: releases
+  api_key:
+    secure: Gw5K6RwRHq0ubD6L37GimTTWHbxPb8EEg1XrAHUvBHn3py92uUfqH5JCvaMsl02TVif1SzPMjWwFmfEgK3Ci2OPZ6hISGtHucyrwzTSDAPzAU7IFoVTnKmBbi2hzcEcTSN1J3fvaFH7MZsOcPJjKHoRhxlBsYALbhcqAwfmkHOY=
+  skip_cleanup: true
+  file_glob: true
+  file: dist/*
+  on:
+    repo: migme/beachball
+    tags: true
+- provider: npm
+  email: seb.d@mig.me
+  api_key:
+    secure: QscM8y3mEJCHhuNqoHNA2KC3Ls8nP3S761Jc8PHRkBQ5zR1nQ88WS34EgelOuzZJulXS7/Qu2GSk+9RhUyOrpT+iaGl/2tGmsRIUMdFxLr1q/oINLahYrvprdTFNfGqGcI/MEfF5k49pOaKi/S1MtolctlNStHwpuwBbnoTfsPw=
+  skip_cleanup: true
+  on:
+    repo: migme/beachball
+    tags: true
