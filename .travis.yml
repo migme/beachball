@@ -35,3 +35,7 @@ deploy:
   on:
     repo: migme/beachball
     tags: true
+env:
+  global:
+  - secure: A1VYaJLskUD9lqtdxJ0Ten339I/G3UaqlF5vpHmoOP67po3o7JFXZ+4RTWgylZBdplTt1ZotnOiuOvS76XLrKrhrWUCqTchDiKYuWv+2KwPGVXqFcWNyN+GgreqVdROfw4n2A0RmVj72Iagb4821LgIg5yj3AvDiS3Sb2SX7IZo=
+  - secure: bu/OchIYO/CixC2DN/5Pc1oYnUu1u9cb2B8cX64TjZWZ0sKz0e/0kDDitJIfg6Cp9j5iKDc2qQ6Ogz9v6HoLvo/MiUyz2y35DE+qyLRy0EPCtu0oFbtWmhMiAwsfdv8/R0bXeULISNUlit28wH3RUzsrfPZPGhuHJFNBT+PTRMs=
