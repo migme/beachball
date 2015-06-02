@@ -61,18 +61,18 @@ var karma = {
 }
 
 var customLaunchers = {
-  sl_android: {
-    base: 'SauceLabs',
-    browserName: 'android'
-  },
+  // sl_android: {
+  //   base: 'SauceLabs',
+  //   browserName: 'android'
+  // },
   sl_ie: {
     base: 'SauceLabs',
     browserName: 'internet explorer'
-  },
-  sl_ipad: {
-    base: 'SauceLabs',
-    browserName: 'ipad'
   }
+  // sl_ipad: {
+  //   base: 'SauceLabs',
+  //   browserName: 'ipad'
+  // }
 }
 
 if (process.env.TRAVIS) {
