@@ -52,7 +52,7 @@ var karma = {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    // browsers: [],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -61,21 +61,21 @@ var karma = {
 }
 
 var customLaunchers = {
-  sl_chrome: {
+  sl_android: {
     base: 'SauceLabs',
-    browserName: 'chrome'
+    browserName: 'android'
   },
-  sl_firefox: {
-    base: 'SauceLabs',
-    browserName: 'firefox'
-  },
-  sl_ie_11: {
+  sl_ie: {
     base: 'SauceLabs',
     browserName: 'internet explorer'
+  },
+  sl_ipad: {
+    base: 'SauceLabs',
+    browserName: 'ipad'
   }
 }
 
-if (process.env.CI_NAME === 'travis-ci') {
+if (process.env.TRAVIS) {
   assign(karma.runner, {
     sauceLabs: {
       testName: 'Web App Unit Tests'
@@ -86,9 +86,11 @@ if (process.env.CI_NAME === 'travis-ci') {
   })
 } else if (process.env.CI_NAME === 'codeship') {
   assign(karma.runner, {
+    browsers: ['Chrome', 'Firefox']
   })
 } else if (!process.env.CI) {
   assign(karma.runner, {
+    browsers: ['Chrome', 'Firefox']
   })
 }
 
