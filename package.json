@@ -36,6 +36,7 @@
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-exorcise": "cbas/grunt-exorcise#patch-1",
     "grunt-karma": "^0.10.1",
+    "isparta": "^3.0.3",
     "karma": "^0.12.31",
     "karma-browserify": "^4.0.0",
     "karma-chai": "^0.1.0",

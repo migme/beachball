@@ -1,3 +1,5 @@
+var isparta = require('isparta')
+var istanbul = require('browserify-istanbul')
 var assign = require('lodash.assign')
 
 var karma = {
@@ -20,7 +22,9 @@ var karma = {
 
     browserify: {
       debug: true,
-      transform: ['babelify', 'browserify-istanbul']
+      transform: [istanbul({
+        instrumenter: isparta
+      })]
     },
 
     // test results reporter to use
