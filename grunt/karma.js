@@ -86,7 +86,8 @@ if (process.env.TRAVIS) {
   })
 } else if (process.env.CI_NAME === 'codeship') {
   assign(karma.runner, {
-    browsers: ['Chrome', 'Firefox']
+    browsers: ['Chrome', 'Firefox'],
+    reporters: ['dots']
   })
 } else if (!process.env.CI) {
   assign(karma.runner, {
