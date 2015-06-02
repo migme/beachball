@@ -1,5 +1,7 @@
-module.exports = {
-  unit: {
+var assign = require('lodash.assign')
+
+var karma = {
+  runner: {
     // configFile: 'test/karma.conf.js',
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -50,10 +52,49 @@ module.exports = {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: [],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true
   }
 }
+
+var customLaunchers = {
+  sl_chrome: {
+    base: 'SauceLabs',
+    browserName: 'chrome',
+    platform: 'Windows 7',
+    version: '35'
+  },
+  sl_firefox: {
+    base: 'SauceLabs',
+    browserName: 'firefox',
+    version: '30'
+  },
+  sl_ios_safari: {
+    base: 'SauceLabs',
+    browserName: 'iphone',
+    platform: 'OS X 10.9',
+    version: '7.1'
+  },
+  sl_ie_11: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows 8.1',
+    version: '11'
+  }
+}
+
+assign(karma.runner, process.env.CI ? {
+  sauceLabs: {
+    testName: 'Web App Unit Tests'
+  },
+  customLaunchers: customLaunchers,
+  browsers: Object.keys(customLaunchers),
+  reporters: ['dots', 'saucelabs']
+} : {
+  browsers: ['Chrome', 'Firefox']
+})
+
+module.exports = karma
