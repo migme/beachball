@@ -7,7 +7,7 @@ export default class Beachball {
     redirect_uri = '',
     version = '',
     access_token = '',
-    baseUrl = 'https://migme-sandcastle.herokuapp.com'
+    baseUrl = 'https://api.mig.me'
   } = {}) {
     Object.assign(this, {
       client_id,
