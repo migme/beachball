@@ -1,6 +1,6 @@
 {
   "name": "migme-beachball",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Migme JavaScript SDK",
   "main": "index.js",
   "scripts": {
