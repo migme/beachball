@@ -4,7 +4,8 @@
   "description": "Migme JavaScript SDK",
   "main": "index.js",
   "scripts": {
-    "test": "standard && grunt test",
+    "pretest": "standard",
+    "test": "grunt test",
     "codecov": "cat coverage/lcov.info | codecov"
   },
   "repository": {
@@ -26,36 +27,40 @@
   },
   "homepage": "https://github.com/migme/beachball",
   "devDependencies": {
-    "babelify": "^6.0.2",
+    "babel-eslint": "^3.1.17",
+    "babelify": "^6.1.2",
     "browserify-istanbul": "^0.2.1",
-    "chai": "^2.1.2",
+    "chai": "^3.0.0",
     "codecov.io": "^0.1.2",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-exorcise": "cbas/grunt-exorcise#patch-1",
-    "grunt-karma": "^0.10.1",
+    "grunt-karma": "^0.11.0",
     "isparta": "^3.0.3",
-    "karma": "^0.12.31",
-    "karma-browserify": "^4.0.0",
+    "karma": "^0.12.36",
+    "karma-browserify": "^4.2.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.1.12",
     "karma-coverage": "douglasduteil/karma-coverage#next",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.1.10",
     "karma-sauce-launcher": "^0.2.11",
-    "karma-sinon-chai": "^0.3.0",
-    "karma-spec-reporter": "0.0.16",
+    "karma-sinon-chai": "^1.0.0",
+    "karma-source-map-support": "^1.0.0",
+    "karma-spec-reporter": "0.0.19",
     "load-grunt-config": "^0.17.1",
     "lodash.assign": "^3.2.0",
+    "minimist": "^1.1.1",
     "standard": "^4.0.1",
     "time-grunt": "^1.1.0"
   },
   "standard": {
     "ignore": [
       "dist/**"
-    ]
+    ],
+    "parser": "babel-eslint"
   },
   "dependencies": {
     "babel": "^5.4.7",
