@@ -4,10 +4,9 @@ import localforage from 'localforage'
 const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'callback',
   'callback_type',
+  'client_id',
   'redirect_uri',
-  'scopes',
-  'redirect_uri',
-  'client_id'
+  'scope'
 ]}}`
 
 function loginIframe () {
