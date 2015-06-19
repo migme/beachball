@@ -4,7 +4,8 @@
   "description": "Migme JavaScript SDK",
   "main": "index.js",
   "scripts": {
-    "test": "standard && grunt test",
+    "pretest": "standard",
+    "test": "grunt test",
     "codecov": "cat coverage/lcov.info | codecov"
   },
   "repository": {
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/migme/beachball",
   "devDependencies": {
+    "babel-eslint": "^3.1.17",
     "babelify": "^6.0.2",
     "browserify-istanbul": "^0.2.1",
     "chai": "^2.1.2",
@@ -57,7 +59,8 @@
   "standard": {
     "ignore": [
       "dist/**"
-    ]
+    ],
+    "parser": "babel-eslint"
   },
   "dependencies": {
     "babel": "^5.4.7",
