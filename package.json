@@ -31,13 +31,13 @@
     "babelify": "^6.1.2",
     "browserify-istanbul": "^0.2.1",
     "chai": "^3.0.0",
-    "codecov.io": "^0.1.2",
+    "codecov.io": "^0.1.4",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-uglify": "^0.9.1",
-    "grunt-exorcise": "cbas/grunt-exorcise#patch-1",
-    "grunt-karma": "^0.11.0",
+    "grunt-exorcise": "^2.0.0",
+    "grunt-karma": "^0.11.1",
     "isparta": "^3.0.3",
     "karma": "^0.12.36",
     "karma-browserify": "^4.2.1",
@@ -45,7 +45,7 @@
     "karma-chrome-launcher": "^0.1.12",
     "karma-coverage": "douglasduteil/karma-coverage#next",
     "karma-firefox-launcher": "^0.1.6",
-    "karma-mocha": "^0.1.10",
+    "karma-mocha": "^0.2.0",
     "karma-sauce-launcher": "^0.2.11",
     "karma-sinon-chai": "^1.0.0",
     "karma-source-map-support": "^1.0.0",
@@ -53,8 +53,8 @@
     "load-grunt-config": "^0.17.1",
     "lodash.assign": "^3.2.0",
     "minimist": "^1.1.1",
-    "standard": "^4.0.1",
-    "time-grunt": "^1.1.0"
+    "standard": "^4.3.2",
+    "time-grunt": "^1.2.1"
   },
   "standard": {
     "ignore": [
@@ -63,9 +63,9 @@
     "parser": "babel-eslint"
   },
   "dependencies": {
-    "babel": "^5.5.8",
+    "babel": "^5.6.4",
     "isomorphic-fetch": "^2.1.0",
-    "localforage": "^1.2.2",
+    "localforage": "^1.2.3",
     "url-template": "^2.0.6"
   },
   "directories": {
