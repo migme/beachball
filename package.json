@@ -3,7 +3,6 @@
   "version": "3.0.0",
   "description": "Migme JavaScript SDK",
   "main": "index.js",
-  "browser": "src",
   "scripts": {
     "pretest": "standard",
     "test": "grunt test",
