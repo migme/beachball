@@ -51,6 +51,11 @@ describe('Session', () => {
         session.login('iframe')
         expect(document.querySelector('iframe')).to.exist
       })
+      it('should inject in a specific location', () => {
+        const target = document.createElement('div')
+        session.login('iframe', { parent: target })
+        expect(target.querySelector('iframe')).to.exist
+      })
     })
 
     describe('as a full page redirect', () => {

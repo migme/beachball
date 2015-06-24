@@ -11,7 +11,7 @@ const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
 
 const loginMethods = {}
 
-loginMethods['iframe'] = function ({ parent = document.body }) {
+loginMethods['iframe'] = function ({ parent = document.body } = {}) {
   const data = Object.assign({
     callback_type: 'iframe'
   }, this.migme)
