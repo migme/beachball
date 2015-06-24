@@ -11,7 +11,7 @@ const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
 
 const loginMethods = {}
 
-loginMethods['iframe'] = function ({ parent = document.body } = {}) {
+loginMethods.iframe = function ({ parent = document.body } = {}) {
   const data = Object.assign({
     callback_type: 'iframe'
   }, this.migme)
@@ -22,7 +22,7 @@ loginMethods['iframe'] = function ({ parent = document.body } = {}) {
   return awaitMessage()
 }
 
-loginMethods['redirect'] = function () {
+loginMethods.redirect = function () {
   const data = Object.assign({
     callback_type: 'redirect',
     redirect_uri: window.location.href
@@ -32,7 +32,7 @@ loginMethods['redirect'] = function () {
   return new Promise(() => {})
 }
 
-loginMethods['popup'] = function () {
+loginMethods.popup = function () {
   const data = Object.assign({
     callback_type: 'popup'
   }, this.migme)
