@@ -11,14 +11,14 @@ const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
 
 const loginMethods = {}
 
-loginMethods['iframe'] = function () {
+loginMethods['iframe'] = function ({ parent = document.body }) {
   const data = Object.assign({
     callback_type: 'iframe'
   }, this.migme)
   const url = urltemplate.parse(API_URL_LOGIN).expand(data)
   const iframe = document.createElement('iframe')
   iframe.src = url
-  document.body.appendChild(iframe)
+  parent.appendChild(iframe)
   return awaitMessage()
 }
 
