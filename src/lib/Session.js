@@ -9,18 +9,20 @@ const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'scope'
 ]}}`
 
-function loginIframe () {
+const loginMethods = {}
+
+loginMethods.iframe = function ({ parent = document.body } = {}) {
   const data = Object.assign({
     callback_type: 'iframe'
   }, this.migme)
   const url = urltemplate.parse(API_URL_LOGIN).expand(data)
   const iframe = document.createElement('iframe')
   iframe.src = url
-  document.body.appendChild(iframe)
+  parent.appendChild(iframe)
   return awaitMessage()
 }
 
-function loginRedirect () {
+loginMethods.redirect = function () {
   const data = Object.assign({
     callback_type: 'redirect',
     redirect_uri: window.location.href
@@ -30,7 +32,7 @@ function loginRedirect () {
   return new Promise(() => {})
 }
 
-function loginPopup () {
+loginMethods.popup = function () {
   const data = Object.assign({
     callback_type: 'popup'
   }, this.migme)
@@ -87,20 +89,9 @@ export default class Session {
     window.location.href = href
   }
 
-  login (type = 'popup') {
-    let session
-    switch (type) {
-      case 'iframe':
-        session = loginIframe.apply(this)
-        break
-      case 'redirect':
-        session = loginRedirect.call(this)
-        break
-      case 'popup':
-      default:
-        session = loginPopup.apply(this)
-    }
-    return session
+  login (type = 'popup', ...args) {
+    const delegate = loginMethods[type]
+    return delegate.apply(this, args)
       .then(saveProfile)
   }
 
