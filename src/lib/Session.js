@@ -12,6 +12,13 @@ const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'scope'
 ]}}`
 
+function sneak (cb) {
+  return function () {
+    cb.apply(this, arguments)
+    return arguments[0]
+  }
+}
+
 const loginMethods = {}
 
 loginMethods.iframe = function ({ parent = document.body } = {}) {
@@ -23,7 +30,7 @@ loginMethods.iframe = function ({ parent = document.body } = {}) {
   iframe.src = url
   parent.appendChild(iframe)
   return this::awaitMessage(iframe.contentWindow)
-    .then(::iframe.remove)
+    .then(sneak(::iframe.remove))
 }
 
 loginMethods.redirect = function () {
