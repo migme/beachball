@@ -23,6 +23,7 @@ loginMethods.iframe = function ({ parent = document.body } = {}) {
   iframe.src = url
   parent.appendChild(iframe)
   return this::awaitMessage(iframe.contentWindow)
+    .then(::iframe.remove)
 }
 
 loginMethods.redirect = function () {
