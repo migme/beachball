@@ -66,6 +66,10 @@ function awaitMessage (sourceWindow) {
   })
 }
 
+async function getLoginFromStorage () {
+  return await localforage.getItem('session')
+}
+
 function getLoginFromHash () {
   return new Promise(resolve => {
     const data = JSON.parse(window.location.hash.substring(1))
@@ -92,6 +96,9 @@ export default class Session extends EventTarget {
   constructor (migme) {
     super(migme)
     this.migme = migme
+
+    getLoginFromStorage()
+      .then(this::saveProfile)
 
     getLoginFromHash()
       .then(this::saveProfile)
