@@ -1,3 +1,4 @@
+/* global Headers */
 export default class API {
   constructor (migme) {
     this.migme = migme

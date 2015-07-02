@@ -1,5 +1,4 @@
 /* global before after beforeEach describe expect it sinon */
-'use strict'
 import * as config from '../fixtures/config'
 import Session from '../../src/lib/Session'
 
