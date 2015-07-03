@@ -48,7 +48,7 @@ loginMethods.popup = function () {
     callback_type: 'popup'
   }, this.migme)
   const url = urltemplate.parse(API_URL_LOGIN).expand(data)
-  const dialog = window.open(url)
+  const dialog = this._windowOpen(url)
   return this::awaitMessage(dialog)
 }
 
@@ -113,6 +113,10 @@ export default class Session extends EventTarget {
 
   _redirect (href) {
     window.location.href = href
+  }
+
+  _windowOpen (url) {
+    return window.open(url)
   }
 
   login (type = 'popup', ...args) {

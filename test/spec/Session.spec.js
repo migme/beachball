@@ -1,4 +1,4 @@
-/* global before after beforeEach describe expect it sinon */
+/* global beforeEach afterEach describe expect it sinon */
 import * as config from '../fixtures/config'
 import Session from '../../src/lib/Session'
 
@@ -21,7 +21,7 @@ describe('Session', () => {
     })
 
     it('should alias signin() to login()', () => {
-      sinon.spy(session, 'login')
+      sinon.stub(session, 'login')
       expect(session.signin).to.exist
       expect(session.signin).to.be.a('function')
       session.signin()
@@ -30,17 +30,17 @@ describe('Session', () => {
     })
 
     describe('as a popup window', () => {
-      before(() => {
-        sinon.spy(window, 'open')
-      })
-      after(() => {
-        window.open.restore()
+      beforeEach(() => {
+        sinon.stub(session, '_windowOpen')
       })
       it('should open a window', () => {
         session.login('popup')
-        expect(window.open).to.be.calledWith(
+        expect(session._windowOpen).to.be.calledWith(
           config.baseUrl + '/login-page/?callback_type=popup'
         )
+      })
+      afterEach(() => {
+        session._windowOpen.restore()
       })
     })
 
@@ -49,6 +49,7 @@ describe('Session', () => {
         expect(document.querySelector('iframe')).to.not.exist
         session.login('iframe')
         expect(document.querySelector('iframe')).to.exist
+        document.querySelector('iframe').remove()
       })
       it('should inject in a specific location', () => {
         const target = document.createElement('div')
@@ -58,17 +59,15 @@ describe('Session', () => {
     })
 
     describe('as a full page redirect', () => {
+      beforeEach(() => {
+        sinon.stub(session, '_redirect')
+      })
       it('should change the browser location', () => {
-        let shim = () => {}
-        let original = session._redirect
-        session._redirect = shim
-        sinon.spy(session, '_redirect')
-
         session.login('redirect')
         expect(session._redirect).to.be.called
-
+      })
+      afterEach(() => {
         session._redirect.restore()
-        session._redirect = original
       })
     })
   })
@@ -96,7 +95,7 @@ describe('Session', () => {
     })
 
     it('should be asynchronous', () => {
-      expect(session.getStatus()).to.have.a.key('then')
+      return expect(session.getStatus()).to.eventually.be.fulfilled
     })
   })
 })
