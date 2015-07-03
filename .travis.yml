@@ -1,8 +1,11 @@
 language: node_js
 node_js:
 - iojs
+sudo: false
+cache:
+  directories:
+    - node_modules
 before_script: npm i -g grunt-cli
-after_script: npm run codecov
 notifications:
   webhooks:
     urls:
@@ -29,6 +32,7 @@ deploy:
   on:
     repo: migme/beachball
     tags: true
+after_success: npm run codecov
 env:
   global:
   - secure: A1VYaJLskUD9lqtdxJ0Ten339I/G3UaqlF5vpHmoOP67po3o7JFXZ+4RTWgylZBdplTt1ZotnOiuOvS76XLrKrhrWUCqTchDiKYuWv+2KwPGVXqFcWNyN+GgreqVdROfw4n2A0RmVj72Iagb4821LgIg5yj3AvDiS3Sb2SX7IZo=
