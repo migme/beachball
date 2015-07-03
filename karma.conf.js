@@ -26,7 +26,7 @@ var options = {
   reporters: ['mocha', 'progress'],
 
   // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-  browsers: ['Chrome' /* , 'Firefox' */ ]
+  browsers: ['Chrome', 'Firefox']
 }
 
 if (!argv.coverage || argv.coverage === true) {
