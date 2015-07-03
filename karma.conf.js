@@ -23,9 +23,7 @@ var options = {
   },
 
   // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-  reporters: [
-    'progress'
-  ],
+  reporters: ['mocha', 'progress'],
 
   // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
   browsers: ['Chrome' /* , 'Firefox' */ ]

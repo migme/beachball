@@ -48,6 +48,7 @@
     "karma-coverage": "douglasduteil/karma-coverage#next",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
+    "karma-mocha-reporter": "^1.0.2",
     "karma-sauce-launcher": "^0.2.14",
     "karma-sinon-chai": "^1.0.0",
     "karma-source-map-support": "^1.0.0",
