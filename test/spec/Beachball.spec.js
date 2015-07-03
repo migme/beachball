@@ -1,5 +1,4 @@
 /* global beforeEach describe expect it */
-'use strict'
 import Beachball from '../..'
 import API from '../../src/lib/API'
 import Session from '../../src/lib/Session'

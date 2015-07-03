@@ -32,13 +32,13 @@ if (process.env.TRAVIS) {
     },
     customLaunchers: customLaunchers,
     browsers: Object.keys(customLaunchers),
-    reporters: ['dots', 'coverage', 'saucelabs']
+    reporters: ['mocha', 'coverage', 'saucelabs']
   })
 }
 
 if (process.env.CI_NAME === 'codeship') {
   assign(karma.runner, {
-    reporters: ['dots']
+    reporters: ['mocha', 'coverage']
   })
 }
 

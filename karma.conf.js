@@ -5,7 +5,7 @@ var argv = require('minimist')(process.argv.slice(2))
 
 var options = {
   // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-  frameworks: ['browserify', 'source-map-support', 'mocha', 'sinon-chai'],
+  frameworks: ['browserify', 'source-map-support', 'mocha', 'chai-as-promised', 'sinon-chai'],
 
   files: [
     'test/**/*.js'
@@ -23,9 +23,7 @@ var options = {
   },
 
   // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-  reporters: [
-    'progress'
-  ],
+  reporters: ['mocha', 'progress'],
 
   // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
   browsers: ['Chrome', 'Firefox']

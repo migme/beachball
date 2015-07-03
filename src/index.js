@@ -1,6 +1,6 @@
-/*eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 import fetch from 'isomorphic-fetch'
-/*eslint-enable no-unused-vars */
+/* eslint-enable no-unused-vars */
 import Session from './lib/Session'
 import API from './lib/API'
 

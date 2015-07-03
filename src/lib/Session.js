@@ -1,5 +1,9 @@
+import { dispatch, on, off } from 'bubbly'
+import EventTarget from 'event-target-shim'
 import urltemplate from 'url-template'
 import localforage from 'localforage'
+import isEqual from 'lodash.isequal'
+import dom4 from 'dom4' // eslint-disable-line no-unused-vars
 
 const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'callback',
@@ -8,6 +12,13 @@ const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'redirect_uri',
   'scope'
 ]}}`
+
+function sneak (cb) {
+  return function () {
+    cb.apply(this, arguments)
+    return arguments[0]
+  }
+}
 
 const loginMethods = {}
 
@@ -19,7 +30,8 @@ loginMethods.iframe = function ({ parent = document.body } = {}) {
   const iframe = document.createElement('iframe')
   iframe.src = url
   parent.appendChild(iframe)
-  return awaitMessage()
+  return this::awaitMessage(iframe.contentWindow)
+    .then(sneak(::iframe.remove))
 }
 
 loginMethods.redirect = function () {
@@ -37,30 +49,42 @@ loginMethods.popup = function () {
     callback_type: 'popup'
   }, this.migme)
   const url = urltemplate.parse(API_URL_LOGIN).expand(data)
-  window.open(url)
-  return awaitMessage.call(this)
+  const dialog = this._windowOpen(url)
+  return this::awaitMessage(dialog)
 }
 
-function awaitMessage () {
+function awaitMessage (sourceWindow) {
   return new Promise((resolve, reject) => {
-    window.addEventListener('message', event => {
-      if (this && this.migme && event.origin === this.migme.baseUrl) {
+    const onMessage = event => {
+      if (event.source === sourceWindow) {
         if (event.data.err) reject(event.data.err)
         else if (event.data.res) resolve(event.data.res)
+        else return
+        window::off('message', onMessage)
       }
-    }, false)
+    }
+    window::on('message', onMessage)
   })
+}
+
+async function getLoginFromStorage () {
+  return await localforage.getItem('session')
 }
 
 function getLoginFromHash () {
   return new Promise(resolve => {
-    const data = JSON.parse(window.location.hash.substring(1))
+    const hash = window.location.hash.substring(1)
+    const data = JSON.parse(hash)
     resolve(data.res)
   })
 }
 
-function saveProfile (data) {
-  return localforage.setItem('session', data)
+async function saveProfile (data) {
+  const session = await localforage.getItem('session')
+  await localforage.setItem('session', data)
+  if (!isEqual(session, data)) {
+    this::dispatch('change', data)
+  }
 }
 
 function trimHash () {
@@ -70,12 +94,16 @@ function trimHash () {
   location.replaceState(null, null, trimmed)
 }
 
-export default class Session {
+export default class Session extends EventTarget {
   constructor (migme) {
+    super(migme)
     this.migme = migme
 
+    getLoginFromStorage()
+      .then(this::saveProfile)
+
     getLoginFromHash()
-      .then(saveProfile)
+      .then(this::saveProfile)
       .then(trimHash)
       .catch(function () {
       })
@@ -89,10 +117,14 @@ export default class Session {
     window.location.href = href
   }
 
+  _windowOpen (url) {
+    return window.open(url)
+  }
+
   login (type = 'popup', ...args) {
     const delegate = loginMethods[type]
     return delegate.apply(this, args)
-      .then(saveProfile)
+      .then(this::saveProfile)
   }
 
   signin () {

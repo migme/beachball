@@ -1,16 +1,19 @@
+/* global Headers */
 export default class API {
   constructor (migme) {
     this.migme = migme
   }
 
-  url (endpoint, options = {}) {
+  async url (endpoint, options = {}) {
     if (endpoint.charAt(0) !== '/') {
       endpoint = '/' + endpoint
     }
-
-    options['content-type'] = 'application/json'
-    options.Authorization = 'Bearer ' + this.migme.access_token
-
-    return window.fetch(this.migme.baseUrl + endpoint, options)
+    const session = await this.migme.Session.getStatus()
+    return window.fetch(this.migme.baseUrl + endpoint, {
+      headers: new Headers({
+        'content-type': 'application/json',
+        authorization: 'Bearer ' + session.access_token
+      })
+    })
   }
 }
