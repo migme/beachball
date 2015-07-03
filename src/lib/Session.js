@@ -73,7 +73,8 @@ async function getLoginFromStorage () {
 
 function getLoginFromHash () {
   return new Promise(resolve => {
-    const data = JSON.parse(window.location.hash.substring(1))
+    const hash = window.location.hash.substring(1)
+    const data = JSON.parse(hash)
     resolve(data.res)
   })
 }
