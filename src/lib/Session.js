@@ -3,6 +3,7 @@ import EventTarget from 'event-target-shim'
 import urltemplate from 'url-template'
 import localforage from 'localforage'
 import isEqual from 'lodash.isequal'
+import dom4 from 'dom4' // eslint-disable-line no-unused-vars
 
 const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'callback',
