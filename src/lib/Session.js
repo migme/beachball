@@ -29,6 +29,7 @@ loginMethods.iframe = function ({ parent = document.body } = {}) {
   const iframe = document.createElement('iframe')
   iframe.src = url
   parent.appendChild(iframe)
+  console.log(iframe)
   return this::awaitMessage(iframe.contentWindow)
     .then(sneak(::iframe.remove))
 }
