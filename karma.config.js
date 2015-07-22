@@ -53,6 +53,7 @@ var options = {
     'karma-mocha',
     'karma-sinon-chai',
     'karma-chai-as-promised',
+    'karma-sauce-launcher',
     'karma-sourcemap-loader',
     'karma-coverage',
     'karma-spec-reporter',
