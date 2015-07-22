@@ -1,7 +1,8 @@
-/* global beforeEach describe expect it */
-import Beachball from '../..'
-import API from '../../src/lib/API'
-import Session from '../../src/lib/Session'
+/* global beforeEach describe it */
+import {expect} from 'chai'
+import Beachball from '../src'
+import API from '../src/lib/API'
+import Session from '../src/lib/Session'
 
 describe('Beachball', () => {
   let beachball
@@ -10,8 +11,8 @@ describe('Beachball', () => {
 
   beforeEach(() => {
     beachball = new Beachball({
-      client_id: client_id,
-      access_token: access_token
+      client_id,
+      access_token
     })
   })
 

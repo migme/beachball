@@ -1,9 +1,8 @@
 import { dispatch, on, off } from 'bubbly'
 import EventTarget from 'event-target-shim'
 import urltemplate from 'url-template'
-import localforage from 'localforage'
+import localstorage from 'universal-localstorage'
 import isEqual from 'lodash.isequal'
-import dom4 from 'dom4' // eslint-disable-line no-unused-vars
 
 const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'callback',
@@ -68,7 +67,7 @@ function awaitMessage (sourceWindow) {
 }
 
 async function getLoginFromStorage () {
-  return await localforage.getItem('session')
+  return await localstorage.getItem('session')
 }
 
 function getLoginFromHash () {
@@ -80,8 +79,8 @@ function getLoginFromHash () {
 }
 
 async function saveProfile (data) {
-  const session = await localforage.getItem('session')
-  await localforage.setItem('session', data)
+  const session = await localstorage.getItem('session')
+  await localstorage.setItem('session', data)
   if (!isEqual(session, data)) {
     this::dispatch('change', data)
   }
@@ -105,12 +104,11 @@ export default class Session extends EventTarget {
     getLoginFromHash()
       .then(this::saveProfile)
       .then(trimHash)
-      .catch(function () {
-      })
+      .catch(() => {})
   }
 
-  getStatus () {
-    return localforage.getItem('session')
+  async getStatus () {
+    return await localstorage.getItem('session')
   }
 
   _redirect (href) {
@@ -132,7 +130,7 @@ export default class Session extends EventTarget {
   }
 
   logout () {
-    return localforage.removeItem('session')
+    return localstorage.removeItem('session')
   }
 
   signout () {

@@ -4,10 +4,11 @@
 .idea
 *.sublime-project
 *.sublime-workspace
+*.log
 bower_components/
 node_modules/
 /pages/
 /docs/
 coverage/
-npm-debug.log
-dist/
+/lib/
+uls-scratch/

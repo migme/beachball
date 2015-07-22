@@ -1,12 +1,25 @@
-/* global beforeEach afterEach describe expect it sinon */
-import * as config from '../fixtures/config'
-import Session from '../../src/lib/Session'
+/* global beforeEach afterEach describe it */
+import chai, {expect} from 'chai'
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
+import chaiAsPromised from 'chai-as-promised'
+import Session from '../src/lib/Session'
+
+chai.use(sinonChai)
+chai.use(chaiAsPromised)
+
+const baseUrl = 'https://localhost'
+const access_token = '1234567890'
+const sessionConfig = {
+  baseUrl,
+  access_token
+}
 
 describe('Session', () => {
   let session
 
   beforeEach(() => {
-    session = new Session(config.session)
+    session = new Session(sessionConfig)
   })
 
   it('should be instantiated', () => {
@@ -35,8 +48,8 @@ describe('Session', () => {
       })
       it('should open a window', () => {
         session.login('popup')
-        expect(session._windowOpen).to.be.calledWith(
-          config.baseUrl + '/login-page/?callback_type=popup'
+        expect(session._windowOpen).to.have.been.calledWith(
+          baseUrl + '/login-page/?callback_type=popup'
         )
       })
       afterEach(() => {
@@ -44,32 +57,34 @@ describe('Session', () => {
       })
     })
 
-    describe('as an embedded iframe', () => {
-      it('should inject an iframe', () => {
-        expect(document.querySelector('iframe')).to.not.exist
-        session.login('iframe')
-        expect(document.querySelector('iframe')).to.exist
-        document.querySelector('iframe').remove()
+    if (typeof window !== 'undefined') {
+      describe('as an embedded iframe', () => {
+        it('should inject an iframe', () => {
+          expect(document.querySelector('iframe')).to.not.exist
+          session.login('iframe')
+          expect(document.querySelector('iframe')).to.exist
+          document.querySelector('iframe').remove()
+        })
+        it('should inject in a specific location', () => {
+          const target = document.createElement('div')
+          session.login('iframe', { parent: target })
+          expect(target.querySelector('iframe')).to.exist
+        })
       })
-      it('should inject in a specific location', () => {
-        const target = document.createElement('div')
-        session.login('iframe', { parent: target })
-        expect(target.querySelector('iframe')).to.exist
-      })
-    })
 
-    describe('as a full page redirect', () => {
-      beforeEach(() => {
-        sinon.stub(session, '_redirect')
+      describe('as a full page redirect', () => {
+        beforeEach(() => {
+          sinon.stub(session, '_redirect')
+        })
+        it('should change the browser location', () => {
+          session.login('redirect')
+          expect(session._redirect).to.have.been.called
+        })
+        afterEach(() => {
+          session._redirect.restore()
+        })
       })
-      it('should change the browser location', () => {
-        session.login('redirect')
-        expect(session._redirect).to.be.called
-      })
-      afterEach(() => {
-        session._redirect.restore()
-      })
-    })
+    }
   })
 
   describe('Log out', () => {
