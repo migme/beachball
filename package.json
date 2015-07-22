@@ -18,7 +18,7 @@
   ],
   "author": "Migme (https://mig.me)",
   "contributors": [
-    "Ed Moore <eddie.moore@gmail.com>",
+    "Ed Moore <ed.m@mig.me>",
     "Sebastiaan Deckers <seb@ninja.sg>"
   ],
   "license": "ISC",
@@ -81,7 +81,6 @@
   "dependencies": {
     "event-target-shim": "^1.0.5",
     "isomorphic-fetch": "^2.1.1",
-    "localforage": "^1.2.4",
     "lodash.isequal": "^3.0.4",
     "universal-localstorage": "^1.0.2",
     "url-template": "^2.0.6"
