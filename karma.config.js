@@ -3,8 +3,6 @@ var pkg = require('./package.json')
 var webpackConfig = require('./webpack.config')
 webpackConfig.devtool = 'inline-source-map'
 
-// var argv = require('minimist')(process.argv.slice(2))
-
 var options = {
   // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
   frameworks: ['mocha', 'chai-as-promised', 'sinon-chai'],
@@ -65,18 +63,10 @@ var options = {
 }
 
 var customLaunchers = {
-  // sl_android: {
-  //   base: 'SauceLabs',
-  //   browserName: 'android'
-  // },
   sl_ie: {
     base: 'SauceLabs',
     browserName: 'internet explorer'
   }
-  // sl_ipad: {
-  //   base: 'SauceLabs',
-  //   browserName: 'ipad'
-  // }
 }
 
 if (process.env.TRAVIS) {

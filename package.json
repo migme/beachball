@@ -63,7 +63,6 @@
     "karma-spec-reporter": "0.0.20",
     "karma-webpack": "^1.5.1",
     "lodash.assign": "^3.2.0",
-    "minimist": "^1.1.1",
     "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2",
     "sinon": "^1.15.4",
