@@ -79,6 +79,7 @@
     "parser": "babel-eslint"
   },
   "dependencies": {
+    "bubbly": "^1.1.2",
     "event-target-shim": "^1.0.5",
     "isomorphic-fetch": "^2.1.1",
     "lodash.isequal": "^3.0.4",
