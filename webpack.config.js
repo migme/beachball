@@ -8,6 +8,14 @@ module.exports = {
     noParse: [
       /\/sinon.js/
     ],
+    preLoaders: [ // << add subject as webpack's preloader
+      {
+        test: /(\.jsx)|(\.js)$/,
+        // exclude this dirs from coverage
+        exclude: /(test|node_modules|bower_components)\//,
+        loader: 'isparta-instrumenter-loader'
+      }
+    ],
     loaders: [
       {
         test: /\.js$/,

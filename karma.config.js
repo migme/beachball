@@ -32,7 +32,16 @@ var options = {
   },
 
   // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-  reporters: ['spec'],
+  reporters: ['spec', 'coverage'],
+
+  coverageReporter: {
+    dir: 'coverage',
+    reporters: [
+      { type: 'lcovonly', subdir: '.', file: 'lcov.info' },
+      { type: 'text' },
+      { type: 'text-summary' }
+    ]
+  },
 
   singleRun: true,
   colors: true,
@@ -45,6 +54,7 @@ var options = {
     'karma-sinon-chai',
     'karma-chai-as-promised',
     'karma-sourcemap-loader',
+    'karma-coverage',
     'karma-spec-reporter',
     'karma-webpack'
   ],
