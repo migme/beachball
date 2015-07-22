@@ -87,12 +87,7 @@
     "url-template": "^2.0.6"
   },
   "directories": {
-    "lib": "src",
+    "lib": "lib",
     "test": "test"
-  },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
   }
 }
