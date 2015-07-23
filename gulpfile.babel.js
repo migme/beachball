@@ -3,7 +3,6 @@ const $ = require('gulp-load-plugins')()
 const isparta = require('isparta') // doesn't work with import for some reason
 import codecov from 'gulp-codecov.io'
 import gulpJsdoc2md from 'gulp-jsdoc-to-markdown'
-// import {argv} from 'yargs'
 import {server as karma} from 'karma'
 import del from 'del'
 import path from 'path'
