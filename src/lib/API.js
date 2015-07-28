@@ -1,4 +1,5 @@
-/* global Headers */
+const self = typeof window === 'undefined' ? global : window
+
 export default class API {
   constructor (migme) {
     this.migme = migme
@@ -9,11 +10,11 @@ export default class API {
       endpoint = '/' + endpoint
     }
     const session = await this.migme.Session.getStatus()
-    return window.fetch(this.migme.baseUrl + endpoint, {
-      headers: new Headers({
+    return self.fetch(this.migme.baseUrl + endpoint, {
+      headers: {
         'content-type': 'application/json',
         authorization: 'Bearer ' + session.access_token
-      })
+      }
     })
   }
 }

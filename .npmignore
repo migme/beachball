@@ -10,5 +10,9 @@ node_modules/
 /pages/
 /docs/
 coverage/
-/lib/
-uls-scratch/
+test/
+src/
+karma.conf.js
+gulpfile.babel.js
+webpack.config.js
+.*
