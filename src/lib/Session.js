@@ -80,7 +80,7 @@ function getLoginFromHash () {
 
 async function saveProfile (data) {
   const session = await localstorage.getItem('session')
-  await localstorage.setItem('session', JSON.stringify(data))
+  await localstorage.setItem('session', data ? JSON.stringify(data) : null)
   if (!isEqual(session, data)) {
     this::dispatch('change', data)
   }
