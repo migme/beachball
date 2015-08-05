@@ -114,7 +114,6 @@ describe('Session', () => {
     })
 
     it('should return null', done => {
-      session.access_token = ''
       session.getStatus().then(res => {
         expect(res).to.equal(null)
         done()
