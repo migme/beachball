@@ -112,5 +112,12 @@ describe('Session', () => {
     it('should be asynchronous', () => {
       return expect(session.getStatus()).to.eventually.be.fulfilled
     })
+
+    it('should return null', done => {
+      session.getStatus().then(res => {
+        expect(res).to.equal(null)
+        done()
+      })
+    })
   })
 })
