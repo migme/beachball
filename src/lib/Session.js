@@ -108,7 +108,8 @@ export default class Session extends EventTarget {
   }
 
   async getStatus () {
-    return await localstorage.getItem('session')
+    const session = await localstorage.getItem('session')
+    return session === 'null' ? null : session
   }
 
   _redirect (href) {
