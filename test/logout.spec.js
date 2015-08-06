@@ -15,6 +15,7 @@ describe('Logout', () => {
     localstorage.setItem(config.storage_key, JSON.stringify({access_token}))
     expect(localstorage.getItem(config.storage_key)).to.equal(JSON.stringify({access_token}))
     Beachball.logout()
+    expect(config.access_token).to.equal('')
     expect(localstorage.getItem(config.storage_key)).to.equal(null)
   })
 })
