@@ -31,8 +31,8 @@ describe('API', () => {
       stub.restore()
     })
 
-    it('should call the correct uri', async () => {
-      await api('/me')
+    it('should call the correct uri', () => {
+      api('/me')
       expect(stub).to.have.been.calledOnce
     })
   })
