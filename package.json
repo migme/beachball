@@ -6,6 +6,7 @@
   "scripts": {
     "pretest": "standard",
     "test": "gulp test && gulp karma",
+    "prepublish": "gulp build",
     "codecov": "cat coverage/lcov.info | codecov"
   },
   "repository": {
