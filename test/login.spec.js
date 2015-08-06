@@ -36,32 +36,5 @@ describe('Login', () => {
         window.open.restore()
       })
     })
-
-    // describe('as an embedded iframe', () => {
-    //   it('should inject an iframe', () => {
-    //     expect(document.querySelector('iframe')).to.not.exist
-    //     Beachball.login('iframe')
-    //     expect(document.querySelector('iframe')).to.exist
-    //     document.querySelector('iframe').remove()
-    //   })
-    //   it('should inject in a specific location', () => {
-    //     const target = document.createElement('div')
-    //     Beachball.login('iframe', { parent: target })
-    //     expect(target.querySelector('iframe')).to.exist
-    //   })
-    // })
-
-    describe('as a full page redirect', () => {
-      // beforeEach(() => {
-      //   sinon.stub(Beachball, '_redirect')
-      // })
-      it('should change the browser location', () => {
-        // Beachball.login('redirect')
-        // expect(window.location.href).to.equal('https://api.mig.me/login-page/?callback_type=redirect')
-      })
-      // afterEach(() => {
-      //   Beachball._redirect.restore()
-      // })
-    })
   }
 })
