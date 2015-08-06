@@ -21,12 +21,12 @@ const loginMethods = {
     return awaitMessage(dialog)
   },
 
-  async redirect () {
+  redirect () {
     const data = Object.assign({
       callback_type: 'redirect'
     }, config)
     const url = urltemplate.parse(API_URL_LOGIN).expand(data)
-    return _redirect(url)
+    _redirect(url)
   }
 }
 
@@ -35,7 +35,7 @@ function openWindow (url) {
 }
 
 function _redirect (href) {
-  return (window.location.href = href)
+  window.location.href = href
 }
 
 function awaitMessage (sourceWindow) {
