@@ -31,6 +31,16 @@ describe('API', () => {
       stub.restore()
     })
 
+    it('should add a slash at the start', () => {
+      api('me')
+      expect(stub).to.have.been.calledWith(baseUrl + '/me', {
+        headers: {
+          'content-type': 'application/json',
+          authorization: 'Bearer ' + access_token
+        }
+      })
+    })
+
     it('should call the correct uri', () => {
       api('/me')
       expect(stub).to.have.been.calledOnce

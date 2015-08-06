@@ -9,6 +9,16 @@ describe('Beachball', () => {
     expect(Beachball.init).to.be.a('function')
   })
 
+  it('should init with default values', () => {
+    Beachball.init()
+    expect(config.client_id).to.equal('')
+    expect(config.redirect_uri).to.equal('')
+    expect(config.version).to.equal('')
+    expect(config.access_token).to.equal('')
+    expect(config.baseUrl).to.equal('https://api.mig.me')
+    expect(config.storage_key).to.equal('migme-session')
+  })
+
   it('should init Beachball', () => {
     const client_id = '309f818242abae8fdd1b'
     const access_token = 'TESTING'
