@@ -36,8 +36,10 @@ var options = {
     dir: 'coverage',
     reporters: [
       { type: 'lcovonly', subdir: '.', file: 'lcov.info' },
+      { type: 'json', subdir: '.', file: 'coverage.json' },
       { type: 'text' },
-      { type: 'text-summary' }
+      { type: 'text-summary' },
+      { type: 'html' }
     ]
   },
 

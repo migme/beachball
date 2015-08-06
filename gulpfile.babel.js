@@ -64,7 +64,7 @@ gulp.task('karma', done => {
 })
 
 gulp.task('coverage', () => {
-  return gulp.src('./coverage/lcov.info')
+  return gulp.src('./coverage/coverage.json')
     .pipe(codecov())
 })
 
