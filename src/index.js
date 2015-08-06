@@ -7,7 +7,7 @@ import getLoginStatus from './lib/login-status'
 import getLoginFromHash from './lib/login-from-hash'
 import saveSession from './lib/save-session'
 import api from './lib/API'
-import {trimHash} from './utils/hash'
+import {trim as trimHash} from './utils/hash'
 import config from './config'
 
 const Beachball = {
