@@ -1,45 +1,50 @@
-/* global beforeEach describe it */
+/* global describe, it */
 import {expect} from 'chai'
 import Beachball from '../src'
-import API from '../src/lib/API'
-import Session from '../src/lib/Session'
+import config from '../src/config'
 
 describe('Beachball', () => {
-  let beachball
-  const client_id = '309f818242abae8fdd1b'
-  const access_token = 'TESTING'
+  it('should expose init', () => {
+    expect(Beachball.init).to.exist
+    expect(Beachball.init).to.be.a('function')
+  })
 
-  beforeEach(() => {
-    beachball = new Beachball({
+  it('should init with default values', () => {
+    Beachball.init()
+    expect(config.client_id).to.equal('')
+    expect(config.redirect_uri).to.equal('')
+    expect(config.version).to.equal('')
+    expect(config.access_token).to.equal('')
+    expect(config.baseUrl).to.equal('https://api.mig.me')
+    expect(config.storage_key).to.equal('migme-session')
+  })
+
+  it('should init Beachball', () => {
+    const client_id = '309f818242abae8fdd1b'
+    const access_token = 'TESTING'
+
+    Beachball.init({
       client_id,
       access_token
     })
+
+    expect(config.client_id).to.equal(client_id)
+    expect(config.access_token).to.equal(access_token)
+    expect(config.baseUrl).to.equal('https://api.mig.me')
   })
 
-  it('should be instantiated', () => {
-    expect(beachball).to.exist
-    expect(beachball).to.be.an.instanceof(Beachball)
-  })
-
-  it('should expose Session', () => {
-    expect(beachball.Session).to.exist
-    expect(beachball.Session).to.be.an.instanceof(Session)
+  it('should expose login', () => {
+    expect(Beachball.login).to.exist
+    expect(Beachball.login).to.be.a('function')
   })
 
   it('should expose API', () => {
-    expect(beachball.API).to.exist
-    expect(beachball.API).to.be.an.instanceof(API)
+    expect(Beachball.api).to.exist
+    expect(Beachball.api).to.be.a('function')
   })
 
-  it('should expose configuration', () => {
-    expect(beachball).to.contain.all.keys([
-      'client_id',
-      'access_token',
-      'baseUrl'
-    ])
-  })
-
-  it('should work without options', () => {
-    expect(() => new Beachball()).not.to.throw(TypeError)
+  it('should expose getLoginStatus', () => {
+    expect(Beachball.getLoginStatus).to.exist
+    expect(Beachball.getLoginStatus).to.be.a('function')
   })
 })

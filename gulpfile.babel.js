@@ -15,6 +15,10 @@ gulp.task('clean', cb => {
   del([destinationFolder], cb)
 })
 
+gulp.task('clean:cov', cb => {
+  del(['coverage'], cb)
+})
+
 // Build two versions of the library
 gulp.task('build', ['clean'], () => {
   return gulp.src('src/**/*.js')
@@ -38,7 +42,7 @@ gulp.task('istanbul', cb => {
     .on('finish', cb)
 })
 
-gulp.task('test', ['istanbul'], () => {
+gulp.task('test', ['clean:cov', 'istanbul'], () => {
   return gulp.src('./test/**/*.js')
     .pipe($.mocha({
       reporter: 'spec'
@@ -60,7 +64,7 @@ gulp.task('karma', done => {
 })
 
 gulp.task('coverage', () => {
-  return gulp.src('./coverage/lcov.info')
+  return gulp.src('./coverage/coverage.json')
     .pipe(codecov())
 })
 

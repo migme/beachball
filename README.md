@@ -44,8 +44,10 @@ define(['migme-beachball'], function (Beachball) {
 
 ### Initialization
 ```
-const client = new Beachball({
+Beachball.init({
   // options
+  client_id: 'XXXXXXXXXXXXX',
+  access_token: '' // If you already have one
 })
 ```
 
@@ -53,6 +55,5 @@ const client = new Beachball({
 ```bash
 npm install # Install dependencies
 npm test    # Test only
-grunt build # Build only
-grunt       # Test, then build
+gulp build  # Build only
 ```

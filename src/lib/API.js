@@ -1,20 +1,17 @@
+import config from '../config'
 const self = typeof window === 'undefined' ? global : window
 
-export default class API {
-  constructor (migme) {
-    this.migme = migme
+export default function (endpoint, options = {}) {
+  if (endpoint.charAt(0) !== '/') {
+    endpoint = `/${endpoint}`
   }
 
-  async url (endpoint, options = {}) {
-    if (endpoint.charAt(0) !== '/') {
-      endpoint = '/' + endpoint
+  Object.assign(options, {
+    headers: {
+      'content-type': 'application/json',
+      authorization: 'Bearer ' + config.access_token
     }
-    const session = await this.migme.Session.getStatus()
-    return self.fetch(this.migme.baseUrl + endpoint, {
-      headers: {
-        'content-type': 'application/json',
-        authorization: 'Bearer ' + session.access_token
-      }
-    })
-  }
+  })
+
+  return self.fetch(config.baseUrl + endpoint, options)
 }
