@@ -47,10 +47,9 @@ describe('API', () => {
     })
 
     it('should call with updated headers', () => {
-      api('/me', { headers: { 'content-type': 'multipart/form-data' } })
+      api('/me', {}, false)
       expect(stub).to.have.been.calledWith(baseUrl + '/me', {
         headers: {
-          'content-type': 'multipart/form-data',
           authorization: 'Bearer ' + access_token
         }
       })
