@@ -6,12 +6,14 @@ export default function (endpoint, options = {}) {
     endpoint = `/${endpoint}`
   }
 
-  Object.assign(options, {
-    headers: {
-      'content-type': 'application/json',
-      authorization: 'Bearer ' + config.access_token
-    }
+  options.headers = options.headers || {}
+  Object.assign(options.headers, {
+    authorization: 'Bearer ' + config.access_token
   })
+
+  if (!options.headers.hasOwnProperty('content-type')) {
+    Object.assign(options.headers, { 'content-type': 'application/json' })
+  }
 
   return self.fetch(config.baseUrl + endpoint, options)
 }
