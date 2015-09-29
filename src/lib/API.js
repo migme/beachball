@@ -1,7 +1,7 @@
 import config from '../config'
 const self = typeof window === 'undefined' ? global : window
 
-export default function (endpoint, options = {}) {
+export default function (endpoint, options = {}, set_content_type = true) {
   if (endpoint.charAt(0) !== '/') {
     endpoint = `/${endpoint}`
   }
@@ -11,7 +11,7 @@ export default function (endpoint, options = {}) {
     authorization: 'Bearer ' + config.access_token
   })
 
-  if (!options.headers.hasOwnProperty('content-type')) {
+  if (set_content_type) {
     Object.assign(options.headers, { 'content-type': 'application/json' })
   }
 
