@@ -6,6 +6,7 @@ Migme JavaScript SDK. Throws data to the [Migme API](http://docs.migme.apiary.io
 [![Codeship](https://img.shields.io/codeship/5e7f47c0-bfe9-0132-39f9-7eb09717a41c.svg)](https://codeship.com/projects/73070)
 [![Travis CI](https://img.shields.io/travis/migme/beachball.svg)](https://travis-ci.org/migme/beachball)
 [![Codecov](https://img.shields.io/codecov/c/github/migme/beachball.svg)](https://codecov.io/github/migme/beachball)
+[![Dependency Status](https://gemnasium.com/migme/beachball.svg)](https://gemnasium.com/migme/beachball)
 [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![npm](https://img.shields.io/npm/v/migme-beachball.svg)](https://www.npmjs.com/package/migme-beachball)
 [![npm](https://img.shields.io/npm/dm/migme-beachball.svg)](https://www.npmjs.com/package/migme-beachball)
