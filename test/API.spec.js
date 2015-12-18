@@ -1,11 +1,13 @@
 /* global afterEach, beforeEach, describe, it */
 import chai, {expect} from 'chai'
 import chaiAsPromised from 'chai-as-promised'
+import sinonChai from 'sinon-chai'
 import sinon from 'sinon'
 import api from '../src/lib/API'
 import config from '../src/config'
 
 chai.use(chaiAsPromised)
+chai.use(sinonChai)
 
 const baseUrl = 'https://localhost'
 const access_token = '1234567890'
