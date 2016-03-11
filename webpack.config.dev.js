@@ -11,7 +11,7 @@ module.exports = {
     ],
     preLoaders: [ // << add subject as webpack's preloader
       {
-        test: /\.js?$/,
+        test: /\.js$/,
         // exclude this dirs from coverage
         exclude: /(test|node_modules|bower_components)\//,
         loader: 'isparta-instrumenter-loader'
