@@ -44,7 +44,7 @@ define(['migme-beachball'], function (Beachball) {
 ```
 
 ### Initialization
-```
+```js
 Beachball.init({
   // options
   client_id: 'XXXXXXXXXXXXX',
@@ -56,5 +56,5 @@ Beachball.init({
 ```bash
 npm install # Install dependencies
 npm test    # Test only
-gulp build  # Build only
+npm run build  # Build only
 ```
