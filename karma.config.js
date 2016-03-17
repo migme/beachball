@@ -1,6 +1,6 @@
 var assign = require('lodash.assign')
 var pkg = require('./package.json')
-var webpackConfig = require('./webpack.config')
+var webpackConfig = require('./webpack.config.dev')
 webpackConfig.devtool = 'inline-source-map'
 
 var options = {
@@ -8,13 +8,13 @@ var options = {
   frameworks: ['mocha', 'chai-as-promised', 'sinon-chai'],
 
   files: [
-    './node_modules/babel-core/browser-polyfill.js',
+    './node_modules/babel-polyfill/dist/polyfill.js',
     'test/**/*.js'
   ],
 
   // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
   preprocessors: {
-    'test/**/*.js': ['webpack', 'sourcemap']
+    './test/**/*.js': ['webpack', 'sourcemap']
   },
 
   webpack: webpackConfig,
