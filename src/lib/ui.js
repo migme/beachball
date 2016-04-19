@@ -1,24 +1,28 @@
+import validator from 'validator'
+import urltemplate from 'url-template'
 import { on, off } from 'bubbly'
+import config from '../config'
 
-const uiMethods = function (args) {
-  // TODO: check undefined
-  if ((args != null) && (args.method != null)) {
-    switch (args.method) {
-      case 'share':
-        if (args.url != null) {
-          const dialog = openWindow(args.url)
-          return awaitMessage(dialog)
-        } else {
-          console.log('TODO: ERROR')
-        }
-        break
-      default:
-        console.log('TODO: ERROR')
-    }
+const pathForShareToMigme = '/share_to_mig33?referrer=&campaign=&return_url=&href='
+
+const uiMethods = ({ method, href } = {}) => {
+  switch (method) {
+    case 'share':
+      if (typeof href === 'string') {
+        // we didn't do any validation but left it for sharing page
+        const dialog = openWindow(encodeURIComponent(href))
+        return awaitMessage(dialog)
+      } else {
+        console.log('TODO: ERROR HREF')
+      }
+      break
+    default:
+      console.log('TODO: ERROR')
   }
 }
 
-function openWindow (url) {
+function openWindow (href) {
+  const url = `${config.host}${pathForShareToMigme}${href}`
   return window.open(url, '', 'height=250px, width=500px')
 }
 

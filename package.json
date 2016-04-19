@@ -82,7 +82,8 @@
     "bubbly": "^1.1.2",
     "isomorphic-fetch": "^2.2.1",
     "universal-localstorage": "^1.0.2",
-    "url-template": "^2.0.6"
+    "url-template": "^2.0.6",
+    "validator": "^5.2.0"
   },
   "directories": {
     "lib": "lib",
