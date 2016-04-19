@@ -1,11 +1,21 @@
-import urltemplate from 'url-template'
 import { on, off } from 'bubbly'
 import config from '../config'
 
-const uiMethods = {
-  share (url) {
-    const dialog = openWindow(url)
-    return awaitMessage(dialog)
+const uiMethods = function (args) {
+  // TBD: check undefined?
+  if ((args != null) && (args.method != null)) {
+    switch (args.method) {
+      case 'share':
+        if (args.url != null) {
+          const dialog = openWindow(url)
+          return awaitMessage(dialog)
+        } else {
+          console.log("TODO: ERROR")
+        }
+        break;
+      default:
+        console.log("TODO: ERROR")
+    }
   }
 }
 
@@ -28,8 +38,8 @@ function awaitMessage (sourceWindow) {
 }
 
 // UI
-export default async function (method = 'share', ...args) {
-  const delegate = uiMethods[method]
+export default async function (args) {
+  const delegate = uiMethods(args)
   return delegate(...args).then(res => {
     return res
   })
