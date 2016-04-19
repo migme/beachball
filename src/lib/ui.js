@@ -1,8 +1,6 @@
 import config from '../config'
 import {awaitMessage} from '../utils/async'
 
-const pathForShareToMigme = '/share_to_mig33?referrer=&campaign=&return_url=&href='
-
 const uiMethods = async({ method, href } = {}) => {
   switch (method) {
     case 'share':
@@ -20,6 +18,7 @@ const uiMethods = async({ method, href } = {}) => {
 }
 
 function openWindow (href) {
+  const pathForShareToMigme = '/share_to_mig33?referrer=&campaign=&return_url=&href='
   const url = `${config.host}${pathForShareToMigme}${href}`
   return window.open(url, '', 'height=250px, width=500px')
 }
