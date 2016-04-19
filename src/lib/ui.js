@@ -19,7 +19,7 @@ const uiMethods = function (args) {
 }
 
 function openWindow (url) {
-  return window.open(url)
+  return window.open(url, '', 'height=250px, width=500px')
 }
 
 function awaitMessage (sourceWindow) {
