@@ -1,20 +1,19 @@
 import { on, off } from 'bubbly'
-import config from '../config'
 
 const uiMethods = function (args) {
-  // TBD: check undefined?
+  // TODO: check undefined
   if ((args != null) && (args.method != null)) {
     switch (args.method) {
       case 'share':
         if (args.url != null) {
-          const dialog = openWindow(url)
+          const dialog = openWindow(args.url)
           return awaitMessage(dialog)
         } else {
-          console.log("TODO: ERROR")
+          console.log('TODO: ERROR')
         }
-        break;
+        break
       default:
-        console.log("TODO: ERROR")
+        console.log('TODO: ERROR')
     }
   }
 }
@@ -40,6 +39,8 @@ function awaitMessage (sourceWindow) {
 // UI
 export default async function (args) {
   const delegate = uiMethods(args)
+
+  // TODO: return error for promise
   return delegate(...args).then(res => {
     return res
   })

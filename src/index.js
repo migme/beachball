@@ -49,11 +49,11 @@ const Beachball = {
 
 export default Beachball
 
-// export Beachball as MIGME 
+// export Beachball as MIGME
 //
 // try {
 //   window.MIGME || (function(window, migme_fif_window) {
-//     // 
+//     //
 //   })(window.inDapIF ? parent.window : window, window);
 // } catch (e) {
 //
