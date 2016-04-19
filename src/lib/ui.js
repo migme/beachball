@@ -1,4 +1,3 @@
-import validator from 'validator'
 import urltemplate from 'url-template'
 import { on, off } from 'bubbly'
 import config from '../config'
@@ -13,11 +12,11 @@ const uiMethods = ({ method, href } = {}) => {
         const dialog = openWindow(encodeURIComponent(href))
         return awaitMessage(dialog)
       } else {
-        console.log('TODO: ERROR HREF')
+        throw Error(`href: ${href} is not valid.`)
       }
       break
     default:
-      console.log('TODO: ERROR')
+      throw Error(`method: ${method} is not valid`)
   }
 }
 
