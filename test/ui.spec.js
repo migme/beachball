@@ -14,7 +14,7 @@ describe('UI', () => {
   })
 
   if (typeof window !== 'undefined') {
-    describe('sharing post will open a popup window', () => {
+    describe('sharing post (method: "share")', () => {
       beforeEach(() => {
         sinon.stub(window, 'open')
       })
@@ -22,7 +22,7 @@ describe('UI', () => {
         const params = {method: 'share', href: 'https://alivenotdead.com'}
         Beachball.ui(params)
         expect(window.open).to.have.been.calledWith(
-          'https://mig.me/share_to_mig33?referrer=&campaign=&return_url=&href=http%3A%2F%alivenotdead.com'
+          'https://mig.me/share_to_mig33?referrer=&campaign=&return_url=&href=https%3A%2F%2Falivenotdead.com'
         )
       })
       afterEach(() => {
