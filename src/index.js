@@ -50,12 +50,4 @@ const Beachball = {
 export default Beachball
 
 // export Beachball as MIGME
-window.MIGME = Beachball
-
-// try {
-//   window.MIGME || (function(window, migme_fif_window) {
-
-//   })(window.inDapIF ? parent.window : window, window);
-// } catch (e) {
-
-// }
+if (typeof window !== 'undefined') { window.MIGME = Beachball }
