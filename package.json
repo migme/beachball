@@ -2,7 +2,7 @@
   "name": "migme-beachball",
   "version": "5.4.0",
   "description": "Migme JavaScript SDK",
-  "main": "lib/index.js",
+  "main": "lib/sdk.js",
   "scripts": {
     "pretest": "standard",
     "test": "npm run mocha && npm run karma",
@@ -10,7 +10,7 @@
     "karma": "karma start karma.config.js",
     "clean": "rimraf lib | rimraf coverage",
     "prebuild": "npm run clean",
-    "build": "webpack --output-filename index.js --config webpack.config.prod.js",
+    "build": "webpack --output-filename sdk.js --config webpack.config.prod.js",
     "prepublish": "npm run build",
     "codecov": "codecov"
   },
