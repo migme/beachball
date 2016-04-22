@@ -2,12 +2,11 @@ var webpack = require('webpack')
 var path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index',
 
   output: {
-    path: path.join(__dirname, '/lib/'),
-    filename: 'index.js',
-    library: 'beachball',
+    path: path.join(__dirname, 'lib'),
+    library: 'MIGME',
     libraryTarget: 'umd'
   },
 

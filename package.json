@@ -10,7 +10,7 @@
     "karma": "karma start karma.config.js",
     "clean": "rimraf lib | rimraf coverage",
     "prebuild": "npm run clean",
-    "build": "webpack --config webpack.config.prod.js",
+    "build": "webpack --output-filename index.js --config webpack.config.prod.js",
     "prepublish": "npm run build",
     "codecov": "codecov"
   },
