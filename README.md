@@ -1,4 +1,4 @@
-# Beachball
+# Migme JS SDK
 
 Migme JavaScript SDK. Throws data to the [Migme API](http://docs.migme.apiary.io/).
 
@@ -18,13 +18,7 @@ Migme JavaScript SDK. Throws data to the [Migme API](http://docs.migme.apiary.io
 
 ### NPM
 ```bash
-npm install migme-beachball
-```
-
-### CDN
-Replace `${VERSION}` with a released version number.
-```html
-<script src="https://cdn.rawgit.com/migme/beachball/releases/download/${VERSION}/migme-beachball.min.js"></script>
+npm install migme
 ```
 
 ## Usage
@@ -32,20 +26,40 @@ Replace `${VERSION}` with a released version number.
 ### Loading
 ```js
 // ES6
-import Beachball from 'migme-beachball'
+import Migme from 'migme'
 
 // CommonJS
-var Beachball = require('migme-beachball')
+var Migme = require('migme')
 
 // AMD
-define(['migme-beachball'], function (Beachball) {
+define(['migme'], function (Migme) {
   // ...
 })
 ```
 
+#### Loading in browser
+```html
+<script>
+  window.migmeAsyncInit = function() {
+    MIGME.init({
+      client_id: 'your client id',
+      redirect_uri: 'URI to redirect to after login'
+    });
+  };
+
+  (function(d, s, id){
+     var js, mjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://npmcdn.com/migme/lib/sdk.js";
+     mjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'migme-jssdk'));
+</script>
+```
+
 ### Initialization
 ```js
-Beachball.init({
+Migme.init({
   // options
   client_id: 'XXXXXXXXXXXXX',
   access_token: '' // If you already have one
