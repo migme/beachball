@@ -1,7 +1,11 @@
 /* global describe, it */
-import {expect} from 'chai'
+import chai, {expect} from 'chai'
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
 import Beachball from '../src'
 import config from '../src/config'
+
+chai.use(sinonChai)
 
 describe('Beachball', () => {
   it('should expose init', () => {
@@ -47,4 +51,14 @@ describe('Beachball', () => {
     expect(Beachball.getLoginStatus).to.exist
     expect(Beachball.getLoginStatus).to.be.a('function')
   })
+
+  if (typeof window !== 'undefined') {
+    it('should call the async init function', () => {
+      window.migmeAsyncInit = () => {}
+      const stub = sinon.stub(window, 'migmeAsyncInit')
+      Beachball.asyncInit()
+      expect(stub).to.have.been.called
+      stub.restore()
+    })
+  }
 })
