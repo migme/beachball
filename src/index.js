@@ -44,10 +44,14 @@ const Beachball = {
   logout,
   getLoginStatus,
   setScope,
-  ui
+  ui,
+  asyncInit () {
+    if (typeof window !== 'undefined' && typeof window.migmeAsyncInit === 'function') {
+      window.migmeAsyncInit()
+    }
+  }
 }
 
-export default Beachball
+Beachball.asyncInit()
 
-// export Beachball as MIGME
-if (typeof window !== 'undefined') { window.MIGME = Beachball }
+export default Beachball
