@@ -1,5 +1,5 @@
 {
-  "name": "migme-beachball",
+  "name": "migme",
   "version": "5.5.0",
   "description": "Migme JavaScript SDK",
   "main": "lib/sdk.js",
