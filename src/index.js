@@ -42,7 +42,14 @@ const Beachball = {
   login,
   logout,
   getLoginStatus,
-  setScope
+  setScope,
+  asyncInit () {
+    if (typeof window !== 'undefined' && typeof window.migmeAsyncInit === 'function') {
+      window.migmeAsyncInit()
+    }
+  }
 }
+
+Beachball.asyncInit()
 
 export default Beachball
