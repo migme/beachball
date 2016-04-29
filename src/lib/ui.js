@@ -18,9 +18,9 @@ const uiMethods = async({ method, href } = {}) => {
 }
 
 function openWindow (href) {
-  const pathForShareToMigme = '/share_to_mig33?referrer=&campaign=&return_url=&href='
+  const pathForShareToMigme = '/share_to_migme?referrer=&campaign=&return_url=&href='
   const url = `${config.host}${pathForShareToMigme}${href}`
-  return window.open(url, '', 'height=250px, width=500px')
+  return window.open(url, '', 'height=500px, width=500px')
 }
 
 // UI
