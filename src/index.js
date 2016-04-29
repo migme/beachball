@@ -45,4 +45,8 @@ const Beachball = {
   setScope
 }
 
+if (typeof window !== 'undefined' && typeof window.migmeAsyncInit === 'function') {
+  window.migmeAsyncInit()
+}
+
 export default Beachball
