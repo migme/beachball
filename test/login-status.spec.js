@@ -27,6 +27,11 @@ describe('Login Status', () => {
     expect(Beachball.getLoginStatus()).to.eventually.eql({access_token}).notify(done)
   })
 
+  it('should get a session', () => {
+    const session = localstorage.getItem(config.storage_key)
+    expect(session).to.equal('{"access_token":"1234567890"}')
+  })
+
   if (typeof document !== 'undefined') {
     it('should get the cookie', done => {
       localstorage.removeItem(config.storage_key)
