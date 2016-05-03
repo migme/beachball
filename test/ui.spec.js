@@ -18,7 +18,7 @@ describe('UI', () => {
       beforeEach(() => {
         sinon.stub(window, 'open')
       })
-      it('should open a window', () => {
+      it('should open a window with href query string', () => {
         const params = {method: 'share', href: 'https://alivenotdead.com'}
         Beachball.ui(params)
         expect(window.open).to.have.been.calledWith(
