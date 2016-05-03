@@ -58,6 +58,7 @@ describe('Beachball', () => {
       const stub = sinon.stub(window, 'migmeAsyncInit')
       asyncInit()
       expect(stub).to.have.been.called
+      expect(window.migmeAsyncInit.hasRun).to.be.true
       stub.restore()
     })
   }
