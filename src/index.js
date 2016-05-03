@@ -50,6 +50,8 @@ const Beachball = {
   }
 }
 
-Beachball.asyncInit()
+setTimeout(() => {
+  Beachball.asyncInit()
+}, 0)
 
 export default Beachball
