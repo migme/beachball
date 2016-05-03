@@ -42,14 +42,22 @@ const Beachball = {
   login,
   logout,
   getLoginStatus,
-  setScope,
-  asyncInit () {
-    if (typeof window !== 'undefined' && typeof window.migmeAsyncInit === 'function') {
-      window.migmeAsyncInit()
-    }
+  setScope
+}
+
+export const asyncInit = () => {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.migmeAsyncInit === 'function' &&
+    !window.migmeAsyncInit.hasRun
+  ) {
+    window.migmeAsyncInit.hasRun = true
+    window.migmeAsyncInit()
   }
 }
 
-Beachball.asyncInit()
+setTimeout(() => {
+  asyncInit()
+}, 0)
 
 export default Beachball

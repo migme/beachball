@@ -47,13 +47,11 @@ define(['migme'], function (Migme) {
     });
   };
 
-  (function(d, s, id){
-     var js, mjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://npmcdn.com/migme/lib/sdk.js";
-     mjs.parentNode.insertBefore(js, mjs);
-   }(document, 'script', 'migme-jssdk'));
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://npmcdn.com/migme/lib/sdk.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
 </script>
 ```
 
