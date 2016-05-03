@@ -23,7 +23,7 @@ describe('UI', () => {
         const params = {method: 'share', href: 'https://alivenotdead.com'}
         Beachball.ui(params)
         expect(window.open).to.have.been.calledWith(
-          'https://mig.me/share_to_migme?href=https%253A%252F%252Falivenotdead.com'
+          'https%3A%2F%2Fmig.me/share_to_migme?href=https%253A%252F%252Falivenotdead.com'
         )
       })
       afterEach(() => {
