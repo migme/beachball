@@ -2,7 +2,7 @@
 import chai, {expect} from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import Beachball from '../src'
+import Beachball, { asyncInit } from '../src'
 import config from '../src/config'
 
 chai.use(sinonChai)
@@ -56,8 +56,9 @@ describe('Beachball', () => {
     it('should call the async init function', () => {
       window.migmeAsyncInit = () => {}
       const stub = sinon.stub(window, 'migmeAsyncInit')
-      Beachball.asyncInit()
+      asyncInit()
       expect(stub).to.have.been.called
+      expect(window.migmeAsyncInit.hasRun).to.be.true
       stub.restore()
     })
   }
