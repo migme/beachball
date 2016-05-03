@@ -1,4 +1,5 @@
 import config from '../config'
+import urltemplate from 'url-template'
 import {awaitMessage} from '../utils/async'
 
 const uiMethods = async({ method, href } = {}) => {
@@ -18,17 +19,23 @@ const uiMethods = async({ method, href } = {}) => {
 }
 
 function openWindow (href) {
+  console.log(config)
+  const SHARE_POST_TO_MIGME_URL = `{+host}/share_to_migme{?${[
+    'href'
+  ]}}`
+  const data = {href: href}
+
   const w = 500
   const h = 500
-  const pathForShareToMigme = '/share_to_migme?referrer=&campaign=&return_url=&href='
-  const url = `${config.host}${pathForShareToMigme}${href}`
+
+  const url = urltemplate.parse(SHARE_POST_TO_MIGME_URL).expand(data)
 
   const screen = screen || {screen: {left: 0, right: 0}}
-  const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left
-  const dualScreenTop = window.screenTop !== undefined ? window.screenTop : screen.top
+  const dualScreenLeft = window.screenLeft || screen.left
+  const dualScreenTop = window.screenTop || screen.top
 
-  const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width
-  const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height
+  const width = window.innerWidth || document.documentElement.clientWidth || screen.width
+  const height = window.innerHeight || document.documentElement.clientHeight || screen.height
 
   var left = ((width / 2) - (w / 2)) + dualScreenLeft
   var top = ((height / 2) - (h / 2)) + dualScreenTop

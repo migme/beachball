@@ -20,7 +20,8 @@ const Beachball = {
     access_token = '',
     scope = '',
     baseUrl = 'https://api.mig.me',
-    storage_key = 'migme-session'
+    storage_key = 'migme-session',
+    host = 'https://mig.me'
   } = {}) {
     Object.assign(config, {
       client_id,
@@ -29,7 +30,8 @@ const Beachball = {
       access_token,
       scope,
       baseUrl,
-      storage_key
+      storage_key,
+      host
     })
 
     getLoginStatus().then(saveSession)
