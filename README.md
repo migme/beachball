@@ -52,7 +52,7 @@ define(['migme'], function (Migme) {
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
      js.src = "https://npmcdn.com/migme/lib/sdk.js";
-     mjs.parentNode.insertBefore(js, fjs);
+     mjs.parentNode.insertBefore(js, mjs);
    }(document, 'script', 'migme-jssdk'));
 </script>
 ```
