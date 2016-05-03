@@ -16,13 +16,14 @@ describe('UI', () => {
   if (typeof window !== 'undefined') {
     describe('sharing post (method: "share")', () => {
       beforeEach(() => {
+        Beachball.init()
         sinon.stub(window, 'open')
       })
       it('should open a window with a query string "href"', () => {
         const params = {method: 'share', href: 'https://alivenotdead.com'}
         Beachball.ui(params)
         expect(window.open).to.have.been.calledWith(
-          'https://mig.me/share_to_migme?referrer=&campaign=&return_url=&href=https%3A%2F%2Falivenotdead.com'
+          'https://mig.me/share_to_migme?href=https%253A%252F%252Falivenotdead.com'
         )
       })
       afterEach(() => {
