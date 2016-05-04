@@ -10,7 +10,7 @@ import setScope from './lib/scope'
 import api from './lib/API'
 import {trim as trimHash} from './utils/hash'
 import config from './config'
-import ui from './lib/ui'
+import ui, {renderShareButton} from './lib/ui'
 
 const Beachball = {
   init ({
@@ -39,6 +39,7 @@ const Beachball = {
       .then(saveSession)
       .then(trimHash)
       .catch(() => {})
+    renderShareButton()
   },
 
   api,

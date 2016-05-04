@@ -45,5 +45,15 @@ function openWindow (href) {
   return window.open(url, 'migme', `height=${h}, width=${w}, top=${top}, left=${left}`)
 }
 
+export const renderShareButton = function() {
+  const shareButtonClassName = 'migme-share-button'
+  var elements = document.getElementsByClassName(shareButtonClassName);
+  if (elements) {
+    for (let el of elements) {
+      console.log(el);
+    }
+  }
+} 
+
 // UI
 export default uiMethods
