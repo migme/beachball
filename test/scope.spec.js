@@ -1,5 +1,5 @@
 /* global describe, it */
-import {expect} from 'chai'
+import { expect } from 'chai'
 import Beachball from '../src'
 import config from '../src/config'
 

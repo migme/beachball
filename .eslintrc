@@ -1,0 +1,7 @@
+{
+  "extends": "migme/base",
+  "parser": "babel-eslint",
+  "rules": {
+    "camelcase": 0
+  }
+}

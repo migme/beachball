@@ -1,5 +1,5 @@
-var webpack = require('webpack')
-var path = require('path')
+const webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
   entry: './src/index',
@@ -7,11 +7,11 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'lib'),
     library: 'MIGME',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
 
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
   },
 
   module: {
@@ -19,17 +19,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loader: 'babel',
       },
       {
         test: /\.json$/,
-        loader: 'json'
-      }
-    ]
+        loader: 'json',
+      },
+    ],
   },
 
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
 
   plugins: [
@@ -37,15 +37,15 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false,
-        screw_ie8: true
-      }
-    })
+        screw_ie8: true,
+      },
+    }),
   ],
 
   stats: {
     colors: true,
-    reasons: true
+    reasons: true,
   },
 
-  progress: true
+  progress: true,
 }

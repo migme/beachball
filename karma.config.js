@@ -1,20 +1,20 @@
-var assign = require('lodash.assign')
-var pkg = require('./package.json')
-var webpackConfig = require('./webpack.config.dev')
+const assign = require('lodash.assign')
+const pkg = require('./package.json')
+const webpackConfig = require('./webpack.config.dev')
 webpackConfig.devtool = 'inline-source-map'
 
-var options = {
+const options = {
   // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
   frameworks: ['mocha', 'chai-as-promised', 'sinon-chai'],
 
   files: [
     './node_modules/babel-polyfill/dist/polyfill.js',
-    'test/**/*.js'
+    'test/**/*.js',
   ],
 
   // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
   preprocessors: {
-    './test/**/*.js': ['webpack', 'sourcemap']
+    './test/**/*.js': ['webpack', 'sourcemap'],
   },
 
   webpack: webpackConfig,
@@ -26,7 +26,7 @@ var options = {
     timings: true,
     chunks: false,
     chunkModules: false,
-    modules: false
+    modules: false,
   },
 
   // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -39,8 +39,8 @@ var options = {
       { type: 'json', subdir: '.', file: 'coverage.json' },
       { type: 'text' },
       { type: 'text-summary' },
-      { type: 'html' }
-    ]
+      { type: 'html' },
+    ],
   },
 
   singleRun: true,
@@ -57,34 +57,34 @@ var options = {
     'karma-sourcemap-loader',
     'karma-coverage',
     'karma-spec-reporter',
-    'karma-webpack'
+    'karma-webpack',
   ],
 
   // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-  browsers: ['Chrome', 'Firefox']
+  browsers: ['Chrome', 'Firefox'],
 }
 
-var customLaunchers = {
+const customLaunchers = {
   sl_ie: {
     base: 'SauceLabs',
-    browserName: 'internet explorer'
-  }
+    browserName: 'internet explorer',
+  },
 }
 
 if (process.env.TRAVIS) {
   assign(options, {
     sauceLabs: {
-      testName: pkg.name
+      testName: pkg.name,
     },
-    customLaunchers: customLaunchers,
+    customLaunchers,
     browsers: Object.keys(customLaunchers),
-    reporters: ['spec', 'coverage', 'saucelabs']
+    reporters: ['spec', 'coverage', 'saucelabs'],
   })
 }
 
 if (process.env.CI_NAME === 'codeship') {
   assign(options, {
-    reporters: ['spec', 'coverage']
+    reporters: ['spec', 'coverage'],
   })
 }
 

@@ -1,5 +1,5 @@
 /* global describe, it, before, after */
-import chai, {expect} from 'chai'
+import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import localstorage from 'universal-localstorage'
 import Beachball from '../src'
@@ -23,8 +23,8 @@ describe('Login Status', () => {
   })
 
   it('should return a the session', done => {
-    localstorage.setItem(config.storage_key, JSON.stringify({access_token}))
-    expect(Beachball.getLoginStatus()).to.eventually.eql({access_token}).notify(done)
+    localstorage.setItem(config.storage_key, JSON.stringify({ access_token }))
+    expect(Beachball.getLoginStatus()).to.eventually.eql({ access_token }).notify(done)
   })
 
   if (typeof document !== 'undefined') {
@@ -32,7 +32,7 @@ describe('Login Status', () => {
       localstorage.removeItem(config.storage_key)
       const session_id = '1234567890'
       document.cookie = `eid=${session_id}`
-      expect(Beachball.getLoginStatus()).to.eventually.eql({session_id}).notify(done)
+      expect(Beachball.getLoginStatus()).to.eventually.eql({ session_id }).notify(done)
     })
   }
 
