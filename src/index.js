@@ -39,7 +39,12 @@ const Beachball = {
       .then(saveSession)
       .then(trimHash)
       .catch(() => {})
-    renderShareButton()
+
+    if (
+      typeof document !== 'undefined'
+    ) {
+      renderShareButton()
+    }
   },
 
   api,
