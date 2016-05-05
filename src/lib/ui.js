@@ -19,7 +19,7 @@ const uiMethods = async({ method, href } = {}) => {
 }
 
 function openWindow (href) {
-  const SHARE_POST_TO_MIGME_URL = `{host}/share_to_migme{?${[
+  const SHARE_POST_TO_MIGME_URL = `{+host}/share_to_migme{?${[
     'href'
   ]}}`
   const data = {
