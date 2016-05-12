@@ -45,13 +45,41 @@ function openWindow (href) {
   return window.open(url, 'migme', `height=${h}, width=${w}, top=${top}, left=${left}`)
 }
 
+function getRandCode (len = 15) {
+  var text = ''
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  for (let i = 0; i < len - 1; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+
+  return text
+}
+
 export const renderShareButton = function () {
   const shareButtonClassName = 'migme-share-button'
   if (document) {
-    var elements = document.getElementsByClassName(shareButtonClassName)
-    if (elements) {
-      for (let idx in elements) {
-        console.log(elements[idx])
+    var containers = document.getElementsByClassName(shareButtonClassName)
+
+    if (containers && containers.length && containers.length > 0) {
+      for (let i = 0; i < containers.length; i++) {
+        var container = containers[i]
+        var containerWidth = container.clientWidth
+        var iframeName = getRandCode(15)
+        var client_id = config.client_id
+        var href = container.getAttribute('data-href')
+        var layout = container.getAttribute('data-layout')
+
+        var spanStyle = ''
+        switch (layout) {
+          case 'button':
+            spanStyle = 'vertical-align: bottom; width: 58px; height: 20px;'
+            break
+          default:
+            spanStyle = 'vertical-align: bottom; width: 58px; height: 20px;'
+        }
+
+        containers[i].innerHTML = `<span style="${spanStyle}"><iframe name="${iframeName}" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="migme:share_button Migme Social Plugin" src="https://connect.mig.me/plugins/share_button?client_id=${client_id}&amp;container_width=${containerWidth}&amp;href=${href}&amp;layout=${layout}" style="border: none; visibility: visible; width: 58px; height: 20px;" class=""></iframe></span>`
       }
     }
   }
