@@ -1,5 +1,5 @@
 /* global describe, it, after */
-import chai, {expect} from 'chai'
+import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import localstorage from 'universal-localstorage'
 import saveSession from '../src/lib/save-session'
@@ -16,8 +16,8 @@ describe('Save Session', () => {
   })
 
   it('should save data', () => {
-    saveSession({access_token, foo})
-    expect(localstorage.getItem(config.storage_key)).to.equal(JSON.stringify({access_token, foo}))
+    saveSession({ access_token, foo })
+    expect(localstorage.getItem(config.storage_key)).to.equal(JSON.stringify({ access_token, foo }))
   })
 
   it('should return a promise', done => {

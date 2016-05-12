@@ -8,9 +8,9 @@ import getLoginFromHash from './lib/login-from-hash'
 import saveSession from './lib/save-session'
 import setScope from './lib/scope'
 import api from './lib/API'
-import {trim as trimHash} from './utils/hash'
+import { trim as trimHash } from './utils/hash'
 import config from './config'
-import ui, {renderShareButton} from './lib/ui'
+import ui, { renderShareButton } from './lib/ui'
 
 const Beachball = {
   init ({
@@ -21,7 +21,7 @@ const Beachball = {
     scope = '',
     baseUrl = 'https://api.mig.me',
     storage_key = 'migme-session',
-    host = 'https://mig.me'
+    host = 'https://mig.me',
   } = {}) {
     Object.assign(config, {
       client_id,
@@ -31,7 +31,7 @@ const Beachball = {
       scope,
       baseUrl,
       storage_key,
-      host
+      host,
     })
 
     getLoginStatus().then(saveSession)
@@ -62,7 +62,7 @@ const Beachball = {
       window.migmeAsyncInit.hasRun = true
       window.migmeAsyncInit()
     }
-  }
+  },
 }
 
 setTimeout(() => {

@@ -3,7 +3,7 @@ const $ = require('gulp-load-plugins')()
 const isparta = require('isparta') // doesn't work with import for some reason
 import codecov from 'gulp-codecov.io'
 import gulpJsdoc2md from 'gulp-jsdoc-to-markdown'
-import {server as karma} from 'karma'
+import { server as karma } from 'karma'
 import del from 'del'
 import path from 'path'
 
@@ -20,62 +20,62 @@ gulp.task('clean:cov', cb => {
 })
 
 // Build two versions of the library
-gulp.task('build', ['clean'], () => {
-  return gulp.src('src/**/*.js')
+gulp.task('build', ['clean'], () => (
+  gulp.src('src/**/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init({ loadMaps: true }))
     .pipe($.babel({
       stage: 0,
-      modules: 'umd'
+      modules: 'umd',
     }))
     .pipe(gulp.dest('lib'))
-})
+))
 
 gulp.task('istanbul', cb => {
   gulp.src(['./src/**/*.js'])
     .pipe($.istanbul({
       instrumenter: isparta.Instrumenter,
       includeUntested: true,
-      babel: { stage: 0 }
+      babel: { stage: 0 },
     }))
     .pipe($.istanbul.hookRequire()) // Force `require` to return covered files
     .on('finish', cb)
 })
 
-gulp.task('test', ['clean:cov', 'istanbul'], () => {
-  return gulp.src('./test/**/*.js')
+gulp.task('test', ['clean:cov', 'istanbul'], () => (
+  gulp.src('./test/**/*.js')
     .pipe($.mocha({
-      reporter: 'spec'
+      reporter: 'spec',
     }))
     .pipe($.istanbul.writeReports({
       dir: './coverage',
-      reportOpts: {dir: './coverage'},
-      reporters: ['lcovonly']
+      reportOpts: { dir: './coverage' },
+      reporters: ['lcovonly'],
     }))
-})
+))
 
 gulp.task('karma', done => {
   karma.start({
-    configFile: __dirname + '/karma.config.js',
-    singleRun: true
+    configFile: `${__dirname}/karma.config.js`,
+    singleRun: true,
   }, () => {
     done()
   })
 })
 
-gulp.task('coverage', () => {
-  return gulp.src('./coverage/coverage.json')
+gulp.task('coverage', () => (
+  gulp.src('./coverage/coverage.json')
     .pipe(codecov())
-})
+))
 
-gulp.task('docs', () => {
-  return gulp.src('./src/**/*.js')
+gulp.task('docs', () => (
+  gulp.src('./src/**/*.js')
     .pipe(gulpJsdoc2md())
     .pipe($.rename(path => {
-      path.extname = '.md'
+      path.extname = '.md' // eslint-disable-line no-param-reassign
     }))
     .pipe(gulp.dest('docs'))
-})
+))
 
 gulp.on('stop', () => {
   process.nextTick(() => {

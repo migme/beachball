@@ -1,5 +1,5 @@
 /* global afterEach, beforeEach, describe, it */
-import chai, {expect} from 'chai'
+import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import sinonChai from 'sinon-chai'
 import sinon from 'sinon'
@@ -13,7 +13,7 @@ const baseUrl = 'https://localhost'
 const access_token = '1234567890'
 Object.assign(config, {
   baseUrl,
-  access_token
+  access_token,
 })
 
 const self = typeof window === 'undefined' ? global : window
@@ -35,25 +35,25 @@ describe('API', () => {
 
     it('should add a slash at the start', () => {
       api('me')
-      expect(stub).to.have.been.calledWith(baseUrl + '/me', {
+      expect(stub).to.have.been.calledWith(`${baseUrl}/me`, {
         headers: {
           'content-type': 'application/json',
-          authorization: 'Bearer ' + access_token
-        }
+          authorization: `Bearer ${access_token}`,
+        },
       })
     })
 
     it('should call the correct uri', () => {
       api('/me')
-      expect(stub).to.have.been.calledOnce
+      expect(stub).to.have.been.calledOnce // eslint-disable-line no-unused-expressions
     })
 
     it('should call with updated headers', () => {
       api('/me', {}, false)
-      expect(stub).to.have.been.calledWith(baseUrl + '/me', {
+      expect(stub).to.have.been.calledWith(`${baseUrl}/me`, {
         headers: {
-          authorization: 'Bearer ' + access_token
-        }
+          authorization: `Bearer ${access_token}`,
+        },
       })
     })
   })

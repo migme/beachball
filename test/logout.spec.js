@@ -1,5 +1,5 @@
 /* global describe, it */
-import {expect} from 'chai'
+import { expect } from 'chai'
 import localstorage from 'universal-localstorage'
 import Beachball from '../src'
 import config from '../src/config'
@@ -12,8 +12,8 @@ describe('Logout', () => {
   })
 
   it('should remove the session', () => {
-    localstorage.setItem(config.storage_key, JSON.stringify({access_token}))
-    expect(localstorage.getItem(config.storage_key)).to.equal(JSON.stringify({access_token}))
+    localstorage.setItem(config.storage_key, JSON.stringify({ access_token }))
+    expect(localstorage.getItem(config.storage_key)).to.equal(JSON.stringify({ access_token }))
     Beachball.logout()
     expect(config.access_token).to.equal('')
     expect(localstorage.getItem(config.storage_key)).to.equal(null)

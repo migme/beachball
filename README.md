@@ -8,8 +8,8 @@ Migme JavaScript SDK. Throws data to the [Migme API](http://docs.migme.apiary.io
 [![Codecov](https://img.shields.io/codecov/c/github/migme/beachball.svg)](https://codecov.io/github/migme/beachball)
 [![Dependency Status](https://gemnasium.com/migme/beachball.svg)](https://gemnasium.com/migme/beachball)
 [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
-[![npm](https://img.shields.io/npm/v/migme-beachball.svg)](https://www.npmjs.com/package/migme-beachball)
-[![npm](https://img.shields.io/npm/dm/migme-beachball.svg)](https://www.npmjs.com/package/migme-beachball)
+[![npm](https://img.shields.io/npm/v/migme.svg)](https://www.npmjs.com/package/migme)
+[![npm](https://img.shields.io/npm/dm/migme.svg)](https://www.npmjs.com/package/migme)
 [![GitHub Releases](https://img.shields.io/github/downloads/migme/beachball/latest/total.svg)](https://github.com/migme/beachball/releases/latest)
 
 ![Beachball Migbot](https://cdn.rawgit.com/mixstix/5eb0fe3bea4e87ea5034/raw/fbf873d7d1b3c845e9e0f9613690489203479fcc/beachball.svg "Beachball Migbot")

@@ -1,47 +1,50 @@
-var webpack = require('webpack')
+const webpack = require('webpack')
 
 module.exports = {
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
   },
 
   module: {
     noParse: [
-      /\/sinon.js/
+      /\/sinon.js/,
     ],
     preLoaders: [ // << add subject as webpack's preloader
       {
         test: /\.js$/,
         // exclude this dirs from coverage
         exclude: /(test|node_modules|bower_components)\//,
-        loader: 'isparta-instrumenter-loader'
-      }
+        loader: 'isparta-instrumenter-loader',
+      },
     ],
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loader: 'babel',
       },
       {
         test: /\.json$/,
-        loader: 'json'
-      }
-    ]
+        loader: 'json',
+      },
+    ],
   },
 
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
 
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(/^sinon$/, __dirname + '/node_modules/sinon/pkg/sinon.js')
+    new webpack.NormalModuleReplacementPlugin(
+      /^sinon$/,
+      `${__dirname}/node_modules/sinon/pkg/sinon.js`
+    ),
   ],
 
   stats: {
     colors: true,
-    reasons: true
+    reasons: true,
   },
 
-  progress: true
+  progress: true,
 }

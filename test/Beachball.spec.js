@@ -1,5 +1,5 @@
 /* global describe, it */
-import chai, {expect} from 'chai'
+import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import Beachball, { asyncInit } from '../src'
@@ -9,7 +9,7 @@ chai.use(sinonChai)
 
 describe('Beachball', () => {
   it('should expose init', () => {
-    expect(Beachball.init).to.exist
+    expect(Beachball.init).to.exist // eslint-disable-line no-unused-expressions
     expect(Beachball.init).to.be.a('function')
   })
 
@@ -29,7 +29,7 @@ describe('Beachball', () => {
 
     Beachball.init({
       client_id,
-      access_token
+      access_token,
     })
 
     expect(config.client_id).to.equal(client_id)
@@ -38,17 +38,17 @@ describe('Beachball', () => {
   })
 
   it('should expose login', () => {
-    expect(Beachball.login).to.exist
+    expect(Beachball.login).to.exist // eslint-disable-line no-unused-expressions
     expect(Beachball.login).to.be.a('function')
   })
 
   it('should expose API', () => {
-    expect(Beachball.api).to.exist
+    expect(Beachball.api).to.exist // eslint-disable-line no-unused-expressions
     expect(Beachball.api).to.be.a('function')
   })
 
   it('should expose getLoginStatus', () => {
-    expect(Beachball.getLoginStatus).to.exist
+    expect(Beachball.getLoginStatus).to.exist // eslint-disable-line no-unused-expressions
     expect(Beachball.getLoginStatus).to.be.a('function')
   })
 
@@ -57,8 +57,8 @@ describe('Beachball', () => {
       window.migmeAsyncInit = () => {}
       const stub = sinon.stub(window, 'migmeAsyncInit')
       asyncInit()
-      expect(stub).to.have.been.called
-      expect(window.migmeAsyncInit.hasRun).to.be.true
+      expect(stub).to.have.been.called // eslint-disable-line no-unused-expressions
+      expect(window.migmeAsyncInit.hasRun).to.be.true // eslint-disable-line no-unused-expressions
       stub.restore()
     })
   }

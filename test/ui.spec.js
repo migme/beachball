@@ -1,5 +1,5 @@
 /* global beforeEach, afterEach, describe, it */
-import chai, {expect} from 'chai'
+import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import chaiAsPromised from 'chai-as-promised'
@@ -20,7 +20,7 @@ describe('UI', () => {
         sinon.stub(window, 'open')
       })
       it('should open a window with a query string "href"', () => {
-        const params = {method: 'share', href: 'https://alivenotdead.com'}
+        const params = { method: 'share', href: 'https://alivenotdead.com' }
         Beachball.ui(params)
         expect(window.open).to.have.been.calledWith(
           'https://mig.me/share_to_migme?href=https%253A%252F%252Falivenotdead.com'

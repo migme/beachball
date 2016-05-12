@@ -1,6 +1,6 @@
 import config from '../config'
 import urltemplate from 'url-template'
-import {awaitMessage} from '../utils/async'
+import { awaitMessage } from '../utils/async'
 
 const uiMethods = async({ method, href } = {}) => {
   switch (method) {

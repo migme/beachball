@@ -1,6 +1,6 @@
 /* global describe, it */
-import {expect} from 'chai'
-import {trim as trimHash} from '../src/utils/hash'
+import { expect } from 'chai'
+import { trim as trimHash } from '../src/utils/hash'
 
 describe('Trim Hash', () => {
   if (typeof window !== 'undefined') {
