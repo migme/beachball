@@ -30,5 +30,69 @@ describe('UI', () => {
         window.open.restore()
       })
     })
+
+    describe('generate a share button by HTML', () => {
+      const shareButtonClassName = 'migme-share-button'
+
+      beforeEach(() => {
+        const testDiv = document.createElement('div')
+        testDiv.className = shareButtonClassName
+        testDiv.setAttribute('data-href', 'https://alivenotdead.com')
+        testDiv.setAttribute('data-layout', 'button')
+
+        document.body.appendChild(testDiv)
+
+        Beachball.init()
+      })
+
+      it('should create a <span> and inside of the <div> container', () => {
+        const elements = document.getElementsByClassName(shareButtonClassName)
+        const children = elements[0].childNodes
+        expect(children.length).to.equal(1)
+      })
+
+      it('should create an iframe inside of the <span> in the <div> container', () => {
+        const elements = document.getElementsByClassName(shareButtonClassName)
+        const children = elements[0].childNodes
+        const childrenInSpan = children[0].childNodes
+        expect(childrenInSpan.length).to.equal(1)
+      })
+
+      it('should embed correct src of the iframe', () => {
+        const elements = document.getElementsByClassName(shareButtonClassName)
+        const children = elements[0].childNodes
+        const childrenInSpan = children[0].childNodes
+        const iframe = childrenInSpan[0]
+        expect(iframe.getAttribute('src').indexOf('https://connect.mig.me/plugins/share_button?client_id=')).should.not.equal(-1)
+      })
+
+      it('should use width and height for layout "button"', () => {
+        const elements = document.getElementsByClassName(shareButtonClassName)
+        const children = elements[0].childNodes
+        const testSpan = children[0]
+        expect(testSpan.style.width).to.equal('58px')
+        expect(testSpan.style.height).to.equal('20px')
+      })
+
+      it('should use default width and height for unset layout', () => {
+        // reset
+        document.body.innerHTML = ''
+
+        const newTestDiv = document.createElement('div')
+        newTestDiv.className = shareButtonClassName
+        newTestDiv.setAttribute('data-href', 'https://alivenotdead.com')
+        newTestDiv.setAttribute('data-layout', 'non-exsited-layout')
+
+        document.body.appendChild(newTestDiv)
+
+        Beachball.init()
+
+        const elements = document.getElementsByClassName(shareButtonClassName)
+        const children = elements[0].childNodes
+        const testSpan = children[0]
+        expect(testSpan.style.width).to.equal('58px')
+        expect(testSpan.style.height).to.equal('20px')
+      })
+    })
   }
 })

@@ -66,9 +66,9 @@ export const renderShareButton = function () {
         var container = containers[i]
         var containerWidth = container.clientWidth
         var iframeName = getRandCode(15)
-        var client_id = config.client_id
-        var href = container.getAttribute('data-href')
-        var layout = container.getAttribute('data-layout')
+        var client_id = config.client_id || ''
+        var href = container.getAttribute('data-href') || ''
+        var layout = container.getAttribute('data-layout') || 'button'
 
         var spanStyle = ''
         switch (layout) {
