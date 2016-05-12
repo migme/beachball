@@ -10,7 +10,7 @@ import setScope from './lib/scope'
 import api from './lib/API'
 import { trim as trimHash } from './utils/hash'
 import config from './config'
-import ui, { renderShareButton } from './lib/ui'
+import ui, { renderShareButtons } from './lib/ui'
 
 const Beachball = {
   init ({
@@ -21,7 +21,8 @@ const Beachball = {
     scope = '',
     baseUrl = 'https://api.mig.me',
     storage_key = 'migme-session',
-    host = 'https://mig.me',
+    hostUrl = 'https://mig.me',
+    sdkHostUrl = 'https://connect.mig.me',
   } = {}) {
     Object.assign(config, {
       client_id,
@@ -31,7 +32,8 @@ const Beachball = {
       scope,
       baseUrl,
       storage_key,
-      host,
+      hostUrl,
+      sdkHostUrl,
     })
 
     getLoginStatus().then(saveSession)
@@ -43,7 +45,7 @@ const Beachball = {
     if (
       typeof document !== 'undefined'
     ) {
-      renderShareButton()
+      renderShareButtons()
     }
   },
 

@@ -1,6 +1,8 @@
 import config from '../config'
 import urltemplate from 'url-template'
 import { awaitMessage } from '../utils/async'
+import { getRandCode } from '../utils/rand'
+import { emptyInnerHTML } from '../utils/dom'
 
 const uiMethods = async({ method, href } = {}) => {
   switch (method) {
@@ -9,22 +11,21 @@ const uiMethods = async({ method, href } = {}) => {
         // we didn't do any validation but left it for sharing page to validate it.
         const dialog = openWindow(encodeURIComponent(href))
         return awaitMessage(dialog)
-      } else {
-        throw Error(`href: ${href} is not valid.`)
       }
-      break
+      throw Error(`href: ${href} is not valid.`)
+
     default:
       throw Error(`method: ${method} is not valid`)
   }
 }
 
-function openWindow (href) {
-  const SHARE_POST_TO_MIGME_URL = `{+host}/share_to_migme{?${[
+const openWindow = (href = '') => {
+  const SHARE_POST_TO_MIGME_URL = `{+hostUrl}/share_to_migme{?${[
     'href'
   ]}}`
   const data = {
     href,
-    host: config.host
+    hostUrl: config.hostUrl,
   }
 
   const w = 500
@@ -39,48 +40,84 @@ function openWindow (href) {
   const width = window.innerWidth || document.documentElement.clientWidth || screen.width
   const height = window.innerHeight || document.documentElement.clientHeight || screen.height
 
-  var left = ((width / 2) - (w / 2)) + dualScreenLeft
-  var top = ((height / 2) - (h / 2)) + dualScreenTop
+  const left = ((width / 2) - (w / 2)) + dualScreenLeft
+  const top = ((height / 2) - (h / 2)) + dualScreenTop
 
   return window.open(url, 'migme', `height=${h}, width=${w}, top=${top}, left=${left}`)
 }
 
-function getRandCode (len = 15) {
-  var text = ''
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-
-  for (let i = 0; i < len - 1; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length))
+const getShareButtonSpanStyle = (layout) => {
+  switch (layout) {
+    case 'button':
+      return 'vertical-align: bottom; width: 58px; height: 20px;'
+    case 'button_count':
+    default:
+      return 'vertical-align: bottom; width: 58px; height: 20px;'
   }
-
-  return text
 }
 
-export const renderShareButton = function () {
+const getShareButtonIframeStyle = (layout) => {
+  switch (layout) {
+    case 'button':
+      return 'border: none; visibility: visible; width: 58px; height: 20px;'
+    case 'button_count':
+    default:
+      return 'border: none; visibility: visible; width: 58px; height: 20px;'
+  }
+}
+
+export const renderShareButtons = () => {
   const shareButtonClassName = 'migme-share-button'
   if (document) {
-    var containers = document.getElementsByClassName(shareButtonClassName)
+    const clientId = config.client_id || ''
+    const containers = document.getElementsByClassName(shareButtonClassName)
 
     if (containers && containers.length && containers.length > 0) {
-      for (let i = 0; i < containers.length; i++) {
-        var container = containers[i]
-        var containerWidth = container.clientWidth
-        var iframeName = getRandCode(15)
-        var client_id = config.client_id || ''
-        var href = container.getAttribute('data-href') || ''
-        var layout = container.getAttribute('data-layout') || 'button'
+      Array.from(containers).forEach(container => {
+        container = emptyInnerHTML(container)
 
-        var spanStyle = ''
-        switch (layout) {
-          case 'button':
-            spanStyle = 'vertical-align: bottom; width: 58px; height: 20px;'
-            break
-          default:
-            spanStyle = 'vertical-align: bottom; width: 58px; height: 20px;'
+        const iframeName = getRandCode(15)
+        const containerWidth = container.clientWidth
+        const dataHref = container.getAttribute('data-href') || ''
+        const dataLayout = container.getAttribute('data-layout') || 'button'
+
+        const spanEle = document.createElement('span')
+        spanEle.setAttribute('style', getShareButtonSpanStyle(dataLayout))
+
+        const iframeEle = document.createElement('iframe')
+        iframeEle.setAttribute('name', iframeName)
+        iframeEle.setAttribute('width', '1000px')
+        iframeEle.setAttribute('height', '1000px')
+        iframeEle.setAttribute('frameborder', 0)
+        iframeEle.setAttribute('allowtransparency', true)
+        iframeEle.setAttribute('allowfullscreen', true)
+        iframeEle.setAttribute('scrolling', 'no')
+        iframeEle.setAttribute('title', 'migme:share_button Migme Social Plugin')
+
+        const SHARE_BUTTON_URL = `{+sdkHostUrl}/plugins/share_button{?${[
+          'client_id',
+          'container_width',
+          'href',
+          'layout'
+        ]}}`
+
+        const data = {
+          sdkHostUrl: config.sdkHostUrl,
+          client_id: clientId,
+          container_width: containerWidth,
+          href: dataHref,
+          layout: dataLayout
         }
 
-        containers[i].innerHTML = `<span style="${spanStyle}"><iframe name="${iframeName}" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="migme:share_button Migme Social Plugin" src="https://connect.mig.me/plugins/share_button?client_id=${client_id}&amp;container_width=${containerWidth}&amp;href=${href}&amp;layout=${layout}" style="border: none; visibility: visible; width: 58px; height: 20px;" class=""></iframe></span>`
-      }
+        const iframeSrc = urltemplate.parse(SHARE_BUTTON_URL).expand(data)
+        iframeEle.setAttribute('src', iframeSrc)
+
+        iframeEle.setAttribute('style', getShareButtonIframeStyle(dataLayout))
+        iframeEle.setAttribute('class', '')
+
+        spanEle.appendChild(iframeEle)
+        container.appendChild(spanEle)
+      })
     }
   }
 }
