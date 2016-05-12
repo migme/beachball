@@ -8,7 +8,7 @@ import getLoginFromHash from './lib/login-from-hash'
 import saveSession from './lib/save-session'
 import setScope from './lib/scope'
 import api from './lib/API'
-import {trim as trimHash} from './utils/hash'
+import { trim as trimHash } from './utils/hash'
 import config from './config'
 
 const Beachball = {
@@ -19,7 +19,7 @@ const Beachball = {
     access_token = '',
     scope = '',
     baseUrl = 'https://api.mig.me',
-    storage_key = 'migme-session'
+    storage_key = 'migme-session',
   } = {}) {
     Object.assign(config, {
       client_id,
@@ -28,7 +28,7 @@ const Beachball = {
       access_token,
       scope,
       baseUrl,
-      storage_key
+      storage_key,
     })
 
     getLoginStatus().then(saveSession)
@@ -42,7 +42,7 @@ const Beachball = {
   login,
   logout,
   getLoginStatus,
-  setScope
+  setScope,
 }
 
 export const asyncInit = () => {
