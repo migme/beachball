@@ -115,27 +115,6 @@ describe('UI', () => {
         expect(testSpan.style.width).to.equal('58px')
         expect(testSpan.style.height).to.equal('20px')
       })
-
-      it('should use default width and height for button_count layout', () => {
-        // reset
-        const el = document.body
-        while (el.firstChild) el.removeChild(el.firstChild)
-
-        const newTestDiv = document.createElement('div')
-        newTestDiv.className = shareButtonClassName
-        newTestDiv.setAttribute('data-href', 'https://alivenotdead.com')
-        newTestDiv.setAttribute('data-layout', 'button_count')
-
-        document.body.appendChild(newTestDiv)
-
-        Beachball.init()
-
-        const elements = document.getElementsByClassName(shareButtonClassName)
-        const children = elements[0].childNodes
-        const testSpan = children[0]
-        expect(testSpan.style.width).to.equal('58px')
-        expect(testSpan.style.height).to.equal('20px')
-      })
     })
   }
 })

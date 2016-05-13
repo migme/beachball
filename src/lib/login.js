@@ -1,7 +1,7 @@
 import urltemplate from 'url-template'
 import config from '../config'
 import saveSession from './save-session'
-import {awaitMessage} from '../utils/async'
+import { awaitMessage } from '../utils/async'
 
 const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'callback',
