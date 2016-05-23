@@ -42,9 +42,7 @@ const Beachball = {
       .then(trimHash)
       .catch(() => {})
 
-    if (
-      typeof document !== 'undefined'
-    ) {
+    if (typeof document !== 'undefined') {
       renderShareButtons()
     }
   },

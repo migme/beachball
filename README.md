@@ -41,7 +41,6 @@ define(['migme'], function (Migme) {
 ```html
 <script>
 window.migmeAsyncInit = function() {
-  console.log('MIGME', MIGME)
   MIGME.init({
     client_id  : 'your-client-id',
     version    : 'v1.0', 

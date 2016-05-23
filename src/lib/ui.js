@@ -67,10 +67,9 @@ const getShareButtonIframeStyle = (layout) => {
 }
 
 export const renderShareButtons = () => {
-  const shareButtonClassName = 'migme-share-button'
   if (document) {
     const clientId = config.client_id || ''
-    const containers = document.getElementsByClassName(shareButtonClassName)
+    const containers = document.getElementsByClassName('migme-share-button')
 
     if (containers && containers.length && containers.length > 0) {
       Array.from(containers).forEach(container => {
