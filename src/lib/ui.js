@@ -43,7 +43,7 @@ const openWindow = (href = '') => {
   const left = ((width / 2) - (w / 2)) + dualScreenLeft
   const top = ((height / 2) - (h / 2)) + dualScreenTop
 
-  return window.open(url, 'migme', `height=${h}, width=${w}, top=${top}, left=${left}`)
+  return window.open(url, 'migme', `height=${h}, width=${w}, top=${top}, left=${left}, resizable=0`)
 }
 
 const getShareButtonSpanStyle = (layout) => {
