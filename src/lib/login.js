@@ -1,7 +1,7 @@
 import urltemplate from 'url-template'
-import { on, off } from 'bubbly'
 import config from '../config'
 import saveSession from './save-session'
+import { awaitMessage } from '../utils/async'
 
 const API_URL_LOGIN = `{+baseUrl}/login-page/{?${[
   'callback',
@@ -32,20 +32,6 @@ const loginMethods = {
 
 function openWindow (url) {
   return window.open(url)
-}
-
-function awaitMessage (sourceWindow) {
-  return new Promise((resolve, reject) => {
-    const onMessage = event => {
-      if (event.source === sourceWindow) {
-        if (event.data.err) reject(event.data.err)
-        else if (event.data.res) resolve(event.data.res)
-        else return
-        window::off('message', onMessage)
-      }
-    }
-    window::on('message', onMessage)
-  })
 }
 
 // Login

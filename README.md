@@ -40,24 +40,35 @@ define(['migme'], function (Migme) {
 #### Loading in browser
 ```html
 <script>
-  window.migmeAsyncInit = function() {
-    MIGME.init({
-      client_id: 'your client id',
-      redirect_uri: 'URI to redirect to after login'
-    });
-  };
+window.migmeAsyncInit = function() {
+  MIGME.init({
+    client_id  : 'your-client-id',
+    version    : 'v1.0', 
+  });
+};
 
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://npmcdn.com/migme/lib/sdk.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
+(function(d, s, id){
+   var js, mjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.mig.me/lib/sdk.js";
+   mjs.parentNode.insertBefore(js, mjs);
+ }(document, 'script', 'migme-jssdk'));
 </script>
+```
+
+#### Share Buttons
+Create a share button on your site. (Initialization is required)
+```html
+<div class="migme-share-button" 
+  data-href="http://www.your-domain.com/your-page.html" 
+  data-layout="button">
+</div>
 ```
 
 ### Initialization
 ```js
-Migme.init({
+MIGME.init({
   // options
   client_id: 'XXXXXXXXXXXXX',
   access_token: '' // If you already have one

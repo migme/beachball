@@ -10,6 +10,7 @@ import setScope from './lib/scope'
 import api from './lib/API'
 import { trim as trimHash } from './utils/hash'
 import config from './config'
+import ui, { renderShareButtons } from './lib/ui'
 
 const Beachball = {
   init ({
@@ -20,6 +21,8 @@ const Beachball = {
     scope = '',
     baseUrl = 'https://api.mig.me',
     storage_key = 'migme-session',
+    hostUrl = 'https://mig.me',
+    sdkHostUrl = 'https://connect.mig.me',
   } = {}) {
     Object.assign(config, {
       client_id,
@@ -29,6 +32,8 @@ const Beachball = {
       scope,
       baseUrl,
       storage_key,
+      hostUrl,
+      sdkHostUrl,
     })
 
     getLoginStatus().then(saveSession)
@@ -36,6 +41,10 @@ const Beachball = {
       .then(saveSession)
       .then(trimHash)
       .catch(() => {})
+
+    if (typeof document !== 'undefined') {
+      renderShareButtons()
+    }
   },
 
   api,
@@ -43,21 +52,21 @@ const Beachball = {
   logout,
   getLoginStatus,
   setScope,
-}
-
-export const asyncInit = () => {
-  if (
-    typeof window !== 'undefined' &&
-    typeof window.migmeAsyncInit === 'function' &&
-    !window.migmeAsyncInit.hasRun
-  ) {
-    window.migmeAsyncInit.hasRun = true
-    window.migmeAsyncInit()
-  }
+  ui,
+  asyncInit () {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.migmeAsyncInit === 'function' &&
+      !window.migmeAsyncInit.hasRun
+    ) {
+      window.migmeAsyncInit.hasRun = true
+      window.migmeAsyncInit()
+    }
+  },
 }
 
 setTimeout(() => {
-  asyncInit()
+  Beachball.asyncInit()
 }, 0)
 
 export default Beachball
