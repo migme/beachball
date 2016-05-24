@@ -41,7 +41,7 @@ define(['migme'], function (Migme) {
 window.migmeAsyncInit = function() {
   MIGME.init({
     client_id  : 'your-client-id',
-    version    : 'v1.0', 
+    version    : 'v1.0',
   });
 };
 
@@ -58,8 +58,8 @@ window.migmeAsyncInit = function() {
 #### Share Buttons
 Create a share button on your site. (Initialization is required)
 ```html
-<div class="migme-share-button" 
-  data-href="http://www.your-domain.com/your-page.html" 
+<div class="migme-share-button"
+  data-href="http://www.your-domain.com/your-page.html"
   data-layout="button">
 </div>
 ```
