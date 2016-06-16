@@ -93,7 +93,7 @@ export const renderShareButtons = () => {
         iframeEle.setAttribute('scrolling', 'no')
         iframeEle.setAttribute('title', 'migme:share_button Migme Social Plugin')
 
-        const SHARE_BUTTON_URL = `{+sdkHostUrl}/plugins/share_button{?${[
+        const SHARE_BUTTON_URL = `{+sdkHostUrl}/plugins/share_button/{?${[
           'client_id',
           'container_width',
           'href',
