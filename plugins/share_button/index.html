@@ -1,0 +1,82 @@
+<html>
+<head>
+<style>
+body {
+  margin: 0px;
+}
+
+.share-button-container {
+  width: 62px;
+  height: 20px;
+  border-radius: 2px;
+  background-color: #dd4533;
+  cursor: pointer;
+}
+
+.share-button-logo {
+  height: 13px;
+  width: 12px;
+}
+
+.share-button-font {
+	width: 31px;
+	height: 16px;
+	font-size: 12px;
+	color: #ffffff;
+  float: right;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+</style>
+<script>
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+</script>
+</head>
+<body>
+<div class="share-button-container" onclick="doShare()">
+<span class="share-button-logo"></span>
+<span class="share-button-font">Share</span>
+</div>
+<script>
+window.migmeAsyncInit = function() {
+  MIGME.init({
+    client_id  : getParameterByName('client_id'),
+    version    : 'v1.0',
+  });
+};
+
+(function(d, s, id){
+   var js, mjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.mig.me/lib/sdk.js";
+   mjs.parentNode.insertBefore(js, mjs);
+ }(document, 'script', 'migme-jssdk'));
+
+function doShare() {
+  console.log('migme', MIGME);
+
+  MIGME.ui({
+    method: 'share',
+    href: getParameterByName('href')
+  })
+  .then(function (res) {
+    console.log('ok', res);
+  })
+  .catch(function (error) {
+    console.error('error', error);
+  })
+}
+</script>
+
+</body>
+</html>

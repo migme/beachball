@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Beachball by migme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Beachball</h1>
+      <h2 class="project-tagline">:soccer: Migme JS SDK</h2>
+      <a href="https://github.com/migme/beachball" class="btn">View on GitHub</a>
+      <a href="https://github.com/migme/beachball/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/migme/beachball/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="migme-js-sdk" class="anchor" href="#migme-js-sdk" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Migme JS SDK</h1>
+
+<p>Migme JavaScript SDK. Throws data to the <a href="http://docs.migme.apiary.io/">Migme API</a>.</p>
+
+<p><a href="https://gitter.im/migme/beachball"><img src="https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg" alt="Gitter"></a>
+<a href="https://codeship.com/projects/73070"><img src="https://img.shields.io/codeship/5e7f47c0-bfe9-0132-39f9-7eb09717a41c.svg" alt="Codeship"></a>
+<a href="https://travis-ci.org/migme/beachball"><img src="https://img.shields.io/travis/migme/beachball.svg" alt="Travis CI"></a>
+<a href="https://codecov.io/github/migme/beachball"><img src="https://img.shields.io/codecov/c/github/migme/beachball.svg" alt="Codecov"></a>
+<a href="https://gemnasium.com/migme/beachball"><img src="https://gemnasium.com/migme/beachball.svg" alt="Dependency Status"></a>
+<a href="https://github.com/feross/standard"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="JavaScript Standard Style"></a>
+<a href="https://www.npmjs.com/package/migme"><img src="https://img.shields.io/npm/v/migme.svg" alt="npm"></a>
+<a href="https://www.npmjs.com/package/migme"><img src="https://img.shields.io/npm/dm/migme.svg" alt="npm"></a>
+<a href="https://github.com/migme/beachball/releases/latest"><img src="https://img.shields.io/github/downloads/migme/beachball/latest/total.svg" alt="GitHub Releases"></a></p>
+
+<p><img src="https://cdn.rawgit.com/mixstix/5eb0fe3bea4e87ea5034/raw/fbf873d7d1b3c845e9e0f9613690489203479fcc/beachball.svg" alt="Beachball Migbot" title="Beachball Migbot"></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="npm" class="anchor" href="#npm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NPM</h3>
+
+<div class="highlight highlight-source-shell"><pre>npm install migme</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="loading" class="anchor" href="#loading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Loading</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// ES6</span>
+<span class="pl-k">import</span> <span class="pl-smi">Migme</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>migme<span class="pl-pds">'</span></span>
+
+<span class="pl-c">// CommonJS</span>
+<span class="pl-k">var</span> Migme <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>migme<span class="pl-pds">'</span></span>)
+
+<span class="pl-c">// AMD</span>
+<span class="pl-en">define</span>([<span class="pl-s"><span class="pl-pds">'</span>migme<span class="pl-pds">'</span></span>], <span class="pl-k">function</span> (<span class="pl-smi">Migme</span>) {
+  <span class="pl-c">// ...</span>
+})</pre></div>
+
+<h4>
+<a id="loading-in-browser" class="anchor" href="#loading-in-browser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Loading in browser</h4>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">  <span class="pl-c1">window</span>.<span class="pl-en">migmeAsyncInit</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {</span>
+<span class="pl-s1">    <span class="pl-c1">MIGME</span>.<span class="pl-en">init</span>({</span>
+<span class="pl-s1">      client_id<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>your client id<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">      redirect_uri<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>URI to redirect to after login<span class="pl-pds">'</span></span></span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1">  };</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">  (<span class="pl-k">function</span>() {</span>
+<span class="pl-s1">    <span class="pl-k">var</span> po <span class="pl-k">=</span> <span class="pl-c1">document</span>.<span class="pl-c1">createElement</span>(<span class="pl-s"><span class="pl-pds">'</span>script<span class="pl-pds">'</span></span>); <span class="pl-smi">po</span>.<span class="pl-c1">type</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>text/javascript<span class="pl-pds">'</span></span>; <span class="pl-smi">po</span>.<span class="pl-smi">async</span> <span class="pl-k">=</span> <span class="pl-c1">true</span>;</span>
+<span class="pl-s1">    <span class="pl-smi">po</span>.<span class="pl-smi">src</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>https://npmcdn.com/migme/lib/sdk.js<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">    <span class="pl-k">var</span> s <span class="pl-k">=</span> <span class="pl-c1">document</span>.<span class="pl-c1">getElementsByTagName</span>(<span class="pl-s"><span class="pl-pds">'</span>script<span class="pl-pds">'</span></span>)[<span class="pl-c1">0</span>]; <span class="pl-smi">s</span>.<span class="pl-c1">parentNode</span>.<span class="pl-c1">insertBefore</span>(po, s);</span>
+<span class="pl-s1">  })();</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<h3>
+<a id="initialization" class="anchor" href="#initialization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initialization</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">Migme</span>.<span class="pl-en">init</span>({
+  <span class="pl-c">// options</span>
+  client_id<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>XXXXXXXXXXXXX<span class="pl-pds">'</span></span>,
+  access_token<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> <span class="pl-c">// If you already have one</span>
+})</pre></div>
+
+<h3>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development</h3>
+
+<div class="highlight highlight-source-shell"><pre>npm install <span class="pl-c"># Install dependencies</span>
+npm <span class="pl-c1">test</span>    <span class="pl-c"># Test only</span>
+npm run build  <span class="pl-c"># Build only</span></pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/migme/beachball">Beachball</a> is maintained by <a href="https://github.com/migme">migme</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Demo project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <style type="text/css">
+    .migme-share-button {
+      width: 62px;
+      height: 20px;
+      border-radius: 2px;
+      background-color: #dd4533;
+    }
+    </style>
+  </head>
+  <body>
+
+  <input type="button" id="test" value="share" onclick="doShare();">
+
+  <!-- Your share button code -->
+  <div class="migme-share-button" 
+    data-href="http://www.your-domain.com/your-page.html" 
+    data-layout="button">
+  </div>
+
+  <div class="migme-share-button" 
+    data-href="http://andretw.com" 
+    data-layout="button">
+    share
+  </div>
+
+  <script type="text/javascript" src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <script>
+  window.migmeAsyncInit = function() {
+    MIGME.init({
+      client_id  : 'your-app-id',
+      version    : 'v1.0',
+      hostUrl: 'https://mig.me'      
+    });
+  };
+
+  (function(d, s, id){
+     var js, mjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.mig.me/lib/sdk.js";
+     mjs.parentNode.insertBefore(js, mjs);
+   }(document, 'script', 'migme-jssdk'));
+
+  function doShare() {
+    MIGME.ui({
+      method: 'share',
+      href: 'http://mig.com/'
+    })
+    .then(function (res) {
+      console.log('ok', res);
+    })
+    .catch(function (error) {
+      console.error('error', error);
+    })
+  }
+  </script>
+
+  </body>
+</html>
